@@ -1,0 +1,77 @@
+﻿/* Custom Styling for AI Traffic Management Dashboard */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #0b0f17;
+    color: #f1f5f9;
+}
+
+.font-mono {
+    font-family: 'JetBrains Mono', monospace;
+}
+
+/* Glassmorphic Panel */
+.glass-panel {
+    background: rgba(18, 24, 38, 0.85);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-glow {
+    background: rgba(18, 24, 38, 0.9);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(46, 204, 113, 0.3);
+    box-shadow: 0 0 20px rgba(46, 204, 113, 0.1);
+}
+
+/* Traffic Light Glow Effects */
+.light-red {
+    background-color: #ef4444;
+    box-shadow: 0 0 16px #ef4444, 0 0 30px rgba(239, 68, 68, 0.6);
+}
+.light-red-off {
+    background-color: #3b1212;
+}
+
+.light-yellow {
+    background-color: #f59e0b;
+    box-shadow: 0 0 16px #f59e0b, 0 0 30px rgba(245, 158, 11, 0.6);
+}
+.light-yellow-off {
+    background-color: #3b2a0d;
+}
+
+.light-green {
+    background-color: #10b981;
+    box-shadow: 0 0 16px #10b981, 0 0 30px rgba(16, 185, 129, 0.6);
+}
+.light-green-off {
+    background-color: #0d3b24;
+}
+
+/* Pulse animation for live dot */
+@keyframes pulse-green {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(1.15); }
+}
+
+.live-dot {
+    animation: pulse-green 2s infinite ease-in-out;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #0f172a;
+}
+::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #475569;
+}

@@ -6,7 +6,11 @@ General Sir John Kotelawala Defence University (KDU) - IT 3182 Essentials of AI
 import sys
 import os
 import math
+import time
 import random
+import json
+import threading
+import urllib.request
 import pygame
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
@@ -24,7 +28,7 @@ from ai_engine.utils.pcu_calculator import calculate_lane_pcu, classify_traffic_
 class TrafficSimulationApp:
     def __init__(self):
         pygame.init()
-        pygame.display.set_caption("AI Traffic Light System - Flow Proportional & Lane-Aware Control | KDU IT3182")
+        pygame.display.set_caption("AI Traffic Light System - Flow Proportional & Web Dashboard Synced | KDU IT3182")
         
         self.width = 1280
         self.height = 720
@@ -58,13 +62,12 @@ class TrafficSimulationApp:
         self.vehicles = []
         self.next_vehicle_id = 1
 
-        # --- SEPARATE PER-APPROACH SPAWN DENSITIES ---
-        # Lower interval = higher vehicle spawn density / arrival rate
+        # Per-Approach Spawn Intervals (seconds)
         self.approach_intervals = {
-            'N': 2.0,  # North Approach
-            'S': 2.0,  # South Approach
-            'E': 2.0,  # East Approach
-            'W': 2.0   # West Approach
+            'N': 2.0,
+            'S': 2.0,
+            'E': 2.0,
+            'W': 2.0
         }
         self.approach_timers = {'N': 0.0, 'S': 0.0, 'E': 0.0, 'W': 0.0}
 
@@ -73,10 +76,13 @@ class TrafficSimulationApp:
         self._init_buttons()
 
         self.current_phase_cleared = 0
-
-        # Emergency vehicle alert
         self.emergency_banner_timer = 0.0
         self.emergency_active = False
+
+        # Start non-blocking background telemetry sync thread to Web Dashboard
+        self.last_sync_time = 0.0
+        self.sync_thread = threading.Thread(target=self._background_sync_worker, daemon=True)
+        self.sync_thread.start()
 
     def _init_buttons(self):
         self.buttons = []
@@ -92,6 +98,78 @@ class TrafficSimulationApp:
     def active_metrics(self) -> MetricsTracker:
         return self.metrics_ai if self.active_mode == 2 else self.metrics_fixed
 
+    def _background_sync_worker(self):
+        """Asynchronously transmits 1-to-1 live Pygame state to the FastAPI backend & Web Dashboard."""
+        sync_url = "http://127.0.0.1:8000/api/intersections/INT-KDU-01/sync"
+        while self.running:
+            try:
+                # Prepare payload
+                active_axis = self.signals.active_green_axis
+                if self.signals.current_phase in [SignalPhase.EW_GREEN, SignalPhase.NS_GREEN]:
+                    rem_time = max(0.0, self.signals.allocated_green - self.signals.time_in_state)
+                    cur_st = "GREEN"
+                elif self.signals.current_phase in [SignalPhase.EW_YELLOW, SignalPhase.NS_YELLOW]:
+                    rem_time = max(0.0, self.signals.yellow_duration - self.signals.time_in_state)
+                    cur_st = "YELLOW"
+                else:
+                    rem_time = max(0.0, self.signals.all_red_duration - self.signals.time_in_state)
+                    cur_st = "ALL_RED"
+
+                apps = {}
+                for d, name in [('N', 'North'), ('S', 'South'), ('E', 'East'), ('W', 'West')]:
+                    rate = self.approach_intervals[d]
+                    flow = round(60.0 / max(0.2, rate), 1)
+                    cat = "HIGH" if rate <= 1.0 else "MEDIUM" if rate <= 2.2 else "LOW"
+                    apps[name] = {
+                        "direction": d,
+                        "spawn_interval_sec": rate,
+                        "arrival_flow_vpm": flow,
+                        "density_category": cat
+                    }
+
+                payload = {
+                    "intersection_id": "INT-KDU-01",
+                    "active_mode": self.active_mode,
+                    "control_mode_name": "AI_CYCLE_ADAPTIVE" if self.active_mode == 2 else "FIXED_TIME",
+                    "signals": {
+                        "North": self.signals.get_signal_state("N"),
+                        "South": self.signals.get_signal_state("S"),
+                        "East": self.signals.get_signal_state("E"),
+                        "West": self.signals.get_signal_state("W")
+                    },
+                    "active_phase": {
+                        "phase_name": str(self.signals.current_phase.name if hasattr(self.signals.current_phase, "name") else self.signals.current_phase),
+                        "active_axis": active_axis,
+                        "state": cur_st,
+                        "allocated_green": round(self.signals.allocated_green, 1),
+                        "countdown_seconds": int(rem_time + 0.99),
+                        "elapsed_in_state": round(self.signals.time_in_state, 1)
+                    },
+                    "approaches": apps,
+                    "ai_decision": getattr(self.ai_controller, "last_decision", {}),
+                    "metrics": self.active_metrics.get_summary(),
+                    "emergency_active": self.emergency_active
+                }
+
+                req = urllib.request.Request(
+                    sync_url,
+                    data=json.dumps(payload).encode("utf-8"),
+                    headers={"Content-Type": "application/json"},
+                    method="POST"
+                )
+                with urllib.request.urlopen(req, timeout=0.3) as response:
+                    resp_data = json.loads(response.read().decode("utf-8"))
+                    # If web dashboard adjusted sliders or mode, apply back to simulation
+                    if "active_mode" in resp_data and resp_data["active_mode"] != self.active_mode:
+                        self.active_mode = resp_data["active_mode"]
+                        self.current_controller = self.ai_controller if self.active_mode == 2 else self.fixed_controller
+
+            except Exception:
+                # Backend not running, ignore
+                pass
+
+            time.sleep(0.1)  # 10 Hz sync rate
+
     def adjust_density(self, direction: str, delta: float):
         new_val = max(0.4, min(8.0, self.approach_intervals[direction] + delta))
         self.approach_intervals[direction] = round(new_val, 1)
@@ -103,7 +181,6 @@ class TrafficSimulationApp:
 
         lane_idx = random.choice([0, 1])
 
-        # Precise bumper clearance check to allow dense convoys
         same_lane_v = [
             v for v in self.vehicles 
             if v.direction == direction and v.lane_idx == lane_idx
@@ -158,9 +235,9 @@ class TrafficSimulationApp:
                 for rect, action, direction in self.buttons:
                     if rect.collidepoint(pos):
                         if action == "+":
-                            self.adjust_density(direction, -0.3)  # Denser traffic
+                            self.adjust_density(direction, -0.3)
                         elif action == "-":
-                            self.adjust_density(direction, +0.3)  # Lighter traffic
+                            self.adjust_density(direction, +0.3)
             elif event.type == pygame.KEYDOWN:
                 mods = pygame.key.get_mods()
                 shift = (mods & pygame.KMOD_SHIFT) or (mods & pygame.KMOD_LSHIFT) or (mods & pygame.KMOD_RSHIFT)
@@ -195,17 +272,14 @@ class TrafficSimulationApp:
         if self.paused:
             return
 
-        # 1. Independent Spawning for each approach
         for d in ['N', 'S', 'E', 'W']:
             self.approach_timers[d] += dt
             if self.approach_timers[d] >= self.approach_intervals[d]:
                 self.approach_timers[d] = 0.0
                 self.spawn_vehicle_for_approach(d)
 
-        # 2. Emergency Preemption
         self.check_emergency_preemption()
 
-        # 3. Update Signal Clock with Flow Proportional Analysis
         switched, completed_p, new_p, allocated = self.signals.update(
             dt, next_green_duration_calc_fn=self.calculate_next_green
         )
@@ -227,7 +301,6 @@ class TrafficSimulationApp:
             )
             self.current_phase_cleared = 0
 
-        # 4. Vehicle Physics Update
         self.vehicles.sort(key=lambda v: (
             v.x if v.direction == 'E' else -v.x if v.direction == 'W' else
             v.y if v.direction == 'S' else -v.y
@@ -246,7 +319,6 @@ class TrafficSimulationApp:
                 sig_state = self.signals.get_signal_state(v.direction)
                 v.update(dt, leading_v, sig_state)
 
-        # 5. Record cleared vehicles
         for v in list(self.vehicles):
             if v.is_off_screen(self.width, self.height):
                 self.active_metrics.record_vehicle_cleared(v)
@@ -261,7 +333,7 @@ class TrafficSimulationApp:
     def draw_road_network(self):
         self.screen.fill((46, 125, 50))
 
-        # Main Asphalt Surfaces
+        # Main Asphalt
         pygame.draw.rect(self.screen, (40, 44, 52), (0, 280, self.width, 160))
         pygame.draw.rect(self.screen, (40, 44, 52), (560, 0, 160, self.height))
 
@@ -383,7 +455,7 @@ class TrafficSimulationApp:
             flow_line = f"Demand Weights -> NS: {dec.get('demand_NS', 0.0)} | EW: {dec.get('demand_EW', 0.0)}"
             self.screen.blit(self.small_font.render(flow_line, True, (160, 180, 200)), (self.width - 345, self.height - 84))
 
-        self.screen.blit(self.small_font.render("Mode: Flow Arrival Rate + PCU Queue Proportional", True, (0, 230, 115)), (self.width - 345, self.height - 58))
+        self.screen.blit(self.small_font.render("Status: Live Synced to Web Dashboard (10 Hz)", True, (0, 230, 115)), (self.width - 345, self.height - 58))
 
         # Emergency Banner
         if self.emergency_banner_timer > 0:

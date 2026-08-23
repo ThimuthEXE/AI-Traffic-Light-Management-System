@@ -1,0 +1,291 @@
+[
+  {
+    "phase_axis": "EW",
+    "allocated_green": 16.0,
+    "pcu_demand": 0.0,
+    "vehicles_cleared": 6,
+    "max_wait_time": 0.0,
+    "rules": {},
+    "logged_at": 1787522410.4742088
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 21.5,
+    "pcu_demand": 0.0,
+    "vehicles_cleared": 6,
+    "max_wait_time": 0.0,
+    "rules": {
+      "FlowShare_49%": 0.5
+    },
+    "logged_at": 1787522435.6775103
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 21.5,
+    "pcu_demand": 0.0,
+    "vehicles_cleared": 6,
+    "max_wait_time": 0.0,
+    "rules": {
+      "FlowShare_49%": 0.5
+    },
+    "logged_at": 1787522460.8612351
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 21.5,
+    "pcu_demand": 0.0,
+    "vehicles_cleared": 6,
+    "max_wait_time": 0.0,
+    "rules": {
+      "FlowShare_49%": 0.5
+    },
+    "logged_at": 1787522485.977345
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 21.5,
+    "pcu_demand": 0.0,
+    "vehicles_cleared": 6,
+    "max_wait_time": 0.0,
+    "rules": {
+      "FlowShare_49%": 0.5
+    },
+    "logged_at": 1787522511.1776967
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 21.5,
+    "pcu_demand": 0.0,
+    "vehicles_cleared": 6,
+    "max_wait_time": 0.0,
+    "rules": {
+      "FlowShare_49%": 0.5
+    },
+    "logged_at": 1787522536.3371165
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 21.5,
+    "pcu_demand": 0.0,
+    "vehicles_cleared": 6,
+    "max_wait_time": 0.0,
+    "rules": {
+      "FlowShare_49%": 0.5
+    },
+    "logged_at": 1787522561.459594
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 16.0,
+    "pcu_demand": 12.0,
+    "vehicles_cleared": 6,
+    "max_wait_time": 0.0,
+    "rules": {},
+    "logged_at": 1787522707.5737834
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 21.5,
+    "pcu_demand": 0.0,
+    "vehicles_cleared": 6,
+    "max_wait_time": 0.0,
+    "rules": {
+      "FlowShare_49%": 0.5
+    },
+    "logged_at": 1787522732.7834523
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 18.3,
+    "pcu_demand": 0.0,
+    "vehicles_cleared": 6,
+    "max_wait_time": 0.0,
+    "rules": {
+      "FlowShare_41%": 0.42
+    },
+    "logged_at": 1787522754.794626
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 24.7,
+    "pcu_demand": 0.0,
+    "vehicles_cleared": 6,
+    "max_wait_time": 0.0,
+    "rules": {
+      "FlowShare_58%": 0.58
+    },
+    "logged_at": 1787522783.1148188
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 18.3,
+    "pcu_demand": 0.0,
+    "vehicles_cleared": 6,
+    "max_wait_time": 0.0,
+    "rules": {
+      "FlowShare_41%": 0.42
+    },
+    "logged_at": 1787522805.1918173
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 24.7,
+    "pcu_demand": 0.0,
+    "vehicles_cleared": 6,
+    "max_wait_time": 0.0,
+    "rules": {
+      "FlowShare_58%": 0.58
+    },
+    "logged_at": 1787522833.5002894
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 18.3,
+    "pcu_demand": 0.0,
+    "vehicles_cleared": 6,
+    "max_wait_time": 0.0,
+    "rules": {
+      "FlowShare_41%": 0.42
+    },
+    "logged_at": 1787522855.421458
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 16.0,
+    "pcu_demand": 0.0,
+    "vehicles_cleared": 6,
+    "max_wait_time": 0.0,
+    "rules": {
+      "FlowShare_41%": 0.42
+    },
+    "logged_at": 1787522899.5929666
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 24.7,
+    "pcu_demand": 0.0,
+    "vehicles_cleared": 6,
+    "max_wait_time": 0.0,
+    "rules": {
+      "FlowShare_58%": 0.58
+    },
+    "logged_at": 1787522928.046514
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 18.3,
+    "pcu_demand": 0.0,
+    "vehicles_cleared": 6,
+    "max_wait_time": 0.0,
+    "rules": {
+      "FlowShare_41%": 0.42
+    },
+    "logged_at": 1787522950.042083
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 24.7,
+    "pcu_demand": 0.0,
+    "vehicles_cleared": 6,
+    "max_wait_time": 0.0,
+    "rules": {
+      "FlowShare_58%": 0.58
+    },
+    "logged_at": 1787522978.4443288
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 18.3,
+    "pcu_demand": 0.0,
+    "vehicles_cleared": 6,
+    "max_wait_time": 0.0,
+    "rules": {
+      "FlowShare_41%": 0.42
+    },
+    "logged_at": 1787523000.4608903
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 16.0,
+    "pcu_demand": 12.0,
+    "vehicles_cleared": 6,
+    "max_wait_time": 0.0,
+    "rules": {},
+    "logged_at": 1787523053.0018225
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 21.5,
+    "pcu_demand": 0.0,
+    "vehicles_cleared": 6,
+    "max_wait_time": 0.0,
+    "rules": {
+      "FlowShare_49%": 0.5
+    },
+    "logged_at": 1787523078.2477252
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 16.0,
+    "pcu_demand": 12.0,
+    "vehicles_cleared": 6,
+    "max_wait_time": 0.0,
+    "rules": {},
+    "logged_at": 1787523129.7018118
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 21.5,
+    "pcu_demand": 0.0,
+    "vehicles_cleared": 6,
+    "max_wait_time": 0.0,
+    "rules": {
+      "FlowShare_49%": 0.5
+    },
+    "logged_at": 1787523154.837016
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 21.5,
+    "pcu_demand": 0.0,
+    "vehicles_cleared": 6,
+    "max_wait_time": 0.0,
+    "rules": {
+      "FlowShare_49%": 0.5
+    },
+    "logged_at": 1787523179.969331
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 19.8,
+    "pcu_demand": 0.0,
+    "vehicles_cleared": 6,
+    "max_wait_time": 0.0,
+    "rules": {
+      "FlowShare_45%": 0.46
+    },
+    "logged_at": 1787523203.4759932
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 23.2,
+    "pcu_demand": 0.0,
+    "vehicles_cleared": 6,
+    "max_wait_time": 0.0,
+    "rules": {
+      "FlowShare_54%": 0.54
+    },
+    "logged_at": 1787523230.4599285
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 19.8,
+    "pcu_demand": 0.0,
+    "vehicles_cleared": 6,
+    "max_wait_time": 0.0,
+    "rules": {
+      "FlowShare_45%": 0.46
+    },
+    "logged_at": 1787523253.849935
+  }
+]
