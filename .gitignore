@@ -1,0 +1,24 @@
+﻿# Python
+__pycache__/
+*.py[cod]
+*.class
+venv/
+env/
+.env
+
+# Model weights
+*.pt
+*.onnx
+*.weights
+
+# Node / Frontend
+node_modules/
+dist/
+build/
+.next/
+
+# Data & OS
+data/sample_videos/*.mp4
+data/sample_videos/*.avi
+.DS_Store
+Thumbs.db
