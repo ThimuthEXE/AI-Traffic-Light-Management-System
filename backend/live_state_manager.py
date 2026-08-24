@@ -1,31 +1,31 @@
 ﻿"""
-Shared In-Memory Intersection State & Real-Time Telemetry Hub
-Maintains live intersection state, synchronizes with the AI Controller,
-and broadcasts WebSocket updates to connected dashboards.
+Live State Manager & Real-Time Telemetry Hub with Protected Dual-Movement Phasing
+Synchronizes physical Pygame simulation state with Web Dashboard WebSockets at 10 Hz.
+General Sir John Kotelawala Defence University (KDU) - IT 3182 Essentials of AI
 """
 
 import time
-import asyncio
-from typing import Set
+import math
+from typing import Dict, Any, Set
 from fastapi import WebSocket
 
 from ai_engine.simulation.traffic_signal import TrafficSignalManager, SignalPhase
 from ai_engine.simulation.controllers import FixedTimeController, AIFuzzyController
 from ai_engine.simulation.metrics_tracker import MetricsTracker
-from backend.db_service import db_service
 
-class IntersectionStateManager:
-    def __init__(self, intersection_id: str = "INT-KDU-01"):
+class LiveIntersectionStateManager:
+    def __init__(self, intersection_id: str = "INT-KDU-01", name: str = "KDU Main Campus 4-Way Junction"):
         self.intersection_id = intersection_id
-        self.name = "KDU Main Campus 4-Way Intersection"
+        self.name = name
         
-        # Signals & Controllers
-        self.signals = TrafficSignalManager(yellow_duration=2.5, all_red_duration=1.0)
+        # Dual-Movement Protected Phasing Signal Manager
+        self.signals = TrafficSignalManager(yellow_duration=2.0, all_red_duration=1.0)
+        
+        # Controllers
         self.fixed_controller = FixedTimeController(fixed_green=25.0)
         self.ai_controller = AIFuzzyController(min_green=8.0, max_green=45.0)
         
-        # Mode: 1 = Fixed-Time, 2 = AI Cycle-Adaptive
-        self.active_mode = 2
+        self.active_mode = 2  # Default to Mode 2: AI Adaptive
         self.current_controller = self.ai_controller
         
         # Metrics
@@ -82,20 +82,19 @@ class IntersectionStateManager:
     def get_snapshot(self) -> dict:
         """Returns structured JSON snapshot. If Pygame is actively syncing, returns exact Pygame frame."""
         now = time.time()
-        # If received sync from Pygame within the last 2 seconds, use exact Pygame state
         if self.last_sim_snapshot and (now - self.last_sim_sync_time) < 2.5:
             snap = dict(self.last_sim_snapshot)
             snap["timestamp"] = round(now, 2)
             snap["sync_source"] = "LIVE_PYGAME_SIMULATION"
             return snap
 
-        # Otherwise, fallback to standalone in-memory ticker
         active_axis = self.signals.active_green_axis
+        cur_phase = str(self.signals.current_phase)
         
-        if self.signals.current_phase in [SignalPhase.EW_GREEN, SignalPhase.NS_GREEN]:
+        if "GREEN" in cur_phase:
             rem_time = max(0.0, self.signals.allocated_green - self.signals.time_in_state)
             current_state = "GREEN"
-        elif self.signals.current_phase in [SignalPhase.EW_YELLOW, SignalPhase.NS_YELLOW]:
+        elif "YELLOW" in cur_phase:
             rem_time = max(0.0, self.signals.yellow_duration - self.signals.time_in_state)
             current_state = "YELLOW"
         else:
@@ -138,20 +137,18 @@ class IntersectionStateManager:
             },
             "signals": signals_map,
             "approaches": approach_stats,
-            "ai_decision": decision,
             "metrics": self.metrics.get_summary(),
-            "sync_source": "STANDALONE_BACKEND_TICKER"
+            "ai_decision": decision,
+            "sync_source": "SERVER_STANDALONE"
         }
 
     def set_control_mode(self, mode: int):
         self.active_mode = mode
         self.current_controller = self.ai_controller if mode == 2 else self.fixed_controller
 
-    def set_approach_interval(self, direction: str, interval: float):
+    def set_approach_density(self, direction: str, interval_sec: float):
         if direction in self.approach_intervals:
-            self.approach_intervals[direction] = max(0.4, min(8.0, round(interval, 1)))
+            self.approach_intervals[direction] = max(0.4, min(8.0, interval_sec))
 
-    def trigger_emergency(self, axis: str = "EW"):
-        self.signals.force_emergency_axis(axis, emergency_green_time=16.0)
 
-state_manager = IntersectionStateManager()
+state_manager = LiveIntersectionStateManager()

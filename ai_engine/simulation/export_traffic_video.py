@@ -1,7 +1,6 @@
 ﻿"""
-Intersection Video Exporter
-Generates synthetic traffic intersection video files (.mp4) using the simulation engine.
-These videos can be used to benchmark and evaluate YOLO vehicle detection and PCU tracking.
+Intersection Video Exporter with Protected Dual-Movement Phasing
+Generates synthetic traffic video files (.mp4) with conflict-free turning maneuvers.
 """
 
 import sys
@@ -27,7 +26,7 @@ def generate_sample_traffic_video(output_path: str, duration_sec: int = 15, fps:
     surface = pygame.Surface((width, height))
     font = pygame.font.SysFont("Segoe UI", 15, bold=True)
 
-    signals = TrafficSignalManager()
+    signals = TrafficSignalManager(yellow_duration=2.0, all_red_duration=1.0)
     controller = AIFuzzyController()
     vehicles = []
     vehicle_id = 1
@@ -39,17 +38,15 @@ def generate_sample_traffic_video(output_path: str, duration_sec: int = 15, fps:
     total_frames = duration_sec * fps
     dt = 1.0 / fps
     
-    # Asymmetrical spawn intervals (e.g. dense North/South, lighter East/West)
-    approach_intervals = {'N': 1.0, 'S': 1.4, 'E': 3.5, 'W': 4.0}
+    approach_intervals = {'N': 1.4, 'S': 1.8, 'E': 3.0, 'W': 3.2}
     approach_timers = {'N': 0.0, 'S': 0.0, 'E': 0.0, 'W': 0.0}
 
-    print(f"Generating {duration_sec}s traffic video ({total_frames} frames) to: {output_path}")
+    print(f"Generating {duration_sec}s traffic video with Protected Phasing ({total_frames} frames)...")
 
     def calc_next(next_axis):
         return controller.get_next_green_duration(next_axis, vehicles, approach_intervals)
 
     for frame_idx in range(total_frames):
-        # Spawning logic
         for d in ['N', 'S', 'E', 'W']:
             approach_timers[d] += dt
             if approach_timers[d] >= approach_intervals[d]:
@@ -61,27 +58,27 @@ def generate_sample_traffic_video(output_path: str, duration_sec: int = 15, fps:
                 vehicles.append(new_v)
                 vehicle_id += 1
 
-        # Signal update
         signals.update(dt, next_green_duration_calc_fn=calc_next)
 
         # Vehicle updates
-        vehicles.sort(key=lambda v: (
-            v.x if v.direction == 'E' else -v.x if v.direction == 'W' else
-            v.y if v.direction == 'S' else -v.y
-        ), reverse=True)
-
         lane_buckets = {}
         for v in vehicles:
-            key = (v.direction, v.lane_idx)
-            if key not in lane_buckets:
-                lane_buckets[key] = []
-            lane_buckets[key].append(v)
+            if not v.is_turning and not v.has_cleared_intersection:
+                key = (v.direction, v.lane_idx)
+                if key not in lane_buckets:
+                    lane_buckets[key] = []
+                lane_buckets[key].append(v)
 
         for key, lane_v_list in lane_buckets.items():
             for i, v in enumerate(lane_v_list):
                 leading_v = lane_v_list[i - 1] if i > 0 else None
-                sig_state = signals.get_signal_state(v.direction)
-                v.update(dt, leading_v, sig_state)
+                sig_th, sig_lt = signals.get_signals_for_direction(v.direction)
+                v.update(dt, leading_v, signal_through=sig_th, signal_turn=sig_lt)
+
+        for v in vehicles:
+            if v.is_turning or v.has_cleared_intersection:
+                sig_th, sig_lt = signals.get_signals_for_direction(v.direction)
+                v.update(dt, None, signal_through=sig_th, signal_turn=sig_lt)
 
         for v in list(vehicles):
             if v.is_off_screen(width, height):
@@ -98,6 +95,19 @@ def generate_sample_traffic_video(output_path: str, duration_sec: int = 15, fps:
         pygame.draw.line(surface, (241, 196, 15), (640, 0), (640, 270), 3)
         pygame.draw.line(surface, (241, 196, 15), (640, 450), (640, height), 3)
 
+        for x in range(0, 540, 40):
+            pygame.draw.line(surface, (200, 200, 200), (x, 320), (x + 20, 320), 2)
+            pygame.draw.line(surface, (200, 200, 200), (x, 400), (x + 20, 400), 2)
+        for x in range(740, width, 40):
+            pygame.draw.line(surface, (200, 200, 200), (x, 320), (x + 20, 320), 2)
+            pygame.draw.line(surface, (200, 200, 200), (x, 400), (x + 20, 400), 2)
+        for y in range(0, 260, 40):
+            pygame.draw.line(surface, (200, 200, 200), (600, y), (600, y + 20), 2)
+            pygame.draw.line(surface, (200, 200, 200), (680, y), (680, y + 20), 2)
+        for y in range(460, height, 40):
+            pygame.draw.line(surface, (200, 200, 200), (600, y), (600, y + 20), 2)
+            pygame.draw.line(surface, (200, 200, 200), (680, y), (680, y + 20), 2)
+
         # Stop Lines
         pygame.draw.line(surface, (255, 255, 255), (555, 360), (555, 440), 5)
         pygame.draw.line(surface, (255, 255, 255), (725, 280), (725, 360), 5)
@@ -109,16 +119,14 @@ def generate_sample_traffic_video(output_path: str, duration_sec: int = 15, fps:
 
         signals.draw(surface, font)
 
-        # Convert Pygame surface to OpenCV frame
         view = pygame.surfarray.array3d(surface)
         view = view.transpose([1, 0, 2])
         bgr_frame = cv2.cvtColor(view, cv2.COLOR_RGB2BGR)
-
         out.write(bgr_frame)
 
     out.release()
     pygame.quit()
-    print("Video generation complete!")
+    print("Protected Phasing video export complete!")
 
 if __name__ == "__main__":
     out_file = os.path.join(PROJECT_ROOT, "data", "sample_videos", "demo_intersection.mp4")
