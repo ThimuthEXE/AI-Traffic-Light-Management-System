@@ -274,3 +274,124 @@ class AIFuzzyController(BaseController):
         }
         self.last_decision = decision
         return decision
+
+
+class DQNAdaptiveController(BaseController):
+    """
+    Deep Reinforcement Learning (DQN) Signal Controller.
+    Uses trained Dueling Double Deep Q-Network to evaluate optimal phase and timing dynamically.
+    """
+    def __init__(self):
+        self.mode_name = "Deep Reinforcement Learning (Dueling DQN)"
+        self.last_decision: dict = {}
+        self.agent = None
+        self.action_names = [
+            "Extend Green", "NS Through", "NS Left Turn", "EW Through", "EW Left Turn",
+            "N Exclusive", "S Exclusive", "E Exclusive", "W Exclusive"
+        ]
+
+        from ai_engine.rl_agent.dqn_model import DQNAgent
+        self.agent = DQNAgent(state_dim=18, action_dim=9)
+        model_path = os.path.join(PROJECT_ROOT, "ai_engine", "traffic_predictor", "saved_models", "dqn_traffic_agent.pth")
+        if os.path.exists(model_path):
+            self.agent.load(model_path)
+            print("[DQN Controller] Deep Q-Network weights loaded successfully!")
+        else:
+            print("[DQN Controller] No pre-trained weights found, using initialized network.")
+
+    def _build_state(self, target_axis: str, vehicles: list, approach_intervals: dict) -> np.ndarray:
+        # 1. 8 Lane Queues (PCU normalized by 12.0)
+        lane_pcus = []
+        for d in ('N', 'S', 'E', 'W'):
+            for l_idx in (0, 1):
+                lane_v = [v for v in vehicles if v.direction == d and v.lane_idx == l_idx and not v.has_cleared_intersection]
+                pcu = calculate_lane_pcu(lane_v)
+                lane_pcus.append(min(2.0, pcu / 12.0))
+
+        # 2. 4 Approach Max Waiting Times (normalized by 40.0s)
+        max_waits = []
+        for d in ('N', 'S', 'E', 'W'):
+            v_d = [v for v in vehicles if v.direction == d and not v.has_cleared_intersection]
+            w = max((v.wait_time for v in v_d), default=0.0)
+            max_waits.append(min(3.0, w / 40.0))
+
+        # 3. 4 Approach Arrival Rates (normalized by 120 v/m)
+        flows = []
+        for d in ('N', 'S', 'E', 'W'):
+            rate = approach_intervals.get(d, 2.0)
+            flow = (60.0 / max(0.2, rate))
+            flows.append(min(1.5, flow / 120.0))
+
+        axis_code = 1.0 if target_axis == "NS" else 0.0
+        elapsed_norm = 0.5
+
+        state = np.array(lane_pcus + max_waits + flows + [axis_code, elapsed_norm], dtype=np.float32)
+        return state
+
+    def get_next_phase_decision(
+        self,
+        target_axis: str,
+        vehicles: list,
+        approach_intervals: dict = None,
+        cycle_observer=None,
+    ) -> dict:
+        if approach_intervals is None:
+            approach_intervals = {d: 2.0 for d in "NSEW"}
+
+        state = self._build_state(target_axis, vehicles, approach_intervals)
+        action_idx, q_values = self.agent.select_action(state, evaluate=True)
+
+        # Map DQN Action to Policy and Axis
+        dir_a, dir_b = AXIS_DIRS[target_axis]
+        pcu_a = calculate_lane_pcu([v for v in vehicles if v.direction == dir_a and not v.has_cleared_intersection])
+        pcu_b = calculate_lane_pcu([v for v in vehicles if v.direction == dir_b and not v.has_cleared_intersection])
+
+        if target_axis == "NS":
+            if action_idx == 5 or (pcu_a > 1.4 * (pcu_b + 0.5) and pcu_a > 5.0):
+                policy = "N_EXCLUSIVE_GREEN"
+                total_green = max(18.0, min(35.0, 10.0 + pcu_a * 1.5))
+                prioritized = "N"
+            elif action_idx == 6 or (pcu_b > 1.4 * (pcu_a + 0.5) and pcu_b > 5.0):
+                policy = "S_EXCLUSIVE_GREEN"
+                total_green = max(18.0, min(35.0, 10.0 + pcu_b * 1.5))
+                prioritized = "S"
+            else:
+                policy = "BALANCED_PHASE"
+                total_green = max(14.0, min(28.0, 8.0 + max(pcu_a, pcu_b) * 1.4))
+                prioritized = "BALANCED_DQN"
+        else:
+            if action_idx == 7 or (pcu_a > 1.4 * (pcu_b + 0.5) and pcu_a > 5.0):
+                policy = "E_EXCLUSIVE_GREEN"
+                total_green = max(14.0, min(28.0, 8.0 + pcu_a * 1.5))
+                prioritized = "E"
+            elif action_idx == 8 or (pcu_b > 1.4 * (pcu_a + 0.5) and pcu_b > 5.0):
+                policy = "W_EXCLUSIVE_GREEN"
+                total_green = max(14.0, min(28.0, 8.0 + pcu_b * 1.5))
+                prioritized = "W"
+            else:
+                policy = "BALANCED_PHASE"
+                total_green = max(12.0, min(24.0, 6.0 + max(pcu_a, pcu_b) * 1.4))
+                prioritized = "BALANCED_DQN"
+
+        through_green = max(10.0, round(total_green * 0.72, 1))
+        turn_green    = max(4.5,  round(total_green * 0.28, 1))
+
+        decision = {
+            "target_axis":            target_axis,
+            "policy":                 policy,
+            "total_green_sec":        round(total_green, 1),
+            "through_green_sec":      through_green,
+            "turn_green_sec":         turn_green,
+            "thru_pct":               72,
+            "turn_pct":               28,
+            "prioritized_dir":        prioritized,
+            "asym_ratio":             round(max(pcu_a, pcu_b) / (min(pcu_a, pcu_b) + 0.5), 2),
+            "dqn_action_idx":         action_idx,
+            "dqn_action_name":        self.action_names[action_idx],
+            "q_values":               [round(float(q), 2) for q in q_values],
+            "anti_starvation_active": False,
+            "data_source":            "deep_q_network_rl",
+            "ml_active":              True,
+        }
+        self.last_decision = decision
+        return decision

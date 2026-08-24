@@ -30,7 +30,7 @@ if PROJECT_ROOT not in sys.path:
 
 from ai_engine.simulation.vehicle        import Vehicle, VEHICLE_CONFIGS
 from ai_engine.simulation.traffic_signal import TrafficSignalManager, SignalPhase
-from ai_engine.simulation.controllers    import FixedTimeController, AIFuzzyController
+from ai_engine.simulation.controllers    import FixedTimeController, AIFuzzyController, DQNAdaptiveController
 from ai_engine.simulation.metrics_tracker import MetricsTracker
 from ai_engine.simulation.cycle_logger   import CycleDataLogger
 from ai_engine.simulation.cycle_observer import CycleObserver
@@ -49,7 +49,7 @@ class TrafficSimulationApp:
     def __init__(self):
         pygame.init()
         pygame.display.set_caption(
-            "AI Traffic Light System — Cycle-Adaptive Observer + ML Phasing | KDU IT3182"
+            "AI Traffic Light System — Deep RL (DQN) + ML Adaptive Phasing | KDU IT3182"
         )
 
         self.width  = 1280
@@ -67,15 +67,17 @@ class TrafficSimulationApp:
         self.big_font   = pygame.font.SysFont("Segoe UI", 22, bold=True)
 
         # Core components
-        self.signals         = TrafficSignalManager(yellow_duration=2.0, all_red_duration=1.0)
+        self.signals          = TrafficSignalManager(yellow_duration=2.0, all_red_duration=1.0)
         self.fixed_controller = FixedTimeController(fixed_green=25.0)
-        self.ai_controller    = AIFuzzyController(min_green=8.0, max_green=45.0)
+        self.ai_controller     = AIFuzzyController(min_green=8.0, max_green=38.0)
+        self.dqn_controller    = DQNAdaptiveController()
 
-        self.active_mode        = 2
-        self.current_controller = self.ai_controller
+        self.active_mode        = 3  # Default to Deep RL (DQN)
+        self.current_controller = self.dqn_controller
 
         self.metrics_ai    = MetricsTracker()
         self.metrics_fixed = MetricsTracker()
+        self.metrics_dqn   = MetricsTracker()
         self.cycle_logger  = CycleDataLogger()
 
         # Cycle Observer
@@ -119,7 +121,12 @@ class TrafficSimulationApp:
 
     @property
     def active_metrics(self) -> MetricsTracker:
-        return self.metrics_ai if self.active_mode == 2 else self.metrics_fixed
+        if self.active_mode == 3:
+            return self.metrics_dqn
+        elif self.active_mode == 2:
+            return self.metrics_ai
+        else:
+            return self.metrics_fixed
 
     # ------------------------------------------------------------------
     # Background API sync
@@ -303,12 +310,16 @@ class TrafficSimulationApp:
                 elif event.key == pygame.K_2:
                     self.active_mode = 2
                     self.current_controller = self.ai_controller
+                elif event.key == pygame.K_3:
+                    self.active_mode = 3
+                    self.current_controller = self.dqn_controller
                 elif event.key == pygame.K_e and not shift:
                     self.spawn_emergency_vehicle()
                 elif event.key == pygame.K_r:
                     self.vehicles.clear()
                     self.metrics_ai.reset()
                     self.metrics_fixed.reset()
+                    self.metrics_dqn.reset()
                 elif event.key == pygame.K_n: self.adjust_density("N", delta)
                 elif event.key == pygame.K_s and not (mods & pygame.KMOD_CTRL):
                     self.adjust_density("S", delta)
@@ -456,17 +467,28 @@ class TrafficSimulationApp:
         pygame.draw.rect(self.screen, (22, 26, 34), panel_rect, border_radius=8)
         pygame.draw.rect(self.screen, (55, 65, 80), panel_rect, width=1, border_radius=8)
 
-        mode_text  = ("ML CYCLE-ADAPTIVE OBSERVER" if self.active_mode == 2
-                      else "TRADITIONAL FIXED-TIME")
-        mode_color = (46, 204, 113) if self.active_mode == 2 else (230, 126, 34)
+        if self.active_mode == 3:
+            mode_text = "DEEP REINFORCEMENT LEARNING (DUELING DDQN)"
+            mode_color = (0, 240, 255)
+        elif self.active_mode == 2:
+            mode_text = "ML CYCLE-ADAPTIVE OBSERVER"
+            mode_color = (46, 204, 113)
+        else:
+            mode_text = "TRADITIONAL FIXED-TIME"
+            mode_color = (230, 126, 34)
+
         self.screen.blit(self.bold_font.render(mode_text, True, mode_color), (25, 22))
 
-        calib_text = (
-            "CYCLE 0 — CALIBRATION IN PROGRESS"
-            if self.completed_cycles == 0
-            else f"Cycle {self.completed_cycles} — Adaptive Mode Active"
-        )
-        calib_col = (241, 196, 15) if self.completed_cycles == 0 else (52, 152, 219)
+        if self.active_mode == 3:
+            calib_text = "Active DQN Policy — Multi-Objective Bellman RL"
+            calib_col = (0, 240, 255)
+        elif self.completed_cycles == 0:
+            calib_text = "CYCLE 0 — CALIBRATION IN PROGRESS"
+            calib_col = (241, 196, 15)
+        else:
+            calib_text = f"Cycle {self.completed_cycles} — Adaptive Mode Active"
+            calib_col = (52, 152, 219)
+
         self.screen.blit(self.small_font.render(calib_text, True, calib_col), (25, 40))
 
         self.ai_controller.analyze_all_lanes(self.vehicles)
@@ -558,7 +580,7 @@ class TrafficSimulationApp:
         )
         self.screen.blit(
             self.small_font.render(
-                "[1] Fixed  [2] AI  [E] Ambulance  [R] Reset  [Space] Pause",
+                "[1] Fixed  [2] AI-ML  [3] Deep RL (DQN)  [E] Ambulance  [R] Reset",
                 True, (140, 160, 190)
             ),
             (self.width - 345, 140)
@@ -567,11 +589,14 @@ class TrafficSimulationApp:
         # ── Bottom-Right: AI Decision Panel ────────────────────────────
         ai_panel = pygame.Rect(self.width - 400, self.height - 215, 385, 200)
         pygame.draw.rect(self.screen, (22, 26, 34), ai_panel, border_radius=8)
-        brd_col = (46, 204, 113) if self.active_mode == 2 else (60, 70, 90)
+        if self.active_mode == 3: brd_col = (0, 240, 255)
+        elif self.active_mode == 2: brd_col = (46, 204, 113)
+        else: brd_col = (60, 70, 90)
         pygame.draw.rect(self.screen, brd_col, ai_panel, width=1, border_radius=8)
 
+        panel_title = "DEEP RL (DQN) ACTIVE DECISION" if self.active_mode == 3 else "AI CYCLE-ADAPTIVE DECISION"
         self.screen.blit(
-            self.bold_font.render("AI CYCLE-ADAPTIVE DECISION", True, brd_col),
+            self.bold_font.render(panel_title, True, brd_col),
             (self.width - 388, self.height - 207)
         )
 
@@ -612,11 +637,11 @@ class TrafficSimulationApp:
         # Through / Turn split from last decision
         thru_g = dec.get("through_green_sec", self.signals.allocated_through_green)
         turn_g = dec.get("turn_green_sec",    self.signals.allocated_left_green)
-        thru_p = dec.get("thru_pct", 68)
-        turn_p = dec.get("turn_pct", 32)
-        src    = dec.get("data_source", "default_fallback")
+        thru_p = dec.get("thru_pct", 72)
+        turn_p = dec.get("turn_pct", 28)
+        src    = dec.get("data_source", "deep_q_network_rl" if self.active_mode == 3 else "default_fallback")
         opp_adj = "✓ Opp.corrected" if dec.get("opposing_adjusted") else ""
-        split_src_label = "Observed" if src == "observed" else "Default"
+        split_src_label = "Deep RL" if "deep_q" in src else "Observed" if src == "observed" else "Default"
 
         self.screen.blit(
             self.small_font.render(
@@ -631,7 +656,11 @@ class TrafficSimulationApp:
         # Priority direction info
         pdir = dec.get("prioritized_dir", "NONE")
         asym = dec.get("asym_ratio", 1.0)
-        if pdir != "NONE":
+        dqn_act = dec.get("dqn_action_name", "")
+        if self.active_mode == 3 and dqn_act:
+            pri_txt = f"DQN Action: {dqn_act}  Target: {pdir}"
+            pri_col = (0, 240, 255)
+        elif pdir != "NONE":
             pdir_label = {"N": "North(U)", "S": "South(D)",
                           "E": "East(R)",  "W": "West(L)"}.get(pdir, pdir)
             pri_txt = f"Priority: {pdir_label}  Dominance: {asym:.2f}x"
@@ -654,11 +683,14 @@ class TrafficSimulationApp:
             ),
             (self.width - 388, self.height - 96)
         )
+        ai_footer = (
+            "DQN: Dueling Double Deep Q-Network (PyTorch) | Bellman Value Function"
+            if self.active_mode == 3
+            else "ML: RandomForest (94.75%) + GradientBoost (R²=0.94) | CycleObserver"
+        )
+        footer_col = (0, 240, 255) if self.active_mode == 3 else (0, 210, 120)
         self.screen.blit(
-            self.small_font.render(
-                "ML: RandomForest (94.75%) + GradientBoost (R²=0.94) | CycleObserver",
-                True, (0, 210, 120)
-            ),
+            self.small_font.render(ai_footer, True, footer_col),
             (self.width - 388, self.height - 74)
         )
 
