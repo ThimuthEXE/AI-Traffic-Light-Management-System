@@ -24,12 +24,12 @@ if PROJECT_ROOT not in sys.path:
 from ai_engine.rl_agent.dqn_model import DQNAgent
 from ai_engine.rl_agent.traffic_env import TrafficRLEnvironment
 
-def train_dqn_agent(num_episodes: int = 50):
+def train_dqn_agent(num_episodes: int = 150):
     print("=" * 75)
-    print("STARTING DEEP Q-NETWORK (DQN) REINFORCEMENT LEARNING TRAINING")
+    print("STARTING EXTENDED DEEP Q-NETWORK (DQN) REINFORCEMENT LEARNING TRAINING")
     print(f"Total Episodes: {num_episodes} (each episode = 300s simulated traffic)")
     print("State Dimension: 18 | Action Space: 9 Discrete Actions")
-    print("Reward Objectives: Min AWT + Min Max-Wait + Max Throughput")
+    print("Reward Objectives: Min AWT + Min Max-Wait (Exponential Barrier) + Max Throughput")
     print("=" * 75)
 
     env = TrafficRLEnvironment(step_duration_sec=3.0)
@@ -39,9 +39,9 @@ def train_dqn_agent(num_episodes: int = 50):
         lr=1e-3,
         gamma=0.96,
         epsilon_start=1.0,
-        epsilon_end=0.05,
-        epsilon_decay=0.985,
-        target_update_freq=50,
+        epsilon_end=0.02,
+        epsilon_decay=0.992,
+        target_update_freq=40,
         batch_size=64
     )
 
@@ -79,8 +79,8 @@ def train_dqn_agent(num_episodes: int = 50):
         avg_loss = np.mean(losses) if losses else 0.0
         elapsed_sec = time.time() - start_wall
 
-        if ep % 5 == 0 or ep == 1 or ep == num_episodes:
-            print(f"Ep {ep:2d}/{num_episodes} [{scenario:<15}] | Total Reward: {total_reward:6.1f} | AWT: {info['awt']:4.1f}s | MaxWait: {info['max_wait']:4.1f}s | Cleared: {info['cleared']:3d} veh | Epsilon: {agent.epsilon:.3f} | Wall: {elapsed_sec:.1f}s")
+        if ep % 10 == 0 or ep == 1 or ep == num_episodes:
+            print(f"Ep {ep:3d}/{num_episodes} [{scenario:<15}] | Total Reward: {total_reward:6.1f} | AWT: {info['awt']:4.1f}s | MaxWait: {info['max_wait']:4.1f}s | Cleared: {info['cleared']:3d} veh | Epsilon: {agent.epsilon:.3f} | Wall: {elapsed_sec:.1f}s")
 
     model_dir = os.path.join(PROJECT_ROOT, "ai_engine", "traffic_predictor", "saved_models")
     os.makedirs(model_dir, exist_ok=True)
@@ -89,7 +89,7 @@ def train_dqn_agent(num_episodes: int = 50):
 
     total_training_wall = time.time() - start_wall
     print("=" * 75)
-    print(f"DQN TRAINING COMPLETED in {total_training_wall:.2f}s")
+    print(f"EXTENDED DQN TRAINING COMPLETED in {total_training_wall:.2f}s")
     print(f"Final Episode Performance: AWT = {episode_awts[-1]:.2f}s | Max Wait = {episode_max_waits[-1]:.2f}s | Cleared = {episode_cleared[-1]} veh")
     print(f"Model successfully saved to:\n{model_save_path}")
     print("=" * 75)
@@ -97,4 +97,4 @@ def train_dqn_agent(num_episodes: int = 50):
     return model_save_path
 
 if __name__ == "__main__":
-    train_dqn_agent(num_episodes=50)
+    train_dqn_agent(num_episodes=150)

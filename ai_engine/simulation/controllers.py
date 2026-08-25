@@ -373,6 +373,13 @@ class DQNAdaptiveController(BaseController):
                 total_green = max(12.0, min(24.0, 6.0 + max(pcu_a, pcu_b) * 1.4))
                 prioritized = "BALANCED_DQN"
 
+        # Starvation Relief Guard
+        max_opp_wait = max((v.wait_time for v in vehicles if v.direction in AXIS_DIRS["EW" if target_axis == "NS" else "NS"] and not v.has_cleared_intersection), default=0.0)
+        anti_starve = (max_opp_wait >= 45.0)
+        if anti_starve:
+            policy = "BALANCED_PHASE"
+            prioritized = "DQN_ANTI_STARVATION"
+
         through_green = max(10.0, round(total_green * 0.72, 1))
         turn_green    = max(4.5,  round(total_green * 0.28, 1))
 
@@ -389,7 +396,7 @@ class DQNAdaptiveController(BaseController):
             "dqn_action_idx":         action_idx,
             "dqn_action_name":        self.action_names[action_idx],
             "q_values":               [round(float(q), 2) for q in q_values],
-            "anti_starvation_active": False,
+            "anti_starvation_active": anti_starve,
             "data_source":            "deep_q_network_rl",
             "ml_active":              True,
         }

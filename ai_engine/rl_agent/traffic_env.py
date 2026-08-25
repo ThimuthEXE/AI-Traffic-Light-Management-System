@@ -157,20 +157,23 @@ class TrafficRLEnvironment:
 
         next_state = self.get_state()
 
-        # Multi-Objective Reward Calculation
-        # R = - [ w1*AWT + w2*(MaxWait/20)^1.8 + w3*TotalQueue + w4*SwitchCost ] + w5*Cleared
+        # Multi-Objective Anti-Starvation Barrier Reward Calculation
         awt = self.app.active_metrics.average_wait_time
         max_w = max((v.wait_time for v in self.app.vehicles if not v.has_cleared_intersection), default=0.0)
         tot_queue = len([v for v in self.app.vehicles if not v.has_cleared_intersection])
 
-        wait_penalty = math.pow(max_w / 25.0, 1.8) if max_w >= 25.0 else (max_w / 25.0)
+        # Non-Linear Barrier Starvation Penalty (Punishes MaxWait > 30s exponentially)
+        if max_w >= 30.0:
+            starvation_penalty = 1.20 * math.pow(max_w / 28.0, 2.4)
+        else:
+            starvation_penalty = (max_w / 28.0)
 
         reward = - (
-            0.30 * (awt / 15.0) +
-            0.45 * wait_penalty +
-            0.20 * (tot_queue / 15.0) +
+            0.25 * (awt / 15.0) +
+            0.55 * starvation_penalty +
+            0.15 * (tot_queue / 15.0) +
             0.05 * switch_cost
-        ) + (0.25 * newly_cleared)
+        ) + (0.35 * newly_cleared)
 
         done = (self.current_sim_time >= 300.0)  # 5-minute training episode
 

@@ -41,28 +41,27 @@ from ai_engine.utils.pcu_calculator import calculate_lane_pcu
 
 def get_hourly_traffic_profile(hour: int) -> dict:
     """
-    Returns realistic nominal inflow rates (v/m) across a 24-hour daily cycle (0 to 23).
-    Includes morning peak rush, midday flow, afternoon commercial, evening outbound surge, and night decay.
+    Returns realistic daily inflow rates (v/m) across 24 hours (0 to 23).
+    Calibrated to match live simulation capacity with morning rush, midday flow, evening surge, and night decay.
     """
-    # Base profiles
-    if 0 <= hour < 5:      # Midnight / Deep Night
-        return {'N': random.uniform(15, 22), 'S': random.uniform(12, 18), 'W': random.uniform(10, 15), 'E': random.uniform(10, 15)}
-    elif 5 <= hour < 7:    # Early Morning Buildup
-        return {'N': random.uniform(40, 60), 'S': random.uniform(30, 45), 'W': random.uniform(25, 35), 'E': random.uniform(20, 30)}
-    elif 7 <= hour < 10:   # Morning Peak Rush (Heavy Inbound U=North & R=East)
-        return {'N': random.uniform(135, 160), 'S': random.uniform(35, 50), 'W': random.uniform(30, 45), 'E': random.uniform(85, 115)}
-    elif 10 <= hour < 12:  # Midday Steady
-        return {'N': random.uniform(45, 65), 'S': random.uniform(40, 55), 'W': random.uniform(35, 50), 'E': random.uniform(30, 45)}
-    elif 12 <= hour < 14:  # Lunch Hour & Commercial Surge (L=West & D=South)
-        return {'N': random.uniform(40, 60), 'S': random.uniform(90, 125), 'W': random.uniform(95, 130), 'E': random.uniform(30, 45)}
-    elif 14 <= hour < 16:  # Afternoon Steady
-        return {'N': random.uniform(50, 70), 'S': random.uniform(50, 65), 'W': random.uniform(40, 55), 'E': random.uniform(40, 55)}
-    elif 16 <= hour < 19:  # Evening Outbound Peak (Major South/D & West/L Outflow)
-        return {'N': random.uniform(35, 50), 'S': random.uniform(140, 170), 'W': random.uniform(110, 145), 'E': random.uniform(30, 45)}
-    elif 19 <= hour < 22:  # Late Evening Leisure & Dinner
-        return {'N': random.uniform(35, 50), 'S': random.uniform(40, 55), 'W': random.uniform(35, 45), 'E': random.uniform(25, 35)}
-    else:                  # 22-24 Late Night
-        return {'N': random.uniform(20, 30), 'S': random.uniform(18, 28), 'W': random.uniform(12, 18), 'E': random.uniform(12, 18)}
+    if 0 <= hour < 5:        # Midnight / Deep Night (Low Flow)
+        return {'N': random.uniform(15, 22), 'S': random.uniform(10, 16), 'W': random.uniform(8, 14), 'E': random.uniform(8, 14)}
+    elif 5 <= hour < 7:      # Early Morning Rise
+        return {'N': random.uniform(40, 60), 'S': random.uniform(25, 40), 'W': random.uniform(20, 30), 'E': random.uniform(20, 30)}
+    elif 7 <= hour < 10:     # Morning Inbound Peak Rush (Heavy North/U Surge)
+        return {'N': random.uniform(120, 150), 'S': random.uniform(35, 45), 'W': random.uniform(30, 40), 'E': random.uniform(40, 55)}
+    elif 10 <= hour < 12:    # Midday Steady Flow
+        return {'N': random.uniform(45, 65), 'S': random.uniform(35, 50), 'W': random.uniform(30, 42), 'E': random.uniform(25, 38)}
+    elif 12 <= hour < 14:    # Lunch Hour Surge (Moderate South/D & West/L)
+        return {'N': random.uniform(40, 55), 'S': random.uniform(65, 90), 'W': random.uniform(50, 75), 'E': random.uniform(25, 38)}
+    elif 14 <= hour < 16:    # Afternoon Commercial Traffic
+        return {'N': random.uniform(45, 60), 'S': random.uniform(40, 55), 'W': random.uniform(35, 48), 'E': random.uniform(30, 42)}
+    elif 16 <= hour < 19:    # Evening Outbound Peak Rush (Heavy South/D Surge)
+        return {'N': random.uniform(35, 50), 'S': random.uniform(120, 150), 'W': random.uniform(45, 65), 'E': random.uniform(30, 42)}
+    elif 19 <= hour < 22:    # Late Evening Leisure & Dinner
+        return {'N': random.uniform(30, 45), 'S': random.uniform(30, 45), 'W': random.uniform(25, 35), 'E': random.uniform(20, 30)}
+    else:                    # 22-24 Late Night Decay
+        return {'N': random.uniform(18, 26), 'S': random.uniform(15, 22), 'W': random.uniform(10, 16), 'E': random.uniform(10, 16)}
 
 
 def simulate_single_mode(mode_id: int, mode_name: str, total_hours: int = 24, sim_speedup_ticks: int = 60):
@@ -83,7 +82,7 @@ def simulate_single_mode(mode_id: int, mode_name: str, total_hours: int = 24, si
     elif mode_id == 3:
         app.current_controller = app.dqn_controller
 
-    dt = 0.10  # 10Hz high-speed headless physics
+    dt = 1.0 / 60.0  # Native 60Hz high-fidelity simulation physics
     sec_per_hour = 3600.0
     
     hourly_records = []
@@ -277,7 +276,7 @@ def generate_visual_graphs(df_hourly: pd.DataFrame, waits_by_mode: dict, output_
         labels.append(m_name)
         colors_list.append(mode_colors.get(m_name, '#333'))
 
-    bp = ax3.boxplot(data_to_plot, patch_artist=True, labels=labels, showmeans=True,
+    bp = ax3.boxplot(data_to_plot, patch_artist=True, tick_labels=labels, showmeans=True,
                      meanprops=dict(marker='D', markeredgecolor='black', markerfacecolor='yellow', markersize=8),
                      medianprops=dict(color='black', linewidth=2),
                      flierprops=dict(marker='o', markersize=3, alpha=0.2))
