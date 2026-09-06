@@ -119,7 +119,7 @@ class TwoJunctionVehicle:
     def has_cleared_junction(self) -> bool:
         return self.has_cleared_intersection
 
-    def update(self, dt: float, leading_vehicle, signal_through: str, signal_turn: str, junction):
+    def update(self, dt: float, leading_vehicle, signal_through: str, signal_turn: str, junction, can_enter_box: bool = True):
         # 1. Determine relevant signal
         relevant_signal = signal_turn if self.turn_intent == "LEFT" else signal_through
 
@@ -128,9 +128,9 @@ class TwoJunctionVehicle:
         if not self.has_cleared_intersection and junction is not None:
             stop_line = junction.get_stop_line(self.direction)
 
-        # 3. Can cross check
+        # 3. Can cross check (Signal must be GREEN AND intersection box must not be blocked)
         if stop_line is not None and not self.has_cleared_intersection and not self.is_turning:
-            can_cross = (relevant_signal == 'GREEN')
+            can_cross = (relevant_signal == 'GREEN' and can_enter_box)
             crossed = False
             if self.direction == 'E' and self.x >= stop_line: crossed = True
             elif self.direction == 'W' and self.x <= stop_line: crossed = True
@@ -144,14 +144,14 @@ class TwoJunctionVehicle:
                         self._setup_turn(junction.cx, junction.cy)
                 else:
                     # Clamp at stop line
-                    if self.direction == 'E': self.x = stop_line - self.length / 2 - 2
-                    elif self.direction == 'W': self.x = stop_line + self.length / 2 + 2
-                    elif self.direction == 'S': self.y = stop_line - self.length / 2 - 2
-                    elif self.direction == 'N': self.y = stop_line + self.length / 2 + 2
+                    if self.direction == 'E': self.x = stop_line - self.length / 2 - 4
+                    elif self.direction == 'W': self.x = stop_line + self.length / 2 + 4
+                    elif self.direction == 'S': self.y = stop_line - self.length / 2 - 4
+                    elif self.direction == 'N': self.y = stop_line + self.length / 2 + 4
                     self.speed = 0.0
 
-        # 4. Car-Following Safety Distance
-        safe_gap = 14.0
+        # 4. Car-Following Safety Distance & Non-Overlap Rule
+        safe_gap = 18.0
         target_distance = 9999.0
 
         if leading_vehicle is not None and not self.is_turning:
@@ -166,10 +166,23 @@ class TwoJunctionVehicle:
             else:
                 dist = 9999.0
 
-            if dist > 0:
-                target_distance = min(target_distance, dist)
+            # ── STRICT NON-PENETRATION CLAMP ──────────────────────────────
+            if dist < 6.0:
+                # Vehicle has reached critical safety boundary: freeze speed and clamp position behind leader
+                self.speed = 0.0
+                target_distance = 0.0
+                if self.direction == 'E':
+                    self.x = leading_vehicle.x - leading_vehicle.length / 2 - self.length / 2 - 6.0
+                elif self.direction == 'W':
+                    self.x = leading_vehicle.x + leading_vehicle.length / 2 + self.length / 2 + 6.0
+                elif self.direction == 'S':
+                    self.y = leading_vehicle.y - leading_vehicle.length / 2 - self.length / 2 - 6.0
+                elif self.direction == 'N':
+                    self.y = leading_vehicle.y + leading_vehicle.length / 2 + self.length / 2 + 6.0
+            else:
+                target_distance = min(target_distance, max(0.0, dist))
 
-        if stop_line is not None and not self.has_cleared_intersection and not self.is_turning and relevant_signal in ['RED', 'YELLOW']:
+        if stop_line is not None and not self.has_cleared_intersection and not self.is_turning and (relevant_signal in ['RED', 'YELLOW'] or not can_enter_box):
             if self.direction == 'E': dist_to_stop = stop_line - (self.x + self.length / 2)
             elif self.direction == 'W': dist_to_stop = (self.x - self.length / 2) - stop_line
             elif self.direction == 'S': dist_to_stop = stop_line - (self.y + self.length / 2)
@@ -182,8 +195,16 @@ class TwoJunctionVehicle:
         # 5. Kinematic Speed Update
         top_speed = self.max_speed * (0.75 if self.is_turning else 1.0)
 
-        if target_distance < safe_gap:
-            self.speed = max(0.0, self.speed - self.decel * 2.5)
+        if target_distance <= safe_gap:
+            # Immediate deceleration to avoid any potential collision
+            if target_distance <= 6.0:
+                self.speed = 0.0
+            else:
+                # Smooth progressive braking matching leader
+                ratio = (target_distance - 6.0) / (safe_gap - 6.0)
+                desired = ratio * (leading_vehicle.speed if leading_vehicle is not None else 0.0)
+                self.speed = min(self.speed, max(0.0, desired))
+                self.speed = max(0.0, self.speed - self.decel * 2.0)
         elif target_distance < 80.0:
             desired = (target_distance - safe_gap) / 80.0 * top_speed
             if self.speed > desired:
@@ -202,6 +223,8 @@ class TwoJunctionVehicle:
                 self.is_turning = False
                 self.direction = self.turn_path_data['exit_dir']
                 self.x, self.y = self.turn_path_data['p2']
+                self.lane_idx = 0 if self.turn_intent == "LEFT" else 1
+                self.turn_intent = "STRAIGHT"
                 self._init_heading()
             else:
                 u = self.turn_progress

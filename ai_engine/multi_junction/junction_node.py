@@ -45,6 +45,11 @@ class JunctionNode:
         self.current_phase_cleared = 0
         self.last_hud_decision = {}
 
+        # Capacity metering: directions held RED by upstream segment saturation
+        self.capacity_hold_directions: set = set()
+        # I2I green wave state (set True when a preemption is in progress)
+        self.green_wave_active: bool = False
+
         # Stop lines (calculated from center cx, cy)
         # Road width is 160px (half_w = 80px, stop line offset = 85px)
         self.stop_lines = {
@@ -68,6 +73,22 @@ class JunctionNode:
 
     def get_stop_line(self, direction: str) -> float:
         return self.stop_lines.get(direction, None)
+
+    def set_capacity_hold(self, direction: str, active: bool):
+        """Called by ArterySegment when downstream link is at/near capacity.
+        When active=True, the departing direction is forced RED (metering).
+        When active=False, the hold is released.
+        """
+        if active:
+            self.capacity_hold_directions.add(direction)
+        else:
+            self.capacity_hold_directions.discard(direction)
+
+    def get_signals_metered(self, direction: str) -> tuple:
+        """Returns (through_signal, turn_signal) with capacity-hold override applied."""
+        if direction in self.capacity_hold_directions:
+            return ('RED', 'RED')
+        return self.signals.get_signals_for_direction(direction)
 
     def _get_active_pcu(self, vehicles: list) -> float:
         cur_p = str(self.signals.current_phase)
@@ -118,19 +139,39 @@ class JunctionNode:
             self.cycle_observer.begin_cycle()
 
     def trigger_green_wave_preemption(self, target_axis: str = "EW", lead_time_sec: float = 4.0):
-        """Coordinated I2I Green Wave preemption: advances phase to EW Green in time for incoming platoon."""
-        cur = self.signals.current_phase
-        if cur == SignalPhase.EW_THROUGH_GREEN:
-            # Extend green to ensure full platoon passes smoothly
+        """Coordinated I2I Green Wave preemption.
+
+        target_axis='EW'  → tries to hold/advance to EW green for approaching EB/WB platoon.
+        target_axis='NS'  → tries to hold/advance to NS green for approaching SB/NB platoon.
+
+        Logic mirrors _get_active_pcu's string-match pattern so it stays compatible
+        with whatever phase names the TrafficSignalManager uses.
+        """
+        cur_p = str(self.signals.current_phase)
+
+        if target_axis == "EW":
+            serving_target = "EW_THROUGH" in cur_p or "E_EXCLUSIVE" in cur_p or "W_EXCLUSIVE" in cur_p
+            serving_cross  = "NS_THROUGH" in cur_p or "N_EXCLUSIVE" in cur_p or "S_EXCLUSIVE" in cur_p
+        else:  # "NS"
+            serving_target = "NS_THROUGH" in cur_p or "N_EXCLUSIVE" in cur_p or "S_EXCLUSIVE" in cur_p
+            serving_cross  = "EW_THROUGH" in cur_p or "E_EXCLUSIVE" in cur_p or "W_EXCLUSIVE" in cur_p
+
+        if serving_target:
+            # Already green for the arriving platoon — extend it
             self.signals.allocated_through_green = max(
                 self.signals.allocated_through_green,
                 self.signals.time_in_state + lead_time_sec + 8.0
             )
             self.green_wave_active = True
-        elif cur in (SignalPhase.NS_THROUGH_GREEN, SignalPhase.N_EXCLUSIVE_GREEN, SignalPhase.S_EXCLUSIVE_GREEN):
-            # Only preempt if minimum safe green (6.0s) has already been served to cross-traffic
+
+        elif serving_cross:
+            # Cross-traffic is green — only cut it short if min safe time (6 s) has been served
             if self.signals.time_in_state >= 6.0:
                 self.signals.time_in_state = self.signals.allocated_through_green
                 self.green_wave_active = True
-        elif cur in (SignalPhase.ALL_RED_1, SignalPhase.ALL_RED_2):
+
+        elif "ALL_RED" in cur_p:
+            # In an all-red clearance — just mark wave active so the next green
+            # phase (chosen by the signal manager) proceeds without interruption
             self.green_wave_active = True
+
