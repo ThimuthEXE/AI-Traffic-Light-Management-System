@@ -1,4 +1,4 @@
-﻿"""
+"""
 FastAPI Server Application with Integrated Web Dashboard
 Provides REST API endpoints, Real-Time WebSockets, and hosts the Interactive Web Dashboard.
 General Sir John Kotelawala Defence University (KDU) - IT 3182 Essentials of AI
@@ -36,14 +36,14 @@ async def background_telemetry_loop():
         last_t = now
 
         switched, completed_p, new_p, allocated = state_manager.signals.update(
-            dt, next_green_duration_calc_fn=lambda axis: state_manager.current_controller.get_next_green_duration(
+            dt, next_decision_calc_fn=lambda axis: state_manager.current_controller.get_next_phase_decision(
                 axis, [], state_manager.approach_intervals
             )
         )
 
         # Log completed cycles
-        if switched and completed_p in ["EW_GREEN", "NS_GREEN"]:
-            axis = 'EW' if completed_p == "EW_GREEN" else 'NS'
+        if switched and completed_p and "GREEN" in str(completed_p):
+            axis = 'EW' if ('EW' in str(completed_p) or 'E_' in str(completed_p) or 'W_' in str(completed_p)) else 'NS'
             decision = getattr(state_manager.current_controller, "last_decision", {})
             db_service.save_cycle_log({
                 "phase_axis": axis,

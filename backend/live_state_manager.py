@@ -1,4 +1,4 @@
-﻿"""
+"""
 Live State Manager & Real-Time Telemetry Hub with Protected Dual-Movement Phasing
 Synchronizes physical Pygame simulation state with Web Dashboard WebSockets at 10 Hz.
 General Sir John Kotelawala Defence University (KDU) - IT 3182 Essentials of AI
@@ -52,6 +52,11 @@ class LiveIntersectionStateManager:
         await websocket.accept()
         self.active_connections.add(websocket)
         print(f"[WS] Client connected. Total clients: {len(self.active_connections)}")
+        try:
+            snapshot = self.get_snapshot()
+            await websocket.send_json(snapshot)
+        except Exception as e:
+            print(f"[WS] Error sending initial snapshot: {e}")
 
     def disconnect_ws(self, websocket: WebSocket):
         if websocket in self.active_connections:
@@ -149,6 +154,20 @@ class LiveIntersectionStateManager:
     def set_approach_density(self, direction: str, interval_sec: float):
         if direction in self.approach_intervals:
             self.approach_intervals[direction] = max(0.4, min(8.0, interval_sec))
+
+    def set_approach_interval(self, direction: str, interval_sec: float):
+        self.set_approach_density(direction, interval_sec)
+
+    def trigger_emergency(self, axis: str = "EW"):
+        """Forces immediate green preemption on the designated axis."""
+        axis = axis.upper()
+        if axis == "EW":
+            self.signals.current_phase = SignalPhase.EW_THROUGH_GREEN
+            self.signals.allocated_through_green = 30.0
+        else:
+            self.signals.current_phase = SignalPhase.NS_THROUGH_GREEN
+            self.signals.allocated_through_green = 30.0
+        self.signals.time_in_state = 0.0
 
 
 state_manager = LiveIntersectionStateManager()
