@@ -76,46 +76,60 @@ flowchart TD
 
 ```
 AI-Traffic-Light-Management-System/
-├── ai_engine/                         # Core AI & Simulation Logic
+├── 1_single_junction/                 # Dedicated Single 4-Way Intersection System
+│   ├── run_single_junction_simulation.py # Interactive Single-Junction Simulation
+│   ├── single_junction_vehicle.py     # Vehicle Physics & Bézier Geometry
+│   ├── run_benchmarks.py              # Single Junction Benchmark Evaluator
+│   └── run_simulation.bat             # Folder Launcher
+│
+├── 2_two_junction/                    # Dedicated 2-Junction Connected Corridor System
+│   ├── run_two_junction_simulation.py # Interactive 2-Junction Pygame Simulation
+│   ├── two_junction_coordinator.py    # Inter-Intersection Green Wave Coordinator
+│   ├── two_junction_vehicle.py        # Arterial Platoon Vehicle Physics
+│   ├── junction_node.py               # Junction Controller Router
+│   ├── run_two_junction_benchmark.py  # 5-Hour Benchmark Suite
+│   └── run_two_junction_simulation.bat# Folder Launcher
+│
+├── 3_four_junction/                   # Dedicated 4-Junction Grid System (2x2 Connected)
+│   ├── run_four_junction_simulation.py# Interactive 4-Junction Grid Simulation
+│   ├── four_junction_coordinator.py   # 4-Junction Network Coordinator
+│   ├── four_junction_vehicle.py       # Collision-Safe Vehicle Physics & Routing
+│   ├── four_junction_collision_manager.py # Zero-Overlap Spatial Safety Guard
+│   ├── run_four_junction_benchmark.py # 4-Junction Performance Benchmark
+│   └── run_four_junction_simulation.bat# Folder Launcher
+│
+├── ai_engine/                         # Core AI, RL & Computer Vision Engines
 │   ├── fuzzy_controller/              # Mamdani Fuzzy Logic Controller
+│   ├── rl_agent/                      # Deep Q-Network (DQN) PyTorch Architecture
+│   ├── traffic_predictor/             # Scikit-Learn Traffic Flow Predictor & Models
+│   ├── simulation/                    # Shared Signal State Machines & Controllers
 │   ├── models/                        # YOLOv8 Computer Vision Pipeline
-│   ├── multi_junction/                # Connected 2-Junction Architecture & Coordinator
-│   │   ├── junction_node.py           # Junction Node Model & Controller Router
-│   │   ├── two_junction_vehicle.py    # Vehicle Physics & Bézier Curve Geometry
-│   │   ├── two_junction_coordinator.py# I2I Green Wave Coordination Protocol
-│   │   ├── run_two_junction_simulation.py # Interactive 2-Junction Pygame GUI
-│   │   └── run_two_junction_benchmark.py  # 5-Hour Multi-Scenario Benchmark Suite
-│   ├── rl_agent/                      # Deep Q-Network (DQN) PyTorch Implementation
-│   ├── simulation/                    # Single Junction Simulation & Controllers
-│   │   ├── controllers.py             # Fixed, Fuzzy, and DQN Signal Controllers
-│   │   ├── traffic_signal.py          # Traffic Signal State Machine (8 Phases)
-│   │   └── run_simulation.py          # Interactive Single-Junction Pygame GUI
-│   ├── traffic_predictor/             # Scikit-Learn Traffic Flow Predictor & DQN Weights
 │   └── utils/                         # Metrics, PCU, and Geometry Helpers
 │
 ├── backend/                           # FastAPI REST & WebSocket Telemetry Server
-│   ├── app.py                         # Application Entry Point & WebSocket Broadcaster
+│   ├── app.py                         # Application Entry Point & Telemetry Loop
 │   ├── config.py                      # Server Configuration
-│   ├── db_service.py                  # Telemetry Fallback & Data Logger
+│   ├── db_service.py                  # Database Layer (MongoDB & Local JSON Fallback)
+│   ├── live_state_manager.py          # Real-time Intersection State Hub
 │   └── routes/                        # Intersections, Predictions, Analytics API
 │
-├── frontend/                          # Web Telemetry Dashboard
+├── frontend/                          # Interactive Web Telemetry Dashboard
 │   ├── index.html                     # Live Control Dashboard UI
 │   ├── styles.css                     # Dark-Themed Responsive Styles
-│   └── app.js                         # WebSocket Consumer & Real-time Chart.js Visualizer
+│   └── app.js                         # WebSocket Consumer & Chart.js Visualizer
 │
 ├── data/
 │   ├── datasets/                      # Training & Synthetic Traffic Data
 │   ├── sample_videos/                 # Real-World Intersection Video Feeds
 │   └── simulation_reports/            # Automated Scientific Benchmark Results
-│       ├── single_junction_reports/   # 24-Hour & 1-Hour Single Intersection Reports & Figures
-│       └── two_junction_reports/      # 5-Hour 2-Junction Comparison Reports & Figures
 │
 ├── requirements.txt                   # Project Dependencies
-├── run_simulation.bat                 # Single-Junction Interactive Simulation Launcher
-├── run_two_junction_simulation.bat    # 2-Junction Connected Simulation Launcher
-├── run_all_components.bat             # Full Stack Launcher (Backend + Web Dashboard)
-└── run_yolo_monitor.bat               # Real-time Video YOLOv8 Monitoring Launcher
+├── run_simulation.bat                 # Single-Junction Launcher
+├── run_two_junction_simulation.bat    # 2-Junction Launcher
+├── run_four_junction_simulation.bat   # 4-Junction Launcher
+├── open_dashboard.bat                 # Web Dashboard Launcher
+├── run_all_components.bat             # Full Stack Launcher
+└── run_yolo_monitor.bat               # YOLOv8 Video Monitor Launcher
 ```
 
 ---
@@ -127,15 +141,22 @@ AI-Traffic-Light-Management-System/
 - (Optional) NVIDIA GPU with CUDA for accelerated YOLOv8 / PyTorch inference.
 
 ### 2. Setup Virtual Environment & Dependencies
-```powershell
-# Clone or navigate to repository root
-cd "E:\Mandila\KDU\Semester 4\Essentials of Artificial Intelligence\AI-Traffic-Light-Management-System"
 
-# Create and activate virtual environment (optional but recommended)
+```bash
+# 1. Clone the repository from GitHub
+git clone https://github.com/ThimuthEXE/AI-Traffic-Light-Management-System.git
+cd AI-Traffic-Light-Management-System
+
+# 2. Create and activate a virtual environment
+# On Windows (PowerShell):
 python -m venv venv
 .\venv\Scripts\activate
 
-# Install required dependencies
+# On macOS / Linux:
+python3 -m venv venv
+source venv/bin/activate
+
+# 3. Install required dependencies
 pip install -r requirements.txt
 ```
 
@@ -144,32 +165,45 @@ pip install -r requirements.txt
 ## 🚀 Running the System
 
 ### Option A: One-Click Windows Launchers
-- 🎮 **2-Junction Interactive Simulation:** Double-click `run_two_junction_simulation.bat`
+- 🎮 **4-Junction Synchronized Grid Simulation:** Double-click `run_four_junction_simulation.bat`
+- 🎮 **2-Junction Connected Corridor Simulation:** Double-click `run_two_junction_simulation.bat`
 - 🎮 **Single-Junction Simulation:** Double-click `run_simulation.bat`
-- 🌐 **Full Telemetry Dashboard (FastAPI + Web UI):** Double-click `run_all_components.bat`
+- 🌐 **Interactive Web Dashboard (FastAPI + UI):** Double-click `open_dashboard.bat` (or `run_all_components.bat`)
 - 📹 **YOLOv8 Computer Vision Video Monitor:** Double-click `run_yolo_monitor.bat`
 
 ### Option B: Command-Line Execution
 
-#### 1. Run Interactive 2-Junction Simulation
-```powershell
-python ai_engine\multi_junction\run_two_junction_simulation.py
+#### 1. Run 4-Junction Grid Simulation
+```bash
+python 3_four_junction/run_four_junction_simulation.py
 ```
 
-#### 2. Run Interactive Single-Junction Simulation
-```powershell
-python ai_engine\simulation\run_simulation.py
+#### 2. Run 2-Junction Connected Simulation
+```bash
+python 2_two_junction/run_two_junction_simulation.py
 ```
 
-#### 3. Run 5-Hour Scientific Benchmark Suite (2 Connected Junctions)
-```powershell
-python ai_engine\multi_junction\run_two_junction_benchmark.py
+#### 3. Run Single-Junction Simulation
+```bash
+python 1_single_junction/run_single_junction_simulation.py
 ```
 
-#### 4. Run Telemetry Backend Server
-```powershell
-python backend\app.py
-# Access Dashboard at: http://localhost:8000
+#### 4. Run Telemetry Backend & Web Dashboard
+```bash
+python -m uvicorn backend.app:app --host 0.0.0.0 --port 8000 --reload
+# Access Dashboard at: http://localhost:8000/dashboard
+```
+
+#### 5. Run Scientific Benchmark Suites
+```bash
+# Single Junction Benchmark
+python 1_single_junction/run_benchmarks.py
+
+# 2-Junction 5-Hour Benchmark
+python 2_two_junction/run_two_junction_benchmark.py
+
+# 4-Junction Grid Benchmark
+python 3_four_junction/run_four_junction_benchmark.py
 ```
 
 ---
@@ -203,7 +237,7 @@ When running the interactive Pygame simulations, use the following hotkeys:
 | **Safety & Anti-Starvation** | Passive | **Hard Cap Ceiling (<55s)** | **Active Multi-Objective** |
 | **Collision Probability** | **0.0%** | **0.0%** | **0.0%** |
 
-*Full evaluation reports and high-resolution figures are located in [`data/simulation_reports/`](file:///E:/Mandila/KDU/Semester%204/Essentials%20of%20Artificial%20Intelligence/AI-Traffic-Light-Management-System/data/simulation_reports/).*
+*Full evaluation reports and high-resolution figures are located in [`data/simulation_reports/`](data/simulation_reports/).*
 
 ---
 
