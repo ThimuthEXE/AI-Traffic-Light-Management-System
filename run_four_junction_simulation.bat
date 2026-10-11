@@ -1,11 +1,9 @@
 @echo off
-title AI 4-Junction Traffic Simulation — KDU IT3182
+title AI 4-Junction Traffic Simulation
 cd /d "%~dp0"
 
 echo ============================================================
 echo   AI 4-Junction Traffic Light Management System
-echo   General Sir John Kotelawala Defence University
-echo   IT 3182 Essentials of AI — Group 06
 echo ============================================================
 echo.
 

@@ -14,7 +14,7 @@ AIFuzzyController now works in two modes:
        a big queue, shorten the turn phase to get back to it sooner.
     5. Return {policy, through_green_sec, turn_green_sec} to the signal manager.
 
-General Sir John Kotelawala Defence University (KDU) — IT 3182 Essentials of AI
+AI Traffic Light Management System
 """
 
 from __future__ import annotations

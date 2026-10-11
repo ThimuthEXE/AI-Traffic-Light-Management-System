@@ -1,6 +1,6 @@
 """
 5-Hour Multi-Scenario Scientific Benchmark for 2-Junction Connected System
-General Sir John Kotelawala Defence University (KDU) — IT 3182 Essentials of AI — Group 06
+AI Traffic Light Management System
 
 Compares 3 Traffic Management Methods across 5 distinct real-world traffic scenarios:
 - Mode 1: Traditional Fixed-Time Controller (Baseline)
@@ -204,7 +204,7 @@ class FastTwoJunctionBenchmark:
 def run_5hour_benchmark():
     print("=" * 80)
     print("  5-HOUR 2-JUNCTION BENCHMARK: FIXED-TIME vs FUZZY-ML vs DEEP RL (DQN)")
-    print("  KDU IT 3182 Essentials of AI — Group 06")
+    
     print("=" * 80)
 
     # 5 simulated hours = 18,000 simulated seconds (300 minutes)

@@ -55,7 +55,7 @@ def run_scenarios():
 
     print("\n" + "=" * 75)
     print("AI MACHINE LEARNING TRAFFIC CONGESTION & PROACTIVE TIMING FORECASTS")
-    print("Course: KDU IT 3182 Essentials of AI | Model: Random Forest Multi-Output")
+    print("Model: Random Forest Multi-Output")
     print("=" * 75)
 
     for sc in scenarios:

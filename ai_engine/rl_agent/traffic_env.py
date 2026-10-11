@@ -1,6 +1,6 @@
 """
 Reinforcement Learning Simulation Environment Wrapper (Gym-Style)
-General Sir John Kotelawala Defence University (KDU) — IT 3182 Essentials of AI
+AI Traffic Light Management System
 
 Wraps the traffic simulation into a standardized MDP Environment:
 - State Space: 18 continuous features (Lane PCUs, Approach Max Waits, Arrival Rates, Active Phase)

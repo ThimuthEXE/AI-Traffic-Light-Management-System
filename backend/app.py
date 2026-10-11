@@ -1,7 +1,7 @@
 """
 FastAPI Server Application with Integrated Web Dashboard
 Provides REST API endpoints, Real-Time WebSockets, and hosts the Interactive Web Dashboard.
-General Sir John Kotelawala Defence University (KDU) - IT 3182 Essentials of AI
+AI-Based Traffic Light Management System
 """
 
 import sys
@@ -71,7 +71,7 @@ async def lifespan(app: FastAPI):
 app = FastAPI(
     title="AI Traffic Light Management System API",
     version="2.0.0",
-    description="Real-time REST & WebSocket API for KDU IT 3182 Essentials of AI Project",
+    description="Real-time REST & WebSocket API for AI Traffic Light Management System",
     lifespan=lifespan
 )
 
@@ -103,8 +103,7 @@ def root_redirect():
 def api_info():
     return {
         "system": "AI-Based Traffic Light Management System",
-        "institution": "General Sir John Kotelawala Defence University (KDU)",
-        "course": "IT 3182 Essentials of AI",
+        "version": "2.0.0",
         "api_docs": "http://localhost:8000/docs",
         "dashboard": "http://localhost:8000/dashboard",
         "websocket_endpoint": "ws://localhost:8000/ws/live-traffic",

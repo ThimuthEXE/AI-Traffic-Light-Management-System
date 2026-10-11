@@ -1,6 +1,6 @@
 """
 24-Hour Comprehensive Benchmark & Statistical Variance Analyzer
-KDU IT 3182 Essentials of AI - AI Traffic Light Management System
+AI Traffic Light Management System
 
 Compares 3 Signal Control Modes under identical 24-Hour Dynamic Traffic (1,440 minutes / 86,400s):
   1. Mode 1: Traditional Fixed-Time (Fix)
@@ -392,7 +392,7 @@ def run_24hour_benchmark():
 
     ws1["A1"] = "24-HOUR COMPREHENSIVE TRAFFIC SIGNAL BENCHMARK (3 CONTROL MODES)"
     ws1["A1"].font = title_font
-    ws1["A2"] = "General Sir John Kotelawala Defence University (KDU) | IT 3182 Essentials of AI | Group 06"
+    ws1["A2"] = "AI Traffic Light Management System
     ws1["A2"].font = sub_title_font
 
     m1_s = all_summaries[0]

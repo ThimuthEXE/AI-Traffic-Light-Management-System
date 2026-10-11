@@ -13,7 +13,7 @@ Provides a clean `get_cycle_summary(direction)` dict that the controller
 uses to compute the next cycle's through_green / turn_green split and to
 decide which approach, if any, receives Exclusive All-Green priority.
 
-General Sir John Kotelawala Defence University (KDU) — IT 3182 Essentials of AI
+AI Traffic Light Management System
 """
 
 from __future__ import annotations

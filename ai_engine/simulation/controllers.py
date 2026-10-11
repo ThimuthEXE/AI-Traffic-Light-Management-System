@@ -1,6 +1,6 @@
 """
 Intersection Control Strategies — High-Capacity Dynamic Cycle Optimizer
-General Sir John Kotelawala Defence University (KDU) — IT 3182 Essentials of AI
+AI Traffic Light Management System
 
 Features:
 1. Dynamic Green Scaling (Surge approaches get 32-36s, light approaches get 12-16s -> Total cycle stays ~58s)

@@ -2,7 +2,7 @@
 Simulation-Based Phase Optimization Dataset Generator
 Generates comprehensive state-action training samples with high sensitivity
 to single-approach spawn rates and directional queue buildup.
-General Sir John Kotelawala Defence University (KDU) - IT 3182 Essentials of AI
+AI Traffic Light Management System
 """
 
 import sys

@@ -1,6 +1,6 @@
 """
 2-Junction Connected Arterial Network Simulation
-General Sir John Kotelawala Defence University (KDU) — IT 3182 Essentials of AI — Group 06
+AI Traffic Light Management System
 
 Features:
 - 2 Interconnected 4-way Junctions (Junction 1: West, Junction 2: East)
@@ -29,7 +29,7 @@ class TwoJunctionSimulationApp:
     def __init__(self):
         pygame.init()
         pygame.display.set_caption(
-            "AI 2-Junction Traffic Simulation — Deep RL & Fuzzy-ML | KDU IT3182"
+            "AI 2-Junction Traffic Simulation — Deep RL & Fuzzy-ML"
         )
 
         self.width = 1440
@@ -329,7 +329,7 @@ class TwoJunctionSimulationApp:
             m_txt, m_col = "TRADITIONAL FIXED-TIME CONTROLLER", (230, 126, 34)
 
         self.screen.blit(self.big_font.render(m_txt, True, m_col), (30, 16))
-        self.screen.blit(self.small_font.render("2-Junction Connected Arterial System | KDU IT3182 Essentials of AI", True, (160, 180, 200)), (30, 44))
+        self.screen.blit(self.small_font.render("2-Junction Connected Arterial System", True, (160, 180, 200)), (30, 44))
 
         # Network Stats
         awt = float(sum(self.network_cleared_waits) / len(self.network_cleared_waits)) if self.network_cleared_waits else 0.0

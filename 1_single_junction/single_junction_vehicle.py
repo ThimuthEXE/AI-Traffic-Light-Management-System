@@ -2,7 +2,7 @@
 Vehicle Kinematics & Turning Model Module
 Simulates individual vehicle dynamics, PCU properties, braking, queuing,
 and smooth multi-directional turns with strict Protected Phasing signal compliance.
-General Sir John Kotelawala Defence University (KDU) - IT 3182 Essentials of AI
+AI Traffic Light Management System
 """
 
 import math

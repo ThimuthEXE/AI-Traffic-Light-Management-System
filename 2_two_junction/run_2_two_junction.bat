@@ -4,8 +4,6 @@ cd /d "%~dp0"
 
 echo ============================================================
 echo   AI Traffic Light Management System — 2 Connected Junctions
-echo   General Sir John Kotelawala Defence University
-echo   IT 3182 Essentials of AI — Group 06
 echo ============================================================
 echo.
 

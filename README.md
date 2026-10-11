@@ -6,9 +6,8 @@
 [![YOLOv8](https://img.shields.io/badge/Ultralytics-YOLOv8-yellow.svg)](https://ultralytics.com/)
 [![License](https://img.shields.io/badge/License-Academic%20Use-lightgrey.svg)]()
 
-> **Course:** IT 3182 — Essentials of Artificial Intelligence  
-> **Institution:** General Sir John Kotelawala Defence University (KDU), Faculty of Computing  
-> **Group:** 06  
+> **Project:** Intelligent Adaptive Traffic Light Control System  
+> **Author:** Thimuth  
 
 ---
 
@@ -241,9 +240,8 @@ When running the interactive Pygame simulations, use the following hotkeys:
 
 ---
 
-## 👥 Authors & Academic Context
+## 👤 Author & License
 
-**General Sir John Kotelawala Defence University (KDU)**  
-**Faculty of Computing — Department of Computer Science & Software Engineering**  
-**Module:** IT 3182 — Essentials of Artificial Intelligence  
-**Group:** 06  
+**Developer:** Thimuth ([@ThimuthEXE](https://github.com/ThimuthEXE))  
+**Repository:** [AI-Traffic-Light-Management-System](https://github.com/ThimuthEXE/AI-Traffic-Light-Management-System)  
+**License:** MIT License  

@@ -1,6 +1,6 @@
 """
 Vehicle Kinematics & Multi-Junction Navigation Module
-General Sir John Kotelawala Defence University (KDU) — IT 3182 Essentials of AI — Group 06
+AI Traffic Light Management System
 
 Features:
 - Individual vehicle dynamics, PCU properties, braking, queuing

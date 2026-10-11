@@ -1,6 +1,6 @@
 """
 Collision Manager & Accident Monitoring Module
-General Sir John Kotelawala Defence University (KDU) — IT 3182 Essentials of AI — Group 06
+AI Traffic Light Management System
 
 Features:
   - Strict Zero-Overlap Physical Invariant Rule:

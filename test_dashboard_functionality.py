@@ -41,27 +41,27 @@ def test_dashboard():
         assert res.status_code == 200
         print(f"[TEST 5] /api/intersections: Listed {len(res.json())} intersection(s)")
 
-        res = client.get('/api/intersections/INT-KDU-01/live')
+        res = client.get('/api/intersections/INT-01/live')
         assert res.status_code == 200
         live = res.json()
-        print(f"[TEST 6] /api/intersections/INT-KDU-01/live: Mode={live.get('control_mode')}, Phase={live.get('active_phase', {}).get('phase_name')}")
+        print(f"[TEST 6] /api/intersections/INT-01/live: Mode={live.get('control_mode')}, Phase={live.get('active_phase', {}).get('phase_name')}")
 
         # 5. Control Mode Switch
-        res = client.post('/api/intersections/INT-KDU-01/control', json={'mode': 1})
+        res = client.post('/api/intersections/INT-01/control', json={'mode': 1})
         assert res.status_code == 200
         print(f"[TEST 7] Switch to Fixed-Time: {res.json()}")
 
-        res = client.post('/api/intersections/INT-KDU-01/control', json={'mode': 2})
+        res = client.post('/api/intersections/INT-01/control', json={'mode': 2})
         assert res.status_code == 200
         print(f"[TEST 8] Switch to AI Adaptive: {res.json()}")
 
         # 6. Emergency Preemption
-        res = client.post('/api/intersections/INT-KDU-01/control', json={'mode': 2, 'emergency_axis': 'EW'})
+        res = client.post('/api/intersections/INT-01/control', json={'mode': 2, 'emergency_axis': 'EW'})
         assert res.status_code == 200
         print(f"[TEST 9] Emergency Preemption Override: {res.json()}")
 
         # 7. Density Adjustment
-        res = client.post('/api/intersections/INT-KDU-01/density', json={'direction': 'N', 'spawn_interval_sec': 1.2})
+        res = client.post('/api/intersections/INT-01/density', json={'direction': 'N', 'spawn_interval_sec': 1.2})
         assert res.status_code == 200
         print(f"[TEST 10] Density Update: {res.json()}")
 

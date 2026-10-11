@@ -1,7 +1,7 @@
 ﻿"""
 Machine Learning Phasing Strategy & Green Duration Optimizer Trainer
 Trains Random Forest Classifier (Phasing Policy) & Gradient Boosting Regressor (Green Duration)
-General Sir John Kotelawala Defence University (KDU) - IT 3182 Essentials of AI
+AI Traffic Light Management System
 """
 
 import sys

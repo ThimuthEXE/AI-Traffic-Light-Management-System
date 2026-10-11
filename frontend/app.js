@@ -176,7 +176,7 @@ function updateApproachBadge(dir, info) {
 // Slider Change Handler
 async function onDensitySliderChange(direction, value) {
     try {
-        await fetch(`${API_BASE}/api/intersections/INT-KDU-01/density`, {
+        await fetch(`${API_BASE}/api/intersections/INT-01/density`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ direction: direction, spawn_interval_sec: parseFloat(value) })
@@ -200,7 +200,7 @@ async function setMode(mode) {
     }
 
     try {
-        await fetch(`${API_BASE}/api/intersections/INT-KDU-01/control`, {
+        await fetch(`${API_BASE}/api/intersections/INT-01/control`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ mode: mode })
@@ -213,7 +213,7 @@ async function setMode(mode) {
 // Emergency Preemption Trigger
 async function triggerEmergencyOverride() {
     try {
-        await fetch(`${API_BASE}/api/intersections/INT-KDU-01/control`, {
+        await fetch(`${API_BASE}/api/intersections/INT-01/control`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ mode: 2, emergency_axis: "EW" })

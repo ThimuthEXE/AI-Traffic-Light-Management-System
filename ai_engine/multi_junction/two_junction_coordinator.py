@@ -1,6 +1,6 @@
 """
 2-Junction Inter-Intersection (I2I) Green Wave Synchronization Coordinator
-General Sir John Kotelawala Defence University (KDU) — IT 3182 Essentials of AI — Group 06
+AI Traffic Light Management System
 
 Features:
 - Real-time Platoon Tracking along the arterial corridor between Junction 1 & Junction 2

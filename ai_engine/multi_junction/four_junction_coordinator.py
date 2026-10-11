@@ -1,6 +1,6 @@
 """
 4-Junction 2×2 Grid Inter-Intersection (I2I) Green Wave Synchronization Coordinator
-General Sir John Kotelawala Defence University (KDU) — IT 3182 Essentials of AI — Group 06
+AI Traffic Light Management System
 
 Handles 8 platoon-tracking channels:
   - EB + WB on each of 2 horizontal segments (Seg_TOP, Seg_BOT)

@@ -11,7 +11,7 @@ Cycle 1+ →  Controller uses observations to:
                (gets back to that queue faster → reduces their max wait).
              • All choices minimise both AVG and MAX wait times across all approaches.
 
-General Sir John Kotelawala Defence University (KDU) — IT 3182 Essentials of AI
+AI Traffic Light Management System
 """
 
 import sys
@@ -49,7 +49,7 @@ class TrafficSimulationApp:
     def __init__(self):
         pygame.init()
         pygame.display.set_caption(
-            "AI Traffic Light System — Cycle-Adaptive Observer + ML Phasing | KDU IT3182"
+            "AI Traffic Light System — Cycle-Adaptive Observer + ML Phasing"
         )
 
         self.width  = 1280
@@ -126,7 +126,7 @@ class TrafficSimulationApp:
     # ------------------------------------------------------------------
 
     def _background_sync_worker(self):
-        sync_url = "http://127.0.0.1:8000/api/intersections/INT-KDU-01/sync"
+        sync_url = "http://127.0.0.1:8000/api/intersections/INT-01/sync"
         while self.running:
             try:
                 apps = {}
@@ -142,7 +142,7 @@ class TrafficSimulationApp:
                         "density_category":   cat,
                     }
                 payload = {
-                    "intersection_id":    "INT-KDU-01",
+                    "intersection_id":    "INT-01",
                     "active_mode":        self.active_mode,
                     "control_mode_name":  ("AI_CYCLE_ADAPTIVE"
                                            if self.active_mode == 2 else "FIXED_TIME"),

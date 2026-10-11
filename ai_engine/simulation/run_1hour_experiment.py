@@ -1,6 +1,6 @@
 """
 1-Hour Simulation Runner & Comparative Report Generator
-KDU IT 3182 Essentials of AI - AI Traffic Light Management System
+AI Traffic Light Management System
 
 Runs the 1-hour simulation with the Universal Anti-Starvation & Max-Wait Optimizer.
 Generates a comprehensive multi-tab Excel report including a side-by-side 'Comparison vs Baseline' sheet.
@@ -435,7 +435,7 @@ def run_1hour_simulation_with_comparison():
 
     ws1["A1"] = "AI TRAFFIC LIGHT MANAGEMENT SYSTEM - 1-HOUR SIMULATION REPORT (OPTIMIZED)"
     ws1["A1"].font = title_font
-    ws1["A2"] = "General Sir John Kotelawala Defence University (KDU) | IT 3182 Essentials of AI | Group 06"
+    ws1["A2"] = "AI Traffic Light Management System
     ws1["A2"].font = sub_title_font
 
     summary_data = [

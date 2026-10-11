@@ -1,6 +1,6 @@
 """
 Deep Q-Network (DQN) Model Architecture & Experience Replay
-General Sir John Kotelawala Defence University (KDU) — IT 3182 Essentials of AI
+AI Traffic Light Management System
 
 Implements Dueling Double Deep Q-Network (Dueling DDQN) with Experience Replay Buffer.
 Decomposes Q(s, a) into State-Value V(s) and Action-Advantage A(s, a):

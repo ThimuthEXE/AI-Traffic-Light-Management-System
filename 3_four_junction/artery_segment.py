@@ -1,6 +1,6 @@
 """
 Artery Segment — Inter-Junction Road Link with Capacity Management
-General Sir John Kotelawala Defence University (KDU) — IT 3182 Essentials of AI — Group 06
+AI Traffic Light Management System
 
 Supports both horizontal (EW) and vertical (NS) road segments between adjacent junctions.
 

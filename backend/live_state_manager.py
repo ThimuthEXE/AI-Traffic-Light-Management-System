@@ -1,7 +1,7 @@
 """
 Live State Manager & Real-Time Telemetry Hub with Protected Dual-Movement Phasing
 Synchronizes physical Pygame simulation state with Web Dashboard WebSockets at 10 Hz.
-General Sir John Kotelawala Defence University (KDU) - IT 3182 Essentials of AI
+Autonomous Traffic Signal Management Hub
 """
 
 import time
@@ -14,7 +14,7 @@ from ai_engine.simulation.controllers import FixedTimeController, AIFuzzyControl
 from ai_engine.simulation.metrics_tracker import MetricsTracker
 
 class LiveIntersectionStateManager:
-    def __init__(self, intersection_id: str = "INT-KDU-01", name: str = "KDU Main Campus 4-Way Junction"):
+    def __init__(self, intersection_id: str = "INT-01", name: str = "Central 4-Way Intersection"):
         self.intersection_id = intersection_id
         self.name = name
         

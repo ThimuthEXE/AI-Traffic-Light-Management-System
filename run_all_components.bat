@@ -2,7 +2,6 @@
 title AI Traffic Light - Full System Launcher
 echo ===================================================================
 echo Starting AI Traffic Light Management System (Backend + Web + Pygame)
-echo General Sir John Kotelawala Defence University (KDU) - IT 3182
 echo ===================================================================
 
 echo [1/3] Starting FastAPI Backend & WebSockets Server...

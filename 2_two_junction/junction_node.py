@@ -1,6 +1,6 @@
 """
 Junction Node Module — Encapsulates Signal Management, AI Controllers, and Metrics for one Junction
-General Sir John Kotelawala Defence University (KDU) — IT 3182 Essentials of AI — Group 06
+AI Traffic Light Management System
 """
 
 import sys

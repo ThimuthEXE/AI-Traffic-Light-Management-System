@@ -2,7 +2,7 @@
 YOLOv8 Traffic Video Monitor & Real-Time PCU Analytics Visualizer
 Supports Portrait (9:16 phone / vertical CCTV) and Landscape (16:9) aspect ratios
 with Automatic Letterboxing, Aspect-Ratio Preservation, and Side-Panel Telemetry HUDs.
-General Sir John Kotelawala Defence University (KDU) - IT 3182 Essentials of AI
+AI Traffic Light Management System
 """
 
 import sys

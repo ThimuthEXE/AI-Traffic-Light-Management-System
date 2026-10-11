@@ -18,7 +18,7 @@ class DensityUpdateRequest(BaseModel):
     spawn_interval_sec: float
 
 class SimulationSyncRequest(BaseModel):
-    intersection_id: str = "INT-KDU-01"
+    intersection_id: str = "INT-01"
     active_mode: int
     control_mode_name: str
     signals: Dict[str, str]

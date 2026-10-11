@@ -1,6 +1,6 @@
 """
 5-Hour Multi-Scenario Scientific Benchmark for 4-Junction 2×2 Grid System
-General Sir John Kotelawala Defence University (KDU) — IT 3182 Essentials of AI — Group 06
+AI Traffic Light Management System
 
 Compares 3 Signal Control Methods across 5 Real-World Scenarios (1 Hour Each = 5 Simulated Hours / 18,000s Total):
   - Mode 1: Traditional Fixed-Time Controller (Baseline)
@@ -277,7 +277,7 @@ class FastFourJunctionBenchmark:
 def run_5hour_four_junction_benchmark():
     print("=" * 80)
     print("  5-HOUR 4-JUNCTION 2x2 GRID BENCHMARK: FIXED-TIME vs FUZZY-ML vs DEEP RL")
-    print("  KDU IT 3182 Essentials of AI — Group 06")
+    
     print("=" * 80)
 
     total_sim_minutes = 300

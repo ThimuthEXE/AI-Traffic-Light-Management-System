@@ -1,6 +1,6 @@
 """
 4-Junction 2×2 Grid Traffic Simulation
-General Sir John Kotelawala Defence University (KDU) — IT 3182 Essentials of AI — Group 06
+AI Traffic Light Management System
 
 Layout:
     J1 (NW, cx=400, cy=230) ─── Seg_TOP ─── J2 (NE, cx=1040, cy=230)
@@ -89,7 +89,7 @@ class FourJunctionGridApp:
     def __init__(self):
         pygame.init()
         pygame.display.set_caption(
-            "AI 4-Junction 2×2 Grid Traffic Simulation | KDU IT3182 — Group 06"
+            "AI 4-Junction 2×2 Grid Traffic Simulation"
         )
         self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
         self.clock  = pygame.time.Clock()
@@ -511,7 +511,7 @@ class FourJunctionGridApp:
         m_txt, m_col = MODE_INFO[self.active_mode]
         self.screen.blit(self.big_font.render(m_txt, True, m_col), (22, 13))
         self.screen.blit(self.small_font.render(
-            "4-Junction 2×2 Grid  |  KDU IT3182 Essentials of AI — Group 06",
+            "4-Junction 2×2 Grid Traffic Control System",
             True, COL_SUBTEXT), (22, 42))
 
         awt = (sum(self.network_cleared_waits) / len(self.network_cleared_waits)

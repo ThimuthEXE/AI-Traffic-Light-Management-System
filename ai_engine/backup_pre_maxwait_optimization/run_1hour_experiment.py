@@ -1,6 +1,6 @@
 """
 1-Hour Simulation Runner & Excel Report Generator with Minute-by-Minute Max Wait Analysis
-KDU IT 3182 Essentials of AI - AI Traffic Light Management System
+AI Traffic Light Management System
 
 Simulation Setup:
 - U (North) Spawn Rate: 150 v/m (0.4s spawn interval)
@@ -321,7 +321,7 @@ def run_1hour_simulation_with_minute_analysis():
 
     ws1["A1"] = "AI TRAFFIC LIGHT MANAGEMENT SYSTEM - 1-HOUR SIMULATION REPORT"
     ws1["A1"].font = title_font
-    ws1["A2"] = "General Sir John Kotelawala Defence University (KDU) | IT 3182 Essentials of AI | Group 06"
+    ws1["A2"] = "AI Traffic Light Management System
     ws1["A2"].font = sub_title_font
 
     summary_data = [

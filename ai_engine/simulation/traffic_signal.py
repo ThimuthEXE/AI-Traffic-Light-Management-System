@@ -1,7 +1,7 @@
 """
 Traffic Signal State Machine with ML Dynamic Asymmetric Phasing
 Features conflict-free Protected Phasing + ML Asymmetric Single-Approach Exclusive Green.
-General Sir John Kotelawala Defence University (KDU) - IT 3182 Essentials of AI
+AI Traffic Light Management System
 """
 
 import math

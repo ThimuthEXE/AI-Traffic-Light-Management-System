@@ -1,6 +1,6 @@
 """
 Deep Q-Network (DQN) Training Pipeline
-General Sir John Kotelawala Defence University (KDU) — IT 3182 Essentials of AI
+AI Traffic Light Management System
 
 Trains Dueling DDQN agent across 50 episodes of diverse traffic flow scenarios:
 - Morning Rush Hour
