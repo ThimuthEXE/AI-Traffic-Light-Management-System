@@ -80,13 +80,12 @@ async def sync_from_simulation(intersection_id: str, req: SimulationSyncRequest)
     snapshot = state_manager.get_snapshot()
     await state_manager.broadcast_state(snapshot)
     
-    emergency_trigger = state_manager.consume_pending_emergency()
-    density_updates = state_manager.consume_pending_density_updates()
-    
     return {
         "status": "synced",
         "active_mode": state_manager.active_mode,
+        "mode_version": state_manager.mode_version,
         "approach_intervals": state_manager.approach_intervals,
-        "density_updates": density_updates,
-        "emergency_trigger": emergency_trigger
+        "density_version": state_manager.density_version,
+        "emergency_trigger": state_manager.active_emergency_axis,
+        "emergency_version": state_manager.emergency_version
     }

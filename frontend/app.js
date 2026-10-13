@@ -226,6 +226,22 @@ function updateApproachBadge(dir, info) {
 
 // Slider Change Handler
 async function onDensitySliderChange(direction, value) {
+    // 1. Instant local badge feedback
+    const badge = document.getElementById(`badge-${direction.toLowerCase()}`);
+    if (badge) {
+        const val = parseFloat(value);
+        const vpm = Math.round(60.0 / Math.max(0.2, val));
+        const cat = val <= 1.0 ? "HIGH" : val <= 2.2 ? "MED" : "LOW";
+        badge.innerText = `${vpm} v/m [${cat}]`;
+        if (cat === "HIGH") {
+            badge.className = "px-1.5 py-0.5 rounded text-[10px] font-bold bg-red-500/20 text-red-400";
+        } else if (cat === "MED") {
+            badge.className = "px-1.5 py-0.5 rounded text-[10px] font-bold bg-yellow-500/20 text-yellow-400";
+        } else {
+            badge.className = "px-1.5 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400";
+        }
+    }
+
     try {
         await fetch(`${API_BASE}/api/intersections/INT-01/density`, {
             method: "POST",

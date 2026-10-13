@@ -39,9 +39,11 @@ class LiveIntersectionStateManager:
             "W": 2.0
         }
         
-        # Pending bidirectional controls from Web Dashboard to Pygame
-        self.pending_emergency_axis = None
-        self.pending_density_updates = {}
+        # Bidirectional synchronization state with versioning
+        self.density_version = 0
+        self.emergency_version = 0
+        self.mode_version = 0
+        self.active_emergency_axis = None
         
         # Live synchronized snapshot from running Pygame simulation
         self.last_sim_snapshot = None
@@ -153,13 +155,14 @@ class LiveIntersectionStateManager:
 
     def set_control_mode(self, mode: int):
         self.active_mode = mode
+        self.mode_version += 1
         self.current_controller = self.ai_controller if mode == 2 else self.fixed_controller
 
     def set_approach_density(self, direction: str, interval_sec: float):
         d = direction.upper()
         if d in self.approach_intervals:
             self.approach_intervals[d] = max(0.4, min(8.0, interval_sec))
-            self.pending_density_updates[d] = self.approach_intervals[d]
+            self.density_version += 1
 
     def set_approach_interval(self, direction: str, interval_sec: float):
         self.set_approach_density(direction, interval_sec)
@@ -167,7 +170,8 @@ class LiveIntersectionStateManager:
     def trigger_emergency(self, axis: str = "EW"):
         """Forces immediate green preemption on the designated axis."""
         axis = axis.upper()
-        self.pending_emergency_axis = axis
+        self.active_emergency_axis = axis
+        self.emergency_version += 1
         if axis == "EW":
             self.signals.current_phase = SignalPhase.EW_THROUGH_GREEN
             self.signals.allocated_through_green = 30.0
@@ -175,16 +179,6 @@ class LiveIntersectionStateManager:
             self.signals.current_phase = SignalPhase.NS_THROUGH_GREEN
             self.signals.allocated_through_green = 30.0
         self.signals.time_in_state = 0.0
-
-    def consume_pending_emergency(self):
-        val = self.pending_emergency_axis
-        self.pending_emergency_axis = None
-        return val
-
-    def consume_pending_density_updates(self):
-        updates = dict(self.pending_density_updates)
-        self.pending_density_updates.clear()
-        return updates
 
 
 state_manager = LiveIntersectionStateManager()

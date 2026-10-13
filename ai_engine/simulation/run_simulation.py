@@ -102,6 +102,9 @@ class TrafficSimulationApp:
         # Cache last decision for HUD display
         self._last_hud_decision: dict = {}
         self.pending_emergency_axis: str = None
+        self.last_density_version: int = 0
+        self.last_emergency_version: int = 0
+        self.last_mode_version: int = 0
 
         self.sync_thread = threading.Thread(
             target=self._background_sync_worker, daemon=True
@@ -184,25 +187,30 @@ class TrafficSimulationApp:
                     resp_data = json.loads(resp.read().decode("utf-8"))
                     
                     # 1. Sync control mode from dashboard
-                    if ("active_mode" in resp_data
-                            and resp_data["active_mode"] != self.active_mode):
-                        self.active_mode = resp_data["active_mode"]
+                    mode_ver = resp_data.get("mode_version", 0)
+                    if mode_ver > self.last_mode_version:
+                        self.last_mode_version = mode_ver
+                        self.active_mode = resp_data.get("active_mode", self.active_mode)
                         self.current_controller = (
                             self.ai_controller if self.active_mode == 2
                             else self.fixed_controller
                         )
 
                     # 2. Sync density adjustments from dashboard sliders
-                    density_updates = resp_data.get("density_updates")
-                    if density_updates and isinstance(density_updates, dict):
-                        for d, val in density_updates.items():
-                            if d in self.approach_intervals:
-                                self.approach_intervals[d] = float(val)
+                    dens_ver = resp_data.get("density_version", 0)
+                    if dens_ver > self.last_density_version:
+                        self.last_density_version = dens_ver
+                        intervals = resp_data.get("approach_intervals", {})
+                        if isinstance(intervals, dict):
+                            for d, val in intervals.items():
+                                if d in self.approach_intervals:
+                                    self.approach_intervals[d] = float(val)
 
                     # 3. Sync emergency override trigger from dashboard
-                    em_trigger = resp_data.get("emergency_trigger")
-                    if em_trigger:
-                        self.pending_emergency_axis = em_trigger
+                    em_ver = resp_data.get("emergency_version", 0)
+                    if em_ver > self.last_emergency_version:
+                        self.last_emergency_version = em_ver
+                        self.pending_emergency_axis = resp_data.get("emergency_trigger")
             except Exception:
                 pass
             time.sleep(0.1)

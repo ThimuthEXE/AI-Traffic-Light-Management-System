@@ -91,9 +91,11 @@ def test_dashboard():
         sync_res = client.post('/api/intersections/INT-01/sync', json=sim_payload)
         assert sync_res.status_code == 200
         sync_data = sync_res.json()
-        assert sync_data.get('density_updates', {}).get('N') == 1.2
+        assert sync_data.get('approach_intervals', {}).get('N') == 1.2
+        assert sync_data.get('density_version', 0) > 0
         assert sync_data.get('emergency_trigger') == 'EW'
-        print(f"[TEST 10b] Simulation Sync Handshake: Density Update (N=1.2s) & Emergency Override (EW) delivered to Pygame!")
+        assert sync_data.get('emergency_version', 0) > 0
+        print(f"[TEST 10b] Simulation Sync Handshake: Versioned Density Update (N=1.2s) & Emergency Override (EW) verified!")
 
         # 8. ML Predictions
         res = client.get('/api/predictions/forecast?datetime_str=2026-08-25T08:00:00&weather=Clear')
