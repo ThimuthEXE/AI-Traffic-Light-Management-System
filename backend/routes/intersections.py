@@ -1,4 +1,4 @@
-﻿"""
+"""
 Intersection Management, Real-Time Control & Pygame Simulation Sync Routes
 """
 
@@ -79,8 +79,14 @@ async def sync_from_simulation(intersection_id: str, req: SimulationSyncRequest)
     # Broadcast immediately to all connected web dashboard WebSockets
     snapshot = state_manager.get_snapshot()
     await state_manager.broadcast_state(snapshot)
+    
+    emergency_trigger = state_manager.consume_pending_emergency()
+    density_updates = state_manager.consume_pending_density_updates()
+    
     return {
         "status": "synced",
         "active_mode": state_manager.active_mode,
-        "approach_intervals": state_manager.approach_intervals
+        "approach_intervals": state_manager.approach_intervals,
+        "density_updates": density_updates,
+        "emergency_trigger": emergency_trigger
     }

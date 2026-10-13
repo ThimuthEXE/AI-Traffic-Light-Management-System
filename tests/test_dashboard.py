@@ -76,6 +76,25 @@ def test_dashboard():
         assert res.status_code == 200
         print(f"[TEST 10] Density Update: {res.json()}")
 
+        # 7b. Simulation Sync Handshake (delivers density & emergency to Pygame)
+        sim_payload = {
+            'intersection_id': 'INT-01',
+            'active_mode': 2,
+            'control_mode_name': 'AI_CYCLE_ADAPTIVE',
+            'signals': {'North': 'RED', 'South': 'RED', 'East': 'GREEN', 'West': 'GREEN'},
+            'active_phase': {'phase_name': 'EW_THROUGH_GREEN', 'active_axis': 'EW', 'allocated_green': 20.0, 'countdown_seconds': 15},
+            'approaches': {'North': {'spawn_interval_sec': 2.0, 'arrival_flow_vpm': 30.0, 'density_category': 'MED'}},
+            'ai_decision': {},
+            'metrics': {},
+            'emergency_active': False
+        }
+        sync_res = client.post('/api/intersections/INT-01/sync', json=sim_payload)
+        assert sync_res.status_code == 200
+        sync_data = sync_res.json()
+        assert sync_data.get('density_updates', {}).get('N') == 1.2
+        assert sync_data.get('emergency_trigger') == 'EW'
+        print(f"[TEST 10b] Simulation Sync Handshake: Density Update (N=1.2s) & Emergency Override (EW) delivered to Pygame!")
+
         # 8. ML Predictions
         res = client.get('/api/predictions/forecast?datetime_str=2026-08-25T08:00:00&weather=Clear')
         assert res.status_code == 200

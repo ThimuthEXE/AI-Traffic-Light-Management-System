@@ -101,6 +101,7 @@ class TrafficSimulationApp:
 
         # Cache last decision for HUD display
         self._last_hud_decision: dict = {}
+        self.pending_emergency_axis: str = None
 
         self.sync_thread = threading.Thread(
             target=self._background_sync_worker, daemon=True
@@ -181,6 +182,8 @@ class TrafficSimulationApp:
                 )
                 with urllib.request.urlopen(req, timeout=0.3) as resp:
                     resp_data = json.loads(resp.read().decode("utf-8"))
+                    
+                    # 1. Sync control mode from dashboard
                     if ("active_mode" in resp_data
                             and resp_data["active_mode"] != self.active_mode):
                         self.active_mode = resp_data["active_mode"]
@@ -188,6 +191,18 @@ class TrafficSimulationApp:
                             self.ai_controller if self.active_mode == 2
                             else self.fixed_controller
                         )
+
+                    # 2. Sync density adjustments from dashboard sliders
+                    density_updates = resp_data.get("density_updates")
+                    if density_updates and isinstance(density_updates, dict):
+                        for d, val in density_updates.items():
+                            if d in self.approach_intervals:
+                                self.approach_intervals[d] = float(val)
+
+                    # 3. Sync emergency override trigger from dashboard
+                    em_trigger = resp_data.get("emergency_trigger")
+                    if em_trigger:
+                        self.pending_emergency_axis = em_trigger
             except Exception:
                 pass
             time.sleep(0.1)
@@ -224,16 +239,19 @@ class TrafficSimulationApp:
         # Notify observer
         self.cycle_observer.on_vehicle_spawned(new_v)
 
-    def spawn_emergency_vehicle(self):
+    def spawn_emergency_vehicle(self, target_axis: str = None):
         self.ai_controller.analyze_all_lanes(self.vehicles)
-        dirs    = ["N", "S", "E", "W"]
-        busy_d  = max(dirs, key=lambda d: self.ai_controller.get_approach_stats(
+        dirs = ["E", "W"] if target_axis == "EW" else ["N", "S"] if target_axis == "NS" else ["N", "S", "E", "W"]
+        busy_d = max(dirs, key=lambda d: self.ai_controller.get_approach_stats(
             d, self.approach_intervals[d])["total_pcu"])
-        new_v   = Vehicle(self.next_vehicle_id, "ambulance", busy_d, 0,
+        new_v = Vehicle(self.next_vehicle_id, "ambulance", busy_d, 0,
                           turn_intent="STRAIGHT")
         self.vehicles.append(new_v)
         self.next_vehicle_id += 1
         self.emergency_banner_timer = 4.0
+        if target_axis:
+            self.signals.force_emergency_axis(target_axis, 16.0)
+            self.emergency_active = True
 
     def check_emergency_preemption(self):
         for v in self.vehicles:
@@ -333,6 +351,12 @@ class TrafficSimulationApp:
     def update(self, dt: float):
         if self.paused:
             return
+
+        # Handle remote dashboard emergency preemption trigger
+        if getattr(self, "pending_emergency_axis", None):
+            axis = self.pending_emergency_axis
+            self.pending_emergency_axis = None
+            self.spawn_emergency_vehicle(target_axis=axis)
 
         # Spawn vehicles
         for d in ("N", "S", "E", "W"):
