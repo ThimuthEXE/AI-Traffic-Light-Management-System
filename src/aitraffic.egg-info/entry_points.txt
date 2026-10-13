@@ -1,0 +1,2 @@
+[console_scripts]
+aitraffic = aitraffic.cli:main

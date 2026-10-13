@@ -1,12 +1,13 @@
 # 🚦 AI-Based Traffic Light Management System
 
-[![Python](https://img.shields.io/badge/Python-3.11-blue.svg)](https://www.python.org/)
+[![CI](https://github.com/ThimuthEXE/AI-Traffic-Light-Management-System/actions/workflows/ci.yml/badge.svg)](https://github.com/ThimuthEXE/AI-Traffic-Light-Management-System/actions/workflows/ci.yml)
+[![Python](https://img.shields.io/badge/Python-3.10%20%7C%203.11-blue.svg)](https://www.python.org/)
+[![Package](https://img.shields.io/badge/Package-aitraffic%20v2.0-purple.svg)](https://github.com/ThimuthEXE/AI-Traffic-Light-Management-System)
 [![Framework](https://img.shields.io/badge/FastAPI-0.100+-green.svg)](https://fastapi.tiangolo.com/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-red.svg)](https://pytorch.org/)
-[![YOLOv8](https://img.shields.io/badge/Ultralytics-YOLOv8-yellow.svg)](https://ultralytics.com/)
-[![License](https://img.shields.io/badge/License-Academic%20Use-lightgrey.svg)]()
+[![License](https://img.shields.io/badge/License-MIT-lightgrey.svg)](LICENSE)
 
-> **Project:** Intelligent Adaptive Traffic Light Control System  
+> **Project:** Autonomous Multi-Modal Traffic Signal Optimization & Telemetry Platform  
 > **Author:** Thimuth  
 
 ---
@@ -75,35 +76,18 @@ flowchart TD
 
 ```
 AI-Traffic-Light-Management-System/
+├── src/aitraffic/                     # Core Installable Python Package
+│   ├── controllers/                   # Signal Controllers (Fixed, Fuzzy, ML Dynamic)
+│   ├── rl/                            # PyTorch Deep Q-Network (DQN) Agent & Environment
+│   ├── vision/                        # YOLOv8 Computer Vision Pipeline & Detection
+│   ├── prediction/                    # Scikit-Learn Traffic Flow Forecasting Models
+│   ├── simulation/                    # Shared Signal State Machines, Nodes & Coordinators
+│   ├── utils/                         # PCU Aggregation, Metrics & Geometric Helpers
+│   └── cli.py                         # Unified Command-Line Interface Engine
+│
 ├── 1_single_junction/                 # Dedicated Single 4-Way Intersection System
-│   ├── run_single_junction_simulation.py # Interactive Single-Junction Simulation
-│   ├── single_junction_vehicle.py     # Vehicle Physics & Bézier Geometry
-│   ├── run_benchmarks.py              # Single Junction Benchmark Evaluator
-│   └── run_simulation.bat             # Folder Launcher
-│
 ├── 2_two_junction/                    # Dedicated 2-Junction Connected Corridor System
-│   ├── run_two_junction_simulation.py # Interactive 2-Junction Pygame Simulation
-│   ├── two_junction_coordinator.py    # Inter-Intersection Green Wave Coordinator
-│   ├── two_junction_vehicle.py        # Arterial Platoon Vehicle Physics
-│   ├── junction_node.py               # Junction Controller Router
-│   ├── run_two_junction_benchmark.py  # 5-Hour Benchmark Suite
-│   └── run_two_junction_simulation.bat# Folder Launcher
-│
 ├── 3_four_junction/                   # Dedicated 4-Junction Grid System (2x2 Connected)
-│   ├── run_four_junction_simulation.py# Interactive 4-Junction Grid Simulation
-│   ├── four_junction_coordinator.py   # 4-Junction Network Coordinator
-│   ├── four_junction_vehicle.py       # Collision-Safe Vehicle Physics & Routing
-│   ├── four_junction_collision_manager.py # Zero-Overlap Spatial Safety Guard
-│   ├── run_four_junction_benchmark.py # 4-Junction Performance Benchmark
-│   └── run_four_junction_simulation.bat# Folder Launcher
-│
-├── ai_engine/                         # Core AI, RL & Computer Vision Engines
-│   ├── fuzzy_controller/              # Mamdani Fuzzy Logic Controller
-│   ├── rl_agent/                      # Deep Q-Network (DQN) PyTorch Architecture
-│   ├── traffic_predictor/             # Scikit-Learn Traffic Flow Predictor & Models
-│   ├── simulation/                    # Shared Signal State Machines & Controllers
-│   ├── models/                        # YOLOv8 Computer Vision Pipeline
-│   └── utils/                         # Metrics, PCU, and Geometry Helpers
 │
 ├── backend/                           # FastAPI REST & WebSocket Telemetry Server
 │   ├── app.py                         # Application Entry Point & Telemetry Loop
@@ -117,18 +101,23 @@ AI-Traffic-Light-Management-System/
 │   ├── styles.css                     # Dark-Themed Responsive Styles
 │   └── app.js                         # WebSocket Consumer & Chart.js Visualizer
 │
-├── data/
-│   ├── datasets/                      # Training & Synthetic Traffic Data
-│   ├── sample_videos/                 # Real-World Intersection Video Feeds
-│   └── simulation_reports/            # Automated Scientific Benchmark Results
+├── launchers/                         # Windows 1-Click Launchers (.bat files)
+│   ├── open_dashboard.bat             # Dashboard Web Launcher
+│   ├── run_four_junction_simulation.bat# 4-Junction Grid Launcher
+│   ├── run_two_junction_simulation.bat# 2-Junction Corridor Launcher
+│   ├── run_simulation.bat             # Single-Junction Launcher
+│   ├── run_yolo_monitor.bat           # YOLOv8 Video Monitor Launcher
+│   └── run_all_components.bat         # Full Stack Launcher
 │
-├── requirements.txt                   # Project Dependencies
-├── run_simulation.bat                 # Single-Junction Launcher
-├── run_two_junction_simulation.bat    # 2-Junction Launcher
-├── run_four_junction_simulation.bat   # 4-Junction Launcher
-├── open_dashboard.bat                 # Web Dashboard Launcher
-├── run_all_components.bat             # Full Stack Launcher
-└── run_yolo_monitor.bat               # YOLOv8 Video Monitor Launcher
+├── tests/                             # Automated Test Suites & Regression Verification
+│   └── test_dashboard.py              # 15-Point REST API & WebSocket Test Suite
+│
+├── data/                              # Datasets, Sample Videos & Scientific Benchmark Reports
+├── .github/workflows/ci.yml           # GitHub Actions Automated CI Workflow
+├── pyproject.toml                     # Standard PEP 621 Package Specification
+├── main.py                            # Master Interactive CLI Console
+├── run.bat                            # Master 1-Click Interactive Windows Launcher
+└── requirements.txt                   # Project Dependencies
 ```
 
 ---
@@ -139,7 +128,7 @@ AI-Traffic-Light-Management-System/
 - **Python 3.10 or 3.11** installed.
 - (Optional) NVIDIA GPU with CUDA for accelerated YOLOv8 / PyTorch inference.
 
-### 2. Setup Virtual Environment & Dependencies
+### 2. Setup Virtual Environment & Install Package
 
 ```bash
 # 1. Clone the repository from GitHub
@@ -155,54 +144,53 @@ python -m venv venv
 python3 -m venv venv
 source venv/bin/activate
 
-# 3. Install required dependencies
-pip install -r requirements.txt
+# 3. Install the package in editable mode with dependencies
+pip install -e .
 ```
 
 ---
 
 ## 🚀 Running the System
 
-### Option A: One-Click Windows Launchers
-- 🎮 **4-Junction Synchronized Grid Simulation:** Double-click `run_four_junction_simulation.bat`
-- 🎮 **2-Junction Connected Corridor Simulation:** Double-click `run_two_junction_simulation.bat`
-- 🎮 **Single-Junction Simulation:** Double-click `run_simulation.bat`
-- 🌐 **Interactive Web Dashboard (FastAPI + UI):** Double-click `open_dashboard.bat` (or `run_all_components.bat`)
-- 📹 **YOLOv8 Computer Vision Video Monitor:** Double-click `run_yolo_monitor.bat`
+### Option A: Master 1-Click Interactive Launcher
+- 🎮 **Windows:** Double-click **`run.bat`** (or run `python main.py`).
+- Presents an interactive master menu to launch any simulation, open the dashboard, or run benchmarks:
+  ```text
+  ================================================================================
+     🚦 AITraffic v2.0 — Autonomous Traffic Management & Telemetry Platform
+  ================================================================================
+    [1] Run 4-Junction Grid Simulation (Synchronized 2x2 Network)
+    [2] Run 2-Junction Corridor Simulation (Arterial Green Wave)
+    [3] Run Single-Junction Simulation (4-Way Intersection)
+    [4] Launch Web Dashboard & FastAPI Telemetry (Port 8000)
+    [5] Launch YOLOv8 Video Traffic Monitor
+    [6] Run Scientific Performance Benchmark Suite
+    [7] Run Automated Regression & Verification Tests
+    [0] Exit
+  ================================================================================
+  ```
 
-### Option B: Command-Line Execution
+### Option B: Command-Line Execution (CLI)
 
-#### 1. Run 4-Junction Grid Simulation
 ```bash
-python 3_four_junction/run_four_junction_simulation.py
-```
+# Direct Simulation Launches
+python main.py sim 4        # 4-Junction Grid Simulation
+python main.py sim 2        # 2-Junction Connected Corridor Simulation
+python main.py sim 1        # Single-Junction Simulation
 
-#### 2. Run 2-Junction Connected Simulation
-```bash
-python 2_two_junction/run_two_junction_simulation.py
-```
+# Web Dashboard & Telemetry Server
+python main.py dashboard    # Launches FastAPI backend & opens browser
 
-#### 3. Run Single-Junction Simulation
-```bash
-python 1_single_junction/run_single_junction_simulation.py
-```
+# YOLOv8 Computer Vision Video Monitor
+python main.py vision
 
-#### 4. Run Telemetry Backend & Web Dashboard
-```bash
-python -m uvicorn backend.app:app --host 0.0.0.0 --port 8000 --reload
-# Access Dashboard at: http://localhost:8000/dashboard
-```
+# Run Automated Test Suite
+python main.py test
 
-#### 5. Run Scientific Benchmark Suites
-```bash
-# Single Junction Benchmark
-python 1_single_junction/run_benchmarks.py
-
-# 2-Junction 5-Hour Benchmark
-python 2_two_junction/run_two_junction_benchmark.py
-
-# 4-Junction Grid Benchmark
-python 3_four_junction/run_four_junction_benchmark.py
+# Run Scientific Benchmarks
+python main.py benchmark 4  # 4-Junction Grid Benchmark
+python main.py benchmark 2  # 2-Junction Corridor Benchmark
+python main.py benchmark 1  # Single-Junction Benchmark
 ```
 
 ---
