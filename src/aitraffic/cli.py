@@ -36,9 +36,9 @@ def run_script(rel_path: str):
     subprocess.run([sys.executable, "-u", full_path], cwd=PROJECT_ROOT)
 
 def run_dashboard():
-    print("\n[AITRAFFIC] Starting FastAPI Telemetry Server on http://localhost:8000/dashboard ...\n")
+    print("\n[AITRAFFIC] Starting FastAPI Telemetry Server on http://localhost:8000/dashboard/ ...\n")
     import webbrowser
-    webbrowser.open("http://localhost:8000/dashboard")
+    webbrowser.open("http://localhost:8000/dashboard/")
     subprocess.run([sys.executable, "-m", "uvicorn", "backend.app:app", "--host", "0.0.0.0", "--port", "8000", "--reload"], cwd=PROJECT_ROOT)
 
 def interactive_menu():

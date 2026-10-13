@@ -1,4 +1,4 @@
-﻿// AI Traffic Light Management Dashboard - Interactive Client Logic
+// AI Traffic Light Management Dashboard - Interactive Client Logic
 
 const API_BASE = window.location.origin;
 const WS_URL = `${window.location.protocol === "https:" ? "wss:" : "ws:"}//${window.location.host}/ws/live-traffic`;
@@ -7,27 +7,48 @@ let socket = null;
 let mlChart = null;
 let benchmarkChart = null;
 
+// Safe DOM text setter
+function setText(id, val) {
+    const el = document.getElementById(id);
+    if (el) el.innerText = val;
+}
+
 // Initialize Dashboard
 document.addEventListener("DOMContentLoaded", () => {
-    lucide.createIcons();
+    // 1. Initialize Icons safely
+    if (window.lucide && typeof lucide.createIcons === "function") {
+        try {
+            lucide.createIcons();
+        } catch (e) {
+            console.warn("Lucide icon initialization skipped:", e);
+        }
+    }
+
+    // 2. Initialize Telemetry, Charts & Logs
     initWebSocket();
     initCharts();
     loadAnalytics();
-    
-    // Set default ML datetime to tomorrow 8:00 AM
-    const now = new Date();
-    now.setDate(now.getDate() + 1);
-    now.setHours(8, 0, 0, 0);
-    document.getElementById("ml-datetime").value = now.toISOString().slice(0, 16);
-    
+
+    // 3. Set default ML datetime to tomorrow 8:00 AM
+    const dtInput = document.getElementById("ml-datetime");
+    if (dtInput) {
+        const now = new Date();
+        now.setDate(now.getDate() + 1);
+        now.setHours(8, 0, 0, 0);
+        dtInput.value = now.toISOString().slice(0, 16);
+    }
+
     runMLPrediction();
 });
 
 // Tab Navigation Switcher
 function switchTab(tabId) {
-    document.getElementById("tab-live").classList.add("hidden");
-    document.getElementById("tab-ml").classList.add("hidden");
-    document.getElementById("tab-analytics").classList.add("hidden");
+    const liveTab = document.getElementById("tab-live");
+    const mlTab = document.getElementById("tab-ml");
+    const analyticsTab = document.getElementById("tab-analytics");
+    if (liveTab) liveTab.classList.add("hidden");
+    if (mlTab) mlTab.classList.add("hidden");
+    if (analyticsTab) analyticsTab.classList.add("hidden");
 
     document.querySelectorAll("[id^='tab-btn-']").forEach(btn => {
         btn.classList.remove("tab-active", "bg-emerald-500/10", "text-emerald-400", "border", "border-emerald-500/30");
@@ -43,8 +64,26 @@ function switchTab(tabId) {
         activeBtn.classList.remove("text-slate-400");
     }
 
+    if (window.lucide && typeof lucide.createIcons === "function") {
+        try {
+            lucide.createIcons();
+        } catch (e) {}
+    }
+
+    // Trigger Chart Resize when switching into previously hidden tabs
+    if (tabId === "ml" && mlChart) {
+        setTimeout(() => {
+            try { mlChart.resize(); } catch (e) {}
+        }, 60);
+    }
+
     if (tabId === "analytics") {
         loadAnalytics();
+        if (benchmarkChart) {
+            setTimeout(() => {
+                try { benchmarkChart.resize(); } catch (e) {}
+            }, 60);
+        }
     }
 }
 
@@ -57,9 +96,11 @@ function initWebSocket() {
         socket = new WebSocket(WS_URL);
 
         socket.onopen = () => {
-            statusText.innerText = "Live Telemetry";
-            statusPill.classList.remove("border-red-500/50");
-            statusPill.classList.add("border-emerald-500/50");
+            if (statusText) statusText.innerText = "Live Telemetry";
+            if (statusPill) {
+                statusPill.classList.remove("border-red-500/50");
+                statusPill.classList.add("border-emerald-500/50");
+            }
         };
 
         socket.onmessage = (event) => {
@@ -72,13 +113,13 @@ function initWebSocket() {
         };
 
         socket.onclose = () => {
-            statusText.innerText = "Reconnecting...";
-            statusPill.classList.add("border-red-500/50");
+            if (statusText) statusText.innerText = "Reconnecting...";
+            if (statusPill) statusPill.classList.add("border-red-500/50");
             setTimeout(initWebSocket, 2000);
         };
 
         socket.onerror = () => {
-            socket.close();
+            try { socket.close(); } catch (e) {}
         };
     } catch (err) {
         console.error("WebSocket init failed:", err);
@@ -98,21 +139,31 @@ function updateLiveDashboard(data) {
     const centerState = document.getElementById("center-state-label");
     const phaseBadge = document.getElementById("active-phase-badge");
 
-    centerCountdown.innerText = `${countdown}s`;
-    centerState.innerText = state;
-    
-    if (state === "GREEN") {
-        centerCountdown.className = "text-3xl font-black text-emerald-400 font-mono";
-        centerState.className = "text-[10px] font-bold text-emerald-300";
-    } else if (state === "YELLOW") {
-        centerCountdown.className = "text-3xl font-black text-yellow-400 font-mono";
-        centerState.className = "text-[10px] font-bold text-yellow-300";
-    } else {
-        centerCountdown.className = "text-3xl font-black text-red-400 font-mono";
-        centerState.className = "text-[10px] font-bold text-red-300";
+    if (centerCountdown) {
+        centerCountdown.innerText = `${countdown}s`;
+        if (state === "GREEN") {
+            centerCountdown.className = "text-3xl font-black text-emerald-400 font-mono";
+        } else if (state === "YELLOW") {
+            centerCountdown.className = "text-3xl font-black text-yellow-400 font-mono";
+        } else {
+            centerCountdown.className = "text-3xl font-black text-red-400 font-mono";
+        }
     }
 
-    phaseBadge.innerText = `PHASE: ${phase.phase_name || "EW GREEN"}`;
+    if (centerState) {
+        centerState.innerText = state;
+        if (state === "GREEN") {
+            centerState.className = "text-[10px] font-bold text-emerald-300";
+        } else if (state === "YELLOW") {
+            centerState.className = "text-[10px] font-bold text-yellow-300";
+        } else {
+            centerState.className = "text-[10px] font-bold text-red-300";
+        }
+    }
+
+    if (phaseBadge) {
+        phaseBadge.innerText = `PHASE: ${phase.phase_name || "EW GREEN"}`;
+    }
 
     // Signal Heads Lenses
     const sigs = data.signals || {};
@@ -122,9 +173,9 @@ function updateLiveDashboard(data) {
     updateSignalLenses("w", sigs.West || "GREEN");
 
     // Allocated & Elapsed
-    document.getElementById("val-allocated-green").innerText = `${phase.allocated_green || 20.0}s`;
-    document.getElementById("val-elapsed-time").innerText = `${phase.elapsed_in_state || 0.0}s`;
-    document.getElementById("val-controller-name").innerText = data.control_mode || "AI Cycle-Adaptive";
+    setText("val-allocated-green", `${phase.allocated_green !== undefined ? phase.allocated_green : 20.0}s`);
+    setText("val-elapsed-time", `${phase.elapsed_in_state !== undefined ? phase.elapsed_in_state : 0.0}s`);
+    setText("val-controller-name", data.control_mode || "AI Cycle-Adaptive");
 
     // Approach Badges & Sliders
     const apps = data.approaches || {};
@@ -135,15 +186,15 @@ function updateLiveDashboard(data) {
 
     // Decision Inspector
     const decision = data.ai_decision || {};
-    document.getElementById("val-demand-share").innerText = `${decision.target_ratio || 50.0}%`;
-    document.getElementById("val-next-green").innerText = `${decision.green_duration || 22.0}s`;
-    document.getElementById("val-target-pcu").innerText = `${decision.target_pcu || 0.0} PCU`;
-    document.getElementById("val-cross-pcu").innerText = `${decision.cross_pcu || 0.0} PCU`;
+    setText("val-demand-share", `${decision.target_ratio !== undefined ? decision.target_ratio : 50.0}%`);
+    setText("val-next-green", `${decision.green_duration !== undefined ? decision.green_duration : 22.0}s`);
+    setText("val-target-pcu", `${decision.target_pcu !== undefined ? decision.target_pcu : 0.0} PCU`);
+    setText("val-cross-pcu", `${decision.cross_pcu !== undefined ? decision.cross_pcu : 0.0} PCU`);
 
     // Metrics
     const metrics = data.metrics || {};
-    document.getElementById("kpi-awt").innerText = `${metrics.average_wait_time || 4.8}s`;
-    document.getElementById("kpi-cleared").innerText = metrics.cleared_vehicles || 0;
+    setText("kpi-awt", `${metrics.average_wait_time !== undefined ? metrics.average_wait_time : 4.8}s`);
+    setText("kpi-cleared", metrics.cleared_vehicles !== undefined ? metrics.cleared_vehicles : 0);
 }
 
 function updateSignalLenses(dir, state) {
@@ -151,16 +202,16 @@ function updateSignalLenses(dir, state) {
     const yellow = document.getElementById(`sig-${dir}-yellow`);
     const green = document.getElementById(`sig-${dir}-green`);
 
-    red.className = state === "RED" ? "w-4 h-4 rounded-full light-red" : "w-4 h-4 rounded-full light-red-off";
-    yellow.className = state === "YELLOW" ? "w-4 h-4 rounded-full light-yellow" : "w-4 h-4 rounded-full light-yellow-off";
-    green.className = state === "GREEN" ? "w-4 h-4 rounded-full light-green" : "w-4 h-4 rounded-full light-green-off";
+    if (red) red.className = state === "RED" ? "w-4 h-4 rounded-full light-red" : "w-4 h-4 rounded-full light-red-off";
+    if (yellow) yellow.className = state === "YELLOW" ? "w-4 h-4 rounded-full light-yellow" : "w-4 h-4 rounded-full light-yellow-off";
+    if (green) green.className = state === "GREEN" ? "w-4 h-4 rounded-full light-green" : "w-4 h-4 rounded-full light-green-off";
 }
 
 function updateApproachBadge(dir, info) {
     const badge = document.getElementById(`badge-${dir}`);
-    if (!badge) return;
+    if (!badge || !info) return;
 
-    const vpm = Math.round(info.arrival_flow_vpm);
+    const vpm = Math.round(info.arrival_flow_vpm || 0);
     const cat = info.density_category || "MED";
     
     badge.innerText = `${vpm} v/m [${cat}]`;
@@ -191,12 +242,14 @@ async function setMode(mode) {
     const btnFixed = document.getElementById("mode-btn-fixed");
     const btnAi = document.getElementById("mode-btn-ai");
 
-    if (mode === 1) {
-        btnFixed.className = "px-3 py-1 text-xs font-semibold rounded bg-amber-500 text-dark-950 shadow";
-        btnAi.className = "px-3 py-1 text-xs font-medium rounded text-slate-400 hover:text-white transition";
-    } else {
-        btnAi.className = "px-3 py-1 text-xs font-semibold rounded bg-emerald-500 text-dark-950 shadow";
-        btnFixed.className = "px-3 py-1 text-xs font-medium rounded text-slate-400 hover:text-white transition";
+    if (btnFixed && btnAi) {
+        if (mode === 1) {
+            btnFixed.className = "px-3 py-1 text-xs font-semibold rounded bg-amber-500 text-dark-950 shadow";
+            btnAi.className = "px-3 py-1 text-xs font-medium rounded text-slate-400 hover:text-white transition";
+        } else {
+            btnAi.className = "px-3 py-1 text-xs font-semibold rounded bg-emerald-500 text-dark-950 shadow";
+            btnFixed.className = "px-3 py-1 text-xs font-medium rounded text-slate-400 hover:text-white transition";
+        }
     }
 
     try {
@@ -226,19 +279,24 @@ async function triggerEmergencyOverride() {
 
 // Machine Learning Forecasting
 async function runMLPrediction() {
-    const dtVal = document.getElementById("ml-datetime").value;
-    const weatherVal = document.getElementById("ml-weather").value;
+    const dtEl = document.getElementById("ml-datetime");
+    const weatherEl = document.getElementById("ml-weather");
+    if (!dtEl || !weatherEl) return;
+
+    const dtVal = dtEl.value;
+    const weatherVal = weatherEl.value;
 
     try {
         const res = await fetch(`${API_BASE}/api/predictions/forecast?datetime_str=${encodeURIComponent(dtVal)}&weather=${encodeURIComponent(weatherVal)}`);
+        if (!res.ok) return;
         const data = await res.json();
 
         // Update badge & timing recommendations
-        document.getElementById("ml-critical-badge").innerText = `🚨 ${data.critical_tidal_approach} (Bottleneck)`;
+        setText("ml-critical-badge", `🚨 ${data.critical_tidal_approach} (Bottleneck)`);
         
         const timing = data.proactive_timing_recommendation || {};
-        document.getElementById("ml-timing-ns").innerText = `${timing.Phase_NS_Green || 29.0}s`;
-        document.getElementById("ml-timing-ew").innerText = `${timing.Phase_EW_Green || 23.0}s`;
+        setText("ml-timing-ns", `${timing.Phase_NS_Green || 29.0}s`);
+        setText("ml-timing-ew", `${timing.Phase_EW_Green || 23.0}s`);
 
         // Update Chart
         const flows = data.predicted_flows_vpm || { North: 35, South: 35, East: 30, West: 30 };
@@ -255,12 +313,13 @@ async function runMLPrediction() {
 async function loadAnalytics() {
     try {
         const res = await fetch(`${API_BASE}/api/analytics/cycles?limit=10`);
+        if (!res.ok) return;
         const logs = await res.json();
         
         const tbody = document.getElementById("logs-table-body");
         if (!tbody) return;
 
-        if (logs.length === 0) {
+        if (!Array.isArray(logs) || logs.length === 0) {
             tbody.innerHTML = `<tr><td colspan="6" class="text-center p-4 text-slate-500">No completed cycles recorded yet.</td></tr>`;
             return;
         }
@@ -282,6 +341,11 @@ async function loadAnalytics() {
 
 // Chart.js Initialization
 function initCharts() {
+    if (typeof Chart === "undefined") {
+        console.warn("Chart.js not yet loaded.");
+        return;
+    }
+
     // 1. ML Flow Chart
     const ctxML = document.getElementById("mlFlowChart");
     if (ctxML) {

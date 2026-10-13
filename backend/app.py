@@ -89,15 +89,33 @@ app.include_router(intersections.router)
 app.include_router(predictions.router)
 app.include_router(analytics.router)
 
+# Dashboard Redirection & Static Asset Fallback Handlers
+@app.get("/")
+def root_redirect():
+    """Redirects visitors directly to the interactive web dashboard."""
+    return RedirectResponse(url="/dashboard/", status_code=307)
+
+
+@app.get("/dashboard")
+def dashboard_redirect():
+    """Redirects /dashboard to /dashboard/ to ensure relative assets resolve properly."""
+    return RedirectResponse(url="/dashboard/", status_code=307)
+
+
+@app.get("/styles.css")
+def get_root_styles():
+    return FileResponse(os.path.join(FRONTEND_DIR, "styles.css"), media_type="text/css")
+
+
+@app.get("/app.js")
+def get_root_app_js():
+    return FileResponse(os.path.join(FRONTEND_DIR, "app.js"), media_type="application/javascript")
+
+
 # Mount Frontend Dashboard Static Files
 if os.path.exists(FRONTEND_DIR):
     app.mount("/dashboard", StaticFiles(directory=FRONTEND_DIR, html=True), name="frontend")
 
-
-@app.get("/")
-def root_redirect():
-    """Redirects visitors directly to the interactive web dashboard."""
-    return RedirectResponse(url="/dashboard")
 
 @app.get("/api")
 def api_info():
@@ -105,7 +123,7 @@ def api_info():
         "system": "AI-Based Traffic Light Management System",
         "version": "2.0.0",
         "api_docs": "http://localhost:8000/docs",
-        "dashboard": "http://localhost:8000/dashboard",
+        "dashboard": "http://localhost:8000/dashboard/",
         "websocket_endpoint": "ws://localhost:8000/ws/live-traffic",
         "status": "ONLINE"
     }

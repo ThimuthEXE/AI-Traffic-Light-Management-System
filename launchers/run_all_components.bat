@@ -1,4 +1,4 @@
-﻿@echo off
+@echo off
 title AI Traffic Light - Full System Launcher
 cd /d "%~dp0.."
 echo ===================================================================
@@ -10,7 +10,7 @@ start "AI Traffic Backend Server" cmd /k "python -m uvicorn backend.app:app --ho
 
 echo [2/3] Opening Web Dashboard in Default Browser...
 timeout /t 2 /nobreak >nul
-start "" http://localhost:8000/dashboard
+start "" http://localhost:8000/dashboard/
 
 echo [3/3] Launching Pygame 2D Traffic Simulation...
 python "ai_engine\simulation\run_simulation.py"

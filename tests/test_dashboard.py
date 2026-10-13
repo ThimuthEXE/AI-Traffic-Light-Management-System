@@ -2,7 +2,7 @@ import sys
 import os
 import time
 
-PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
@@ -15,16 +15,27 @@ def test_dashboard():
     print("==================================================")
     
     with TestClient(app) as client:
-        # 1. Root redirect
-        res = client.get('/', follow_redirects=False)
-        print(f"[TEST 1] Root redirect: Status {res.status_code}, Location: {res.headers.get('location')}")
-        assert res.status_code in [302, 307], f"Expected 307/302, got {res.status_code}"
+        # 1. Root redirect and /dashboard trailing slash redirect
+        res_root = client.get('/', follow_redirects=False)
+        print(f"[TEST 1a] Root redirect: Status {res_root.status_code}, Location: {res_root.headers.get('location')}")
+        assert res_root.status_code in [302, 307] and res_root.headers.get('location') == '/dashboard/', f"Expected 307 to /dashboard/, got {res_root.status_code}"
 
-        # 2. Static Dashboard HTML
+        res_dash = client.get('/dashboard', follow_redirects=False)
+        print(f"[TEST 1b] /dashboard redirect: Status {res_dash.status_code}, Location: {res_dash.headers.get('location')}")
+        assert res_dash.status_code in [302, 307] and res_dash.headers.get('location') == '/dashboard/', f"Expected 307 to /dashboard/, got {res_dash.status_code}"
+
+        # 2. Static Dashboard HTML & Asset Resolution
         res = client.get('/dashboard/')
-        print(f"[TEST 2] Static Dashboard: Status {res.status_code}, Length: {len(res.text)} bytes")
+        print(f"[TEST 2a] Static Dashboard HTML: Status {res.status_code}, Length: {len(res.text)} bytes")
         assert res.status_code == 200, f"Expected 200, got {res.status_code}"
         assert "<!DOCTYPE html>" in res.text, "index.html missing DOCTYPE"
+        assert '<base href="/dashboard/">' in res.text, "index.html missing <base href='/dashboard/'>"
+
+        # 2b. Static Assets at /dashboard/ and root /
+        for asset in ['/dashboard/app.js', '/app.js', '/dashboard/styles.css', '/styles.css']:
+            res_asset = client.get(asset)
+            assert res_asset.status_code == 200, f"Asset {asset} returned {res_asset.status_code}"
+        print(f"[TEST 2b] Static Assets (app.js, styles.css) verified at /dashboard/ and root / (All 200 OK)")
 
         # 3. System API & Status
         res = client.get('/api')
