@@ -6,6 +6,7 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import Optional, Dict, Any
 from backend.live_state_manager import state_manager
+from backend.db_service import db_service
 
 router = APIRouter(prefix="/api/intersections", tags=["Intersections"])
 
@@ -27,6 +28,7 @@ class SimulationSyncRequest(BaseModel):
     ai_decision: Dict[str, Any]
     metrics: Dict[str, Any]
     emergency_active: bool
+    completed_cycle: Optional[Dict[str, Any]] = None
 
 @router.get("")
 def list_intersections():
@@ -76,6 +78,11 @@ def update_approach_density(intersection_id: str, req: DensityUpdateRequest):
 async def sync_from_simulation(intersection_id: str, req: SimulationSyncRequest):
     """Receives live 1-to-1 frames from the Pygame simulation and mirrors to the Web Dashboard."""
     state_manager.apply_simulation_sync(req.dict())
+    
+    # Persist live completed cycle log if delivered from Pygame
+    if req.completed_cycle:
+        db_service.save_cycle_log(req.completed_cycle)
+
     # Broadcast immediately to all connected web dashboard WebSockets
     snapshot = state_manager.get_snapshot()
     await state_manager.broadcast_state(snapshot)

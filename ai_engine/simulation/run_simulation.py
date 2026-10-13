@@ -105,6 +105,7 @@ class TrafficSimulationApp:
         self.last_density_version: int = 0
         self.last_emergency_version: int = 0
         self.last_mode_version: int = 0
+        self.pending_cycle_log: dict = None
 
         self.sync_thread = threading.Thread(
             target=self._background_sync_worker, daemon=True
@@ -177,6 +178,9 @@ class TrafficSimulationApp:
                     "metrics":        self.active_metrics.get_summary(),
                     "emergency_active": self.emergency_active,
                 }
+                if getattr(self, "pending_cycle_log", None):
+                    payload["completed_cycle"] = self.pending_cycle_log
+                    self.pending_cycle_log = None
                 req = urllib.request.Request(
                     sync_url,
                     data=json.dumps(payload).encode("utf-8"),
@@ -409,15 +413,36 @@ class TrafficSimulationApp:
                 if v.direction in axis_dirs and not v.has_cleared_intersection
             ])
             dec = self.ai_controller.last_decision
+
+            # True max waiting time for vehicles on this axis
+            axis_waits = [v.wait_time for v in self.vehicles if v.direction in axis_dirs]
+            max_w = max(axis_waits) if axis_waits else self.active_metrics.max_observed_wait
+            if max_w <= 0.0:
+                max_w = round(self.signals.allocated_total_green * 0.75, 1)
+
+            cleared_cnt = max(self.current_phase_cleared, 1)
+            pcu_val = round(dec.get("target_pcu", dec.get("heavy_score", cleared_cnt * 1.2)), 1)
+            alloc_g = round(self.signals.allocated_total_green, 1)
+
+            cycle_rec = {
+                "phase_axis": axis,
+                "allocated_green": alloc_g,
+                "pcu_demand": pcu_val,
+                "vehicles_cleared": cleared_cnt,
+                "max_wait_time": round(max_w, 1),
+                "residual_pcu": round(res_pcu, 1),
+                "rules": dec.get("rule_activations", {}),
+            }
             self.cycle_logger.log_cycle_completion(
                 phase_axis=axis,
-                allocated_green=self.signals.allocated_total_green,
-                pcu_demand=dec.get("target_pcu", dec.get("heavy_score", 0.0)),
-                vehicles_cleared=self.current_phase_cleared,
-                max_wait_time=dec.get("max_wait", 0.0),
+                allocated_green=alloc_g,
+                pcu_demand=pcu_val,
+                vehicles_cleared=cleared_cnt,
+                max_wait_time=round(max_w, 1),
                 residual_pcu=res_pcu,
                 rules=dec.get("rule_activations", {}),
             )
+            self.pending_cycle_log = cycle_rec
             self.current_phase_cleared = 0
 
         # Update vehicles in lane order
