@@ -6,6 +6,8 @@ const WS_URL = `${window.location.protocol === "https:" ? "wss:" : "ws:"}//${win
 let socket = null;
 let mlChart = null;
 let benchmarkChart = null;
+let lastCycleCounter = -1;
+let analyticsAutoRefreshTimer = null;
 
 // Safe DOM text setter
 function setText(id, val) {
@@ -83,6 +85,22 @@ function switchTab(tabId) {
             setTimeout(() => {
                 try { benchmarkChart.resize(); } catch (e) {}
             }, 60);
+        }
+        if (!analyticsAutoRefreshTimer) {
+            analyticsAutoRefreshTimer = setInterval(() => {
+                const aTab = document.getElementById("tab-analytics");
+                if (aTab && !aTab.classList.contains("hidden")) {
+                    loadAnalytics();
+                } else {
+                    clearInterval(analyticsAutoRefreshTimer);
+                    analyticsAutoRefreshTimer = null;
+                }
+            }, 3000);
+        }
+    } else {
+        if (analyticsAutoRefreshTimer) {
+            clearInterval(analyticsAutoRefreshTimer);
+            analyticsAutoRefreshTimer = null;
         }
     }
 }
@@ -195,6 +213,14 @@ function updateLiveDashboard(data) {
     const metrics = data.metrics || {};
     setText("kpi-awt", `${metrics.average_wait_time !== undefined ? metrics.average_wait_time : 4.8}s`);
     setText("kpi-cleared", metrics.cleared_vehicles !== undefined ? metrics.cleared_vehicles : 0);
+
+    // Auto-update analytics table if a new cycle completed
+    if (data.cycle_event_counter !== undefined && data.cycle_event_counter !== lastCycleCounter) {
+        if (lastCycleCounter !== -1) {
+            loadAnalytics();
+        }
+        lastCycleCounter = data.cycle_event_counter;
+    }
 }
 
 function updateSignalLenses(dir, state) {
@@ -382,6 +408,11 @@ async function loadAnalytics() {
 
         if (window.lucide && typeof lucide.createIcons === "function") {
             try { lucide.createIcons(); } catch (e) {}
+        }
+
+        const refreshText = document.getElementById("refresh-logs-text");
+        if (refreshText) {
+            refreshText.innerText = `Updated ${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', second:'2-digit'})}`;
         }
     } catch (e) {
         console.error("Analytics fetch failed:", e);

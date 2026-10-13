@@ -337,5 +337,16 @@
     "max_wait_time": 17.7,
     "rules": {},
     "logged_at": 1791907830.5965796
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 24.5,
+    "pcu_demand": 28.4,
+    "vehicles_cleared": 18,
+    "max_wait_time": 16.7,
+    "rules": {
+      "LiveSimSync_Verified": 1.0
+    },
+    "logged_at": 1791908058.9995034
   }
 ]

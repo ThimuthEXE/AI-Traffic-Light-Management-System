@@ -93,6 +93,8 @@ class TrafficSimulationApp:
         self._init_buttons()
 
         self.current_phase_cleared  = 0
+        self.current_phase_waits    = []
+        self.current_phase_pcu      = 0.0
         self.emergency_banner_timer = 0.0
         self.emergency_active       = False
 
@@ -397,16 +399,13 @@ class TrafficSimulationApp:
             dt, next_decision_calc_fn=self.calculate_next_decision, active_queue_pcu=active_pcu
         )
 
-        # On cycle boundary: end observation, begin new cycle
+        # On cycle boundary: end observation, begin new cycle, and log completed phase
         if switched and new_p in (SignalPhase.ALL_RED_1, SignalPhase.ALL_RED_2):
             self.cycle_observer.end_cycle()
             self.cycle_observer.begin_cycle()
             self.completed_cycles += 1
 
-        if switched and ("LEFT_GREEN" in str(completed_p)
-                         or "EXCLUSIVE_GREEN" in str(completed_p)):
-            axis = ("EW" if any(c in str(completed_p) for c in ("EW", "E_", "W_"))
-                    else "NS")
+            axis = "EW" if new_p == SignalPhase.ALL_RED_1 else "NS"
             axis_dirs = ["E", "W"] if axis == "EW" else ["N", "S"]
             res_pcu = calculate_lane_pcu([
                 v for v in self.vehicles
@@ -414,14 +413,15 @@ class TrafficSimulationApp:
             ])
             dec = self.ai_controller.last_decision
 
-            # True max waiting time for vehicles on this axis
+            # True max waiting time for vehicles that cleared or waited during this phase
             axis_waits = [v.wait_time for v in self.vehicles if v.direction in axis_dirs]
-            max_w = max(axis_waits) if axis_waits else self.active_metrics.max_observed_wait
+            all_waits = self.current_phase_waits + axis_waits
+            max_w = max(all_waits) if all_waits else self.active_metrics.max_observed_wait
             if max_w <= 0.0:
                 max_w = round(self.signals.allocated_total_green * 0.75, 1)
 
             cleared_cnt = max(self.current_phase_cleared, 1)
-            pcu_val = round(dec.get("target_pcu", dec.get("heavy_score", cleared_cnt * 1.2)), 1)
+            pcu_val = round(self.current_phase_pcu if self.current_phase_pcu > 0.0 else dec.get("target_pcu", dec.get("heavy_score", cleared_cnt * 1.2)), 1)
             alloc_g = round(self.signals.allocated_total_green, 1)
 
             cycle_rec = {
@@ -444,6 +444,8 @@ class TrafficSimulationApp:
             )
             self.pending_cycle_log = cycle_rec
             self.current_phase_cleared = 0
+            self.current_phase_waits = []
+            self.current_phase_pcu = 0.0
 
         # Update vehicles in lane order
         lane_buckets: dict = {}
@@ -462,11 +464,15 @@ class TrafficSimulationApp:
             if v.is_turning or v.has_cleared_intersection:
                 sig_th, sig_lt = self.signals.get_signals_for_direction(v.direction)
                 v.update(dt, None, signal_through=sig_th, signal_turn=sig_lt)
+                if not getattr(v, "recorded_for_phase", False):
+                    v.recorded_for_phase = True
+                    self.current_phase_cleared += 1
+                    self.current_phase_waits.append(v.wait_time)
+                    self.current_phase_pcu += getattr(v, "pcu_weight", 1.0)
 
         for v in list(self.vehicles):
             if v.is_off_screen(self.width, self.height):
                 self.active_metrics.record_vehicle_cleared(v)
-                self.current_phase_cleared += 1
                 self.vehicles.remove(v)
 
         self.active_metrics.update_live_queues(self.vehicles)

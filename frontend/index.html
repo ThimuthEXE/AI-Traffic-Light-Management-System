@@ -454,10 +454,16 @@
                         <i data-lucide="database" class="w-4 h-4 text-cyan-400"></i>
                         Recent Cycle Completion Logs (Database Persistence)
                     </h3>
-                    <button onclick="loadAnalytics()" class="px-2.5 py-1 text-xs rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700/60 flex items-center gap-1.5 transition">
-                        <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
-                        <span>Refresh Logs</span>
-                    </button>
+                    <div class="flex items-center gap-2">
+                        <span id="logs-sync-badge" class="flex items-center gap-1.5 text-[10px] text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                            Auto-Sync Active
+                        </span>
+                        <button onclick="loadAnalytics()" class="px-2.5 py-1 text-xs rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700/60 flex items-center gap-1.5 transition">
+                            <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+                            <span id="refresh-logs-text">Refresh Logs</span>
+                        </button>
+                    </div>
                 </div>
 
                 <div class="overflow-x-auto">

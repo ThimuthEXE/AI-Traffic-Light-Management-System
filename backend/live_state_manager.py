@@ -48,6 +48,7 @@ class LiveIntersectionStateManager:
         # Live synchronized snapshot from running Pygame simulation
         self.last_sim_snapshot = None
         self.last_sim_sync_time = 0.0
+        self.cycle_event_counter = 0
 
         # Active connected WebSockets
         self.active_connections: Set[WebSocket] = set()
@@ -85,6 +86,9 @@ class LiveIntersectionStateManager:
         self.last_sim_snapshot = sim_data
         self.last_sim_sync_time = time.time()
         
+        if sim_data.get("completed_cycle"):
+            self.cycle_event_counter += 1
+
         if "active_mode" in sim_data:
             self.active_mode = sim_data["active_mode"]
         if "approach_intervals" in sim_data:
@@ -97,6 +101,7 @@ class LiveIntersectionStateManager:
             snap = dict(self.last_sim_snapshot)
             snap["timestamp"] = round(now, 2)
             snap["sync_source"] = "LIVE_PYGAME_SIMULATION"
+            snap["cycle_event_counter"] = self.cycle_event_counter
             return snap
 
         active_axis = self.signals.active_green_axis
@@ -150,6 +155,7 @@ class LiveIntersectionStateManager:
             "approaches": approach_stats,
             "metrics": self.metrics.get_summary(),
             "ai_decision": decision,
+            "cycle_event_counter": self.cycle_event_counter,
             "sync_source": "SERVER_STANDALONE"
         }
 
