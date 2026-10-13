@@ -328,6 +328,35 @@ async function runMLPrediction() {
 // Historical Analytics Loader
 async function loadAnalytics() {
     try {
+        // 1. Fetch Summary for Benchmarks & Totals
+        try {
+            const summaryRes = await fetch(`${API_BASE}/api/analytics/summary`);
+            if (summaryRes.ok) {
+                const summary = await summaryRes.json();
+                const perf = summary.performance_comparison || {};
+                const hist = summary.historical_database || {};
+
+                if (perf.fixed_time_baseline_awt_sec !== undefined) {
+                    setText("bench-fixed-awt", `${Number(perf.fixed_time_baseline_awt_sec).toFixed(1)}s AWT`);
+                }
+                if (perf.ai_adaptive_awt_sec !== undefined) {
+                    setText("bench-ai-awt", `${Number(perf.ai_adaptive_awt_sec).toFixed(1)}s AWT`);
+                }
+                if (perf.waiting_time_reduction_pct !== undefined) {
+                    setText("bench-reduction", `${Number(perf.waiting_time_reduction_pct).toFixed(1)}% Improvement`);
+                }
+                if (perf.fuel_consumption_reduction_pct !== undefined) {
+                    setText("bench-fuel", `+${Number(perf.fuel_consumption_reduction_pct).toFixed(1)}% Saved`);
+                }
+                if (hist.total_cycles_recorded !== undefined) {
+                    setText("bench-total-cycles", `${hist.total_cycles_recorded} Cycles Recorded`);
+                }
+            }
+        } catch (err) {
+            console.warn("Summary fetch error:", err);
+        }
+
+        // 2. Fetch Recent Completed Cycles
         const res = await fetch(`${API_BASE}/api/analytics/cycles?limit=10`);
         if (!res.ok) return;
         const logs = await res.json();
@@ -350,6 +379,10 @@ async function loadAnalytics() {
                 <td class="p-2.5 text-slate-400">${l.max_wait_time || '0.0'}s</td>
             </tr>
         `).join("");
+
+        if (window.lucide && typeof lucide.createIcons === "function") {
+            try { lucide.createIcons(); } catch (e) {}
+        }
     } catch (e) {
         console.error("Analytics fetch failed:", e);
     }

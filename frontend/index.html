@@ -420,25 +420,28 @@
                 </div>
 
                 <div class="lg:col-span-5 glass-panel p-5 rounded-xl space-y-4">
-                    <h3 class="text-xs font-bold text-white uppercase tracking-wider border-b border-slate-800 pb-3">
-                        Academic Research Benchmarks
-                    </h3>
+                    <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                        <h3 class="text-xs font-bold text-white uppercase tracking-wider">
+                            Academic Research Benchmarks
+                        </h3>
+                        <span id="bench-total-cycles" class="text-[10px] font-semibold text-slate-400 bg-slate-900 px-2 py-0.5 rounded border border-slate-800">Database Synced</span>
+                    </div>
                     <ul class="text-xs text-slate-300 space-y-3">
                         <li class="flex items-center justify-between bg-slate-900/60 p-2.5 rounded-lg">
                             <span>Traditional Fixed-Time (Baseline):</span>
-                            <strong class="text-red-400">24.5s AWT</strong>
+                            <strong id="bench-fixed-awt" class="text-red-400">24.5s AWT</strong>
                         </li>
                         <li class="flex items-center justify-between bg-slate-900/60 p-2.5 rounded-lg">
                             <span>AI Cycle-Adaptive System:</span>
-                            <strong class="text-emerald-400">4.8s AWT</strong>
+                            <strong id="bench-ai-awt" class="text-emerald-400">4.8s AWT</strong>
                         </li>
                         <li class="flex items-center justify-between bg-slate-900/60 p-2.5 rounded-lg">
                             <span>Net Waiting Time Reduction:</span>
-                            <strong class="text-emerald-400">42.8% Improvement</strong>
+                            <strong id="bench-reduction" class="text-emerald-400">42.8% Improvement</strong>
                         </li>
                         <li class="flex items-center justify-between bg-slate-900/60 p-2.5 rounded-lg">
                             <span>Fuel Efficiency Gain:</span>
-                            <strong class="text-amber-400">+18.4% Saved</strong>
+                            <strong id="bench-fuel" class="text-amber-400">+18.4% Saved</strong>
                         </li>
                     </ul>
                 </div>
@@ -446,10 +449,16 @@
 
             <!-- Historical Cycle Logs Table -->
             <div class="glass-panel p-5 rounded-xl space-y-4">
-                <h3 class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2 border-b border-slate-800 pb-3">
-                    <i data-lucide="database" class="w-4 h-4 text-cyan-400"></i>
-                    Recent Cycle Completion Logs (Database Persistence)
-                </h3>
+                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                    <h3 class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                        <i data-lucide="database" class="w-4 h-4 text-cyan-400"></i>
+                        Recent Cycle Completion Logs (Database Persistence)
+                    </h3>
+                    <button onclick="loadAnalytics()" class="px-2.5 py-1 text-xs rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700/60 flex items-center gap-1.5 transition">
+                        <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+                        <span>Refresh Logs</span>
+                    </button>
+                </div>
 
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-xs text-slate-300">
