@@ -5,11 +5,17 @@ echo ===================================================================
 echo Starting AI Traffic Light Management System (Backend + Web + Pygame)
 echo ===================================================================
 
-echo [1/3] Starting FastAPI Backend & WebSockets Server...
-start "AI Traffic Backend Server" cmd /k "python -m uvicorn backend.app:app --host 0.0.0.0 --port 8000 --reload"
+netstat -ano | findstr ":8000" | findstr "LISTENING" >nul
+if %errorlevel% equ 0 (
+    echo [INFO] Backend is already running on port 8000.
+) else (
+    echo [1/3] Starting FastAPI Backend on port 8000...
+    start "AI Traffic Backend Server (Port 8000)" cmd /k "python -m uvicorn backend.app:app --host 0.0.0.0 --port 8000 --reload"
+    echo [2/3] Waiting for server to initialize...
+    timeout /t 3 /nobreak >nul
+)
 
-echo [2/3] Opening Web Dashboard in Default Browser...
-timeout /t 2 /nobreak >nul
+echo Opening Web Dashboard in default browser...
 start "" http://localhost:8000/dashboard/
 
 echo [3/3] Launching Pygame 2D Traffic Simulation...
