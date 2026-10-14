@@ -128,6 +128,21 @@ def get_root_app_js():
     return FileResponse(os.path.join(FRONTEND_DIR, "app.js"), media_type="application/javascript")
 
 
+@app.get("/tailwind.min.js")
+def get_root_tailwind():
+    return FileResponse(os.path.join(FRONTEND_DIR, "tailwind.min.js"), media_type="application/javascript")
+
+
+@app.get("/chart.min.js")
+def get_root_chart():
+    return FileResponse(os.path.join(FRONTEND_DIR, "chart.min.js"), media_type="application/javascript")
+
+
+@app.get("/lucide.min.js")
+def get_root_lucide():
+    return FileResponse(os.path.join(FRONTEND_DIR, "lucide.min.js"), media_type="application/javascript")
+
+
 # Mount Frontend Dashboard Static Files
 if os.path.exists(FRONTEND_DIR):
     app.mount("/dashboard", StaticFiles(directory=FRONTEND_DIR, html=True), name="frontend")

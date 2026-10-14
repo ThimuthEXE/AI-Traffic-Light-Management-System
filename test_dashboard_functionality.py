@@ -32,10 +32,17 @@ def test_dashboard():
         assert '<base href="/dashboard/">' in res.text, "index.html missing <base href='/dashboard/'>"
 
         # 2b. Static Assets at /dashboard/ and root /
-        for asset in ['/dashboard/app.js', '/app.js', '/dashboard/styles.css', '/styles.css']:
+        assets_to_test = [
+            '/dashboard/app.js', '/app.js',
+            '/dashboard/styles.css', '/styles.css',
+            '/dashboard/tailwind.min.js', '/tailwind.min.js',
+            '/dashboard/chart.min.js', '/chart.min.js',
+            '/dashboard/lucide.min.js', '/lucide.min.js'
+        ]
+        for asset in assets_to_test:
             res_asset = client.get(asset)
             assert res_asset.status_code == 200, f"Asset {asset} returned {res_asset.status_code}"
-        print(f"[TEST 2b] Static Assets (app.js, styles.css) verified at /dashboard/ and root / (All 200 OK)")
+        print(f"[TEST 2b] All Offline Static Assets (JS, CSS, Icons) verified at /dashboard/ and root / (All 200 OK)")
 
         # 3. System API & Status
         res = client.get('/api')
