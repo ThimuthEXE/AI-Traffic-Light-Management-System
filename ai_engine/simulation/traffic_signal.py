@@ -150,11 +150,11 @@ class TrafficSignalManager:
         """
         self.allocated_total_green   = total_green
         if through_green is not None and turn_green is not None:
-            self.allocated_through_green = max(7.0,  round(through_green, 1))
-            self.allocated_left_green    = max(4.5,  round(turn_green,    1))
+            self.allocated_through_green = max(4.5,  round(through_green, 1))
+            self.allocated_left_green    = max(2.5,  round(turn_green,    1))
         else:
-            self.allocated_through_green = max(7.0, round(total_green * 0.68, 1))
-            self.allocated_left_green    = max(4.5, round(total_green * 0.32, 1))
+            self.allocated_through_green = max(4.5, round(total_green * 0.68, 1))
+            self.allocated_left_green    = max(2.5, round(total_green * 0.32, 1))
 
     def update(self, dt: float, next_decision_calc_fn=None, active_queue_pcu: float = None) -> tuple:
         self.time_in_state += dt
