@@ -1,4 +1,4 @@
-﻿"""
+"""
 Mamdani Fuzzy Logic Traffic Signal Controller
 High dynamic range green duration allocation:
 - Empty / Sparse: 8.0s
@@ -31,24 +31,32 @@ class FuzzyMembership:
 
 
 class FuzzyTrafficController:
-    def __init__(self, min_green=8.0, max_green=42.0):
+    def __init__(self, min_green=22.0, max_green=58.0):
         self.min_green = min_green
         self.max_green = max_green
+        span = max_green - min_green
+        self.OUTPUT_CONSEQUENTS = {
+            'micro':    round(min_green, 1),
+            'short':    round(min_green + span * 0.20, 1),
+            'medium':   round(min_green + span * 0.45, 1),
+            'long':     round(min_green + span * 0.72, 1),
+            'extended': round(max_green, 1)
+        }
 
     def _membership_queue(self, pcu):
         return {
-            'very_low': FuzzyMembership.trapmf(pcu, 0, 0, 1.0, 2.5),
-            'low': FuzzyMembership.trimf(pcu, 1.5, 3.5, 6.0),
-            'medium': FuzzyMembership.trimf(pcu, 4.5, 8.0, 12.0),
-            'high': FuzzyMembership.trimf(pcu, 9.5, 14.0, 19.0),
-            'very_high': FuzzyMembership.trapmf(pcu, 16.0, 22.0, 50.0, 50.0)
+            'very_low': FuzzyMembership.trapmf(pcu, 0, 0, 1.5, 3.0),
+            'low': FuzzyMembership.trimf(pcu, 2.0, 4.5, 8.0),
+            'medium': FuzzyMembership.trimf(pcu, 6.0, 10.0, 15.0),
+            'high': FuzzyMembership.trimf(pcu, 12.0, 18.0, 24.0),
+            'very_high': FuzzyMembership.trapmf(pcu, 20.0, 28.0, 60.0, 60.0)
         }
 
     def _membership_wait_time(self, wait_sec):
         return {
-            'short': FuzzyMembership.trapmf(wait_sec, 0, 0, 8.0, 16.0),
-            'moderate': FuzzyMembership.trimf(wait_sec, 12.0, 24.0, 38.0),
-            'long': FuzzyMembership.trapmf(wait_sec, 30.0, 45.0, 100.0, 100.0)
+            'short': FuzzyMembership.trapmf(wait_sec, 0, 0, 15.0, 30.0),
+            'moderate': FuzzyMembership.trimf(wait_sec, 25.0, 45.0, 65.0),
+            'long': FuzzyMembership.trapmf(wait_sec, 55.0, 75.0, 120.0, 120.0)
         }
 
     def _membership_cross_traffic(self, cross_pcu):
@@ -57,15 +65,6 @@ class FuzzyTrafficController:
             'moderate': FuzzyMembership.trimf(cross_pcu, 4.0, 8.0, 14.0),
             'high': FuzzyMembership.trapmf(cross_pcu, 10.0, 16.0, 50.0, 50.0)
         }
-
-    # Distinct crisp centers for clear dynamic range
-    OUTPUT_CONSEQUENTS = {
-        'micro': 8.0,
-        'short': 12.0,
-        'medium': 20.0,
-        'long': 30.0,
-        'extended': 40.0
-    }
 
     def compute_green_duration(self, current_pcu: float, max_wait_time: float = 0.0, cross_pcu: float = 0.0) -> dict:
         if current_pcu <= 0.8:
@@ -114,7 +113,8 @@ class FuzzyTrafficController:
         num = sum(strength * self.OUTPUT_CONSEQUENTS[cat] for cat, strength in rule_strengths.items() if strength > 0)
         den = sum(strength for strength in rule_strengths.values() if strength > 0)
 
-        computed = (num / den) if den > 0 else 18.0
+        default_fallback = round(self.min_green + (self.max_green - self.min_green) * 0.35, 1)
+        computed = (num / den) if den > 0 else default_fallback
         final_green = max(self.min_green, min(self.max_green, computed))
 
         return {

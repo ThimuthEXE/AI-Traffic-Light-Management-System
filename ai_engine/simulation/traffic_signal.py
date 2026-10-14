@@ -150,11 +150,11 @@ class TrafficSignalManager:
         """
         self.allocated_total_green   = total_green
         if through_green is not None and turn_green is not None:
-            self.allocated_through_green = max(4.5,  round(through_green, 1))
-            self.allocated_left_green    = max(2.5,  round(turn_green,    1))
+            self.allocated_through_green = max(16.0, round(through_green, 1))
+            self.allocated_left_green    = max(6.0,  round(turn_green,    1))
         else:
-            self.allocated_through_green = max(4.5, round(total_green * 0.68, 1))
-            self.allocated_left_green    = max(2.5, round(total_green * 0.32, 1))
+            self.allocated_through_green = max(16.0, round(total_green * 0.72, 1))
+            self.allocated_left_green    = max(6.0,  round(total_green * 0.28, 1))
 
     def update(self, dt: float, next_decision_calc_fn=None, active_queue_pcu: float = None) -> tuple:
         self.time_in_state += dt
@@ -163,8 +163,8 @@ class TrafficSignalManager:
         new_phase = None
         new_green = 0.0
 
-        # Gap-out check: If active queue is completely clear and min green (7s) served, terminate green early
-        early_gap_out = (active_queue_pcu is not None and active_queue_pcu <= 0.3 and self.time_in_state >= 7.0)
+        # Gap-out check: If active queue is completely clear and min safe window (18s) served, terminate green early
+        early_gap_out = (active_queue_pcu is not None and active_queue_pcu <= 0.3 and self.time_in_state >= 18.0)
 
         # === EXCLUSIVE ASYMMETRIC PHASES ===
         if "EXCLUSIVE_GREEN" in self.current_phase:

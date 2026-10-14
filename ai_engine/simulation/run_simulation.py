@@ -69,7 +69,7 @@ class TrafficSimulationApp:
         # Core components
         self.signals          = TrafficSignalManager(yellow_duration=2.0, all_red_duration=1.0)
         self.fixed_controller = FixedTimeController(fixed_green=25.0)
-        self.ai_controller     = AIFuzzyController(min_green=8.0, max_green=38.0)
+        self.ai_controller     = AIFuzzyController(min_green=22.0, max_green=58.0)
         self.dqn_controller    = DQNAdaptiveController()
 
         self.active_mode        = 3  # Default to Deep RL (DQN)
@@ -395,12 +395,8 @@ class TrafficSimulationApp:
         elif "EW_THROUGH" in cur_phase_str: active_pcu = pcu_by_dir.get('E', 0.0) + pcu_by_dir.get('W', 0.0)
         elif "NS_THROUGH" in cur_phase_str: active_pcu = pcu_by_dir.get('N', 0.0) + pcu_by_dir.get('S', 0.0)
 
-        # For Method 1 (AI Cycle-Adaptive Controller), timing is pre-allocated upfront;
-        # pass active_queue_pcu=None so the countdown ticks down smoothly without mid-flight truncation.
-        gap_out_pcu = None if self.active_mode == 2 else active_pcu
-
         switched, completed_p, new_p, allocated = self.signals.update(
-            dt, next_decision_calc_fn=self.calculate_next_decision, active_queue_pcu=gap_out_pcu
+            dt, next_decision_calc_fn=self.calculate_next_decision, active_queue_pcu=active_pcu
         )
 
         # On cycle boundary: end observation, begin new cycle, and log completed phase
@@ -741,18 +737,11 @@ class TrafficSimulationApp:
             (self.width - 388, self.height - 118)
         )
 
-        # Countdown & MPC Proactive Status
+        # Countdown
         rem = max(0.0, self.signals.allocated_green - self.signals.time_in_state)
-        mpc_status = ""
-        if self.active_mode == 2:
-            if dec.get("mpc_proactive_cap"):
-                mpc_status = f" | MPC Capped ({dec.get('mpc_safe_green', 0):.0f}s)"
-            else:
-                mpc_status = " | MPC 4-Cycle Safe"
-
         self.screen.blit(
             self.small_font.render(
-                f"Countdown: {rem:.1f}s   Policy: {self.signals.active_policy}{mpc_status}",
+                f"Countdown: {rem:.1f}s   Policy: {self.signals.active_policy}",
                 True, (160, 180, 200)
             ),
             (self.width - 388, self.height - 96)
@@ -760,7 +749,7 @@ class TrafficSimulationApp:
         ai_footer = (
             "DQN: Dueling Double Deep Q-Network (PyTorch) | Bellman Value Function"
             if self.active_mode == 3
-            else f"Method 1: 4-Cycle MPC Lookahead Pre-Allocation (Target: {dec.get('target_ceiling_sec', 28.0):.0f}s)"
+            else "ML: RandomForest (94.75%) + GradientBoost (R²=0.94) | CycleObserver"
         )
         footer_col = (0, 240, 255) if self.active_mode == 3 else (0, 210, 120)
         self.screen.blit(

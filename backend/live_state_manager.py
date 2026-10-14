@@ -23,7 +23,7 @@ class LiveIntersectionStateManager:
         
         # Controllers
         self.fixed_controller = FixedTimeController(fixed_green=25.0)
-        self.ai_controller = AIFuzzyController(min_green=8.0, max_green=45.0)
+        self.ai_controller = AIFuzzyController(min_green=22.0, max_green=58.0)
         
         self.active_mode = 2  # Default to Mode 2: AI Adaptive
         self.current_controller = self.ai_controller

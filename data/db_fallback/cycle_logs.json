@@ -998,5 +998,3055 @@
     "residual_pcu": 13.6,
     "rules": {},
     "logged_at": 1791948880.2719703
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 24.0,
+    "pcu_demand": 55.0,
+    "vehicles_cleared": 55,
+    "max_wait_time": 132.3,
+    "residual_pcu": 13.9,
+    "rules": {},
+    "logged_at": 1791959401.9723911
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 16.0,
+    "pcu_demand": 34.0,
+    "vehicles_cleared": 34,
+    "max_wait_time": 44.4,
+    "residual_pcu": 4.5,
+    "rules": {},
+    "logged_at": 1791959424.087199
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 28.0,
+    "pcu_demand": 30.0,
+    "vehicles_cleared": 30,
+    "max_wait_time": 75.3,
+    "residual_pcu": 28.2,
+    "rules": {},
+    "logged_at": 1791959455.0552838
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 16.0,
+    "pcu_demand": 26.0,
+    "vehicles_cleared": 26,
+    "max_wait_time": 41.0,
+    "residual_pcu": 10.9,
+    "rules": {},
+    "logged_at": 1791959477.1681635
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 28.0,
+    "pcu_demand": 26.0,
+    "vehicles_cleared": 26,
+    "max_wait_time": 84.0,
+    "residual_pcu": 18.5,
+    "rules": {},
+    "logged_at": 1791959488.34789
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 16.0,
+    "pcu_demand": 29.0,
+    "vehicles_cleared": 29,
+    "max_wait_time": 38.9,
+    "residual_pcu": 10.0,
+    "rules": {},
+    "logged_at": 1791959510.3724136
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 28.0,
+    "pcu_demand": 38.0,
+    "vehicles_cleared": 38,
+    "max_wait_time": 57.0,
+    "residual_pcu": 26.4,
+    "rules": {},
+    "logged_at": 1791959541.3823447
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 16.0,
+    "pcu_demand": 26.0,
+    "vehicles_cleared": 26,
+    "max_wait_time": 47.1,
+    "residual_pcu": 11.9,
+    "rules": {},
+    "logged_at": 1791959563.4346273
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 16.0,
+    "pcu_demand": 44.0,
+    "vehicles_cleared": 44,
+    "max_wait_time": 89.7,
+    "residual_pcu": 10.4,
+    "rules": {},
+    "logged_at": 1791959585.5399892
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 16.0,
+    "pcu_demand": 23.0,
+    "vehicles_cleared": 23,
+    "max_wait_time": 69.4,
+    "residual_pcu": 14.0,
+    "rules": {},
+    "logged_at": 1791959607.5170236
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 16.0,
+    "pcu_demand": 45.0,
+    "vehicles_cleared": 45,
+    "max_wait_time": 96.5,
+    "residual_pcu": 15.0,
+    "rules": {},
+    "logged_at": 1791959629.5152438
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 25.8,
+    "pcu_demand": 13.0,
+    "vehicles_cleared": 13,
+    "max_wait_time": 59.4,
+    "residual_pcu": 14.2,
+    "rules": {},
+    "logged_at": 1791959640.0484247
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 16.0,
+    "pcu_demand": 28.0,
+    "vehicles_cleared": 28,
+    "max_wait_time": 27.2,
+    "residual_pcu": 16.1,
+    "rules": {},
+    "logged_at": 1791959662.1734753
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 30.5,
+    "pcu_demand": 14.0,
+    "vehicles_cleared": 14,
+    "max_wait_time": 62.3,
+    "residual_pcu": 12.0,
+    "rules": {},
+    "logged_at": 1791959672.569665
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 16.0,
+    "pcu_demand": 34.0,
+    "vehicles_cleared": 34,
+    "max_wait_time": 41.0,
+    "residual_pcu": 16.2,
+    "rules": {},
+    "logged_at": 1791959694.5686443
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 27.6,
+    "pcu_demand": 34.0,
+    "vehicles_cleared": 34,
+    "max_wait_time": 72.4,
+    "residual_pcu": 7.0,
+    "rules": {},
+    "logged_at": 1791959728.1659882
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 24.0,
+    "pcu_demand": 49.0,
+    "vehicles_cleared": 49,
+    "max_wait_time": 67.7,
+    "residual_pcu": 9.0,
+    "rules": {},
+    "logged_at": 1791959758.2804875
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 28.6,
+    "pcu_demand": 15.0,
+    "vehicles_cleared": 15,
+    "max_wait_time": 47.5,
+    "residual_pcu": 14.5,
+    "rules": {},
+    "logged_at": 1791959769.3709438
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 16.0,
+    "pcu_demand": 34.0,
+    "vehicles_cleared": 34,
+    "max_wait_time": 28.5,
+    "residual_pcu": 6.5,
+    "rules": {},
+    "logged_at": 1791959791.3659875
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 30.2,
+    "pcu_demand": 15.0,
+    "vehicles_cleared": 15,
+    "max_wait_time": 70.5,
+    "residual_pcu": 13.8,
+    "rules": {},
+    "logged_at": 1791959801.9072776
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 16.0,
+    "pcu_demand": 17.0,
+    "vehicles_cleared": 17,
+    "max_wait_time": 28.0,
+    "residual_pcu": 25.6,
+    "rules": {},
+    "logged_at": 1791959823.9091892
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 16.0,
+    "pcu_demand": 28.0,
+    "vehicles_cleared": 28,
+    "max_wait_time": 62.0,
+    "residual_pcu": 7.2,
+    "rules": {},
+    "logged_at": 1791959845.98664
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 28.0,
+    "pcu_demand": 33.0,
+    "vehicles_cleared": 33,
+    "max_wait_time": 70.1,
+    "residual_pcu": 26.6,
+    "rules": {},
+    "logged_at": 1791959877.004665
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 16.0,
+    "pcu_demand": 26.0,
+    "vehicles_cleared": 26,
+    "max_wait_time": 46.5,
+    "residual_pcu": 10.0,
+    "rules": {},
+    "logged_at": 1791959899.0232258
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 16.0,
+    "pcu_demand": 29.0,
+    "vehicles_cleared": 29,
+    "max_wait_time": 104.9,
+    "residual_pcu": 29.4,
+    "rules": {},
+    "logged_at": 1791959921.0181365
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 16.0,
+    "pcu_demand": 28.0,
+    "vehicles_cleared": 28,
+    "max_wait_time": 66.0,
+    "residual_pcu": 6.9,
+    "rules": {},
+    "logged_at": 1791959943.1254222
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 24.0,
+    "pcu_demand": 37.0,
+    "vehicles_cleared": 37,
+    "max_wait_time": 144.6,
+    "residual_pcu": 35.4,
+    "rules": {},
+    "logged_at": 1791959973.1659226
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 16.0,
+    "pcu_demand": 30.0,
+    "vehicles_cleared": 30,
+    "max_wait_time": 47.4,
+    "residual_pcu": 8.9,
+    "rules": {},
+    "logged_at": 1791959995.2895353
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 24.0,
+    "pcu_demand": 34.0,
+    "vehicles_cleared": 34,
+    "max_wait_time": 180.8,
+    "residual_pcu": 31.8,
+    "rules": {},
+    "logged_at": 1791960025.3398538
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 16.0,
+    "pcu_demand": 30.0,
+    "vehicles_cleared": 30,
+    "max_wait_time": 46.9,
+    "residual_pcu": 10.0,
+    "rules": {},
+    "logged_at": 1791960047.3408272
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 24.0,
+    "pcu_demand": 39.0,
+    "vehicles_cleared": 39,
+    "max_wait_time": 203.9,
+    "residual_pcu": 25.8,
+    "rules": {},
+    "logged_at": 1791960077.4104936
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 16.0,
+    "pcu_demand": 26.0,
+    "vehicles_cleared": 26,
+    "max_wait_time": 57.3,
+    "residual_pcu": 5.0,
+    "rules": {},
+    "logged_at": 1791960099.5139806
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 24.0,
+    "pcu_demand": 42.0,
+    "vehicles_cleared": 42,
+    "max_wait_time": 94.4,
+    "residual_pcu": 20.2,
+    "rules": {},
+    "logged_at": 1791960129.5058362
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 16.0,
+    "pcu_demand": 25.0,
+    "vehicles_cleared": 25,
+    "max_wait_time": 39.7,
+    "residual_pcu": 12.2,
+    "rules": {},
+    "logged_at": 1791960151.6150475
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 16.0,
+    "pcu_demand": 33.0,
+    "vehicles_cleared": 33,
+    "max_wait_time": 81.0,
+    "residual_pcu": 24.7,
+    "rules": {},
+    "logged_at": 1791960173.5765288
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 16.0,
+    "pcu_demand": 26.0,
+    "vehicles_cleared": 26,
+    "max_wait_time": 62.7,
+    "residual_pcu": 7.5,
+    "rules": {},
+    "logged_at": 1791960195.711811
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 28.0,
+    "pcu_demand": 32.0,
+    "vehicles_cleared": 32,
+    "max_wait_time": 86.3,
+    "residual_pcu": 30.4,
+    "rules": {},
+    "logged_at": 1791960226.6518314
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 16.0,
+    "pcu_demand": 24.0,
+    "vehicles_cleared": 24,
+    "max_wait_time": 47.4,
+    "residual_pcu": 12.4,
+    "rules": {},
+    "logged_at": 1791960248.7795782
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 16.0,
+    "pcu_demand": 29.0,
+    "vehicles_cleared": 29,
+    "max_wait_time": 97.2,
+    "residual_pcu": 23.9,
+    "rules": {},
+    "logged_at": 1791960270.7947762
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 16.0,
+    "pcu_demand": 26.0,
+    "vehicles_cleared": 26,
+    "max_wait_time": 75.8,
+    "residual_pcu": 10.7,
+    "rules": {},
+    "logged_at": 1791960292.907654
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 24.0,
+    "pcu_demand": 30.0,
+    "vehicles_cleared": 30,
+    "max_wait_time": 129.7,
+    "residual_pcu": 34.8,
+    "rules": {},
+    "logged_at": 1791960322.9775186
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 16.0,
+    "pcu_demand": 28.0,
+    "vehicles_cleared": 28,
+    "max_wait_time": 59.8,
+    "residual_pcu": 8.7,
+    "rules": {},
+    "logged_at": 1791960344.975533
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 24.0,
+    "pcu_demand": 47.0,
+    "vehicles_cleared": 47,
+    "max_wait_time": 171.2,
+    "residual_pcu": 18.0,
+    "rules": {},
+    "logged_at": 1791960375.0549505
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 16.0,
+    "pcu_demand": 26.0,
+    "vehicles_cleared": 26,
+    "max_wait_time": 46.9,
+    "residual_pcu": 8.7,
+    "rules": {},
+    "logged_at": 1791960397.134817
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 16.0,
+    "pcu_demand": 27.0,
+    "vehicles_cleared": 27,
+    "max_wait_time": 84.1,
+    "residual_pcu": 30.8,
+    "rules": {},
+    "logged_at": 1791960419.1756604
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 16.0,
+    "pcu_demand": 31.0,
+    "vehicles_cleared": 31,
+    "max_wait_time": 71.6,
+    "residual_pcu": 11.4,
+    "rules": {},
+    "logged_at": 1791960441.2883754
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 28.0,
+    "pcu_demand": 34.0,
+    "vehicles_cleared": 34,
+    "max_wait_time": 86.7,
+    "residual_pcu": 30.4,
+    "rules": {},
+    "logged_at": 1791960472.243126
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 16.0,
+    "pcu_demand": 27.0,
+    "vehicles_cleared": 27,
+    "max_wait_time": 47.2,
+    "residual_pcu": 6.0,
+    "rules": {},
+    "logged_at": 1791960494.3409631
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 28.0,
+    "pcu_demand": 30.0,
+    "vehicles_cleared": 30,
+    "max_wait_time": 103.9,
+    "residual_pcu": 23.8,
+    "rules": {},
+    "logged_at": 1791960510.9868982
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 16.0,
+    "pcu_demand": 24.0,
+    "vehicles_cleared": 24,
+    "max_wait_time": 27.7,
+    "residual_pcu": 11.7,
+    "rules": {},
+    "logged_at": 1791960533.036902
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 28.0,
+    "pcu_demand": 35.0,
+    "vehicles_cleared": 35,
+    "max_wait_time": 63.0,
+    "residual_pcu": 27.7,
+    "rules": {},
+    "logged_at": 1791960564.0458639
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 16.0,
+    "pcu_demand": 26.0,
+    "vehicles_cleared": 26,
+    "max_wait_time": 68.4,
+    "residual_pcu": 10.2,
+    "rules": {},
+    "logged_at": 1791960586.1940668
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 16.0,
+    "pcu_demand": 37.0,
+    "vehicles_cleared": 37,
+    "max_wait_time": 88.0,
+    "residual_pcu": 26.8,
+    "rules": {},
+    "logged_at": 1791960608.2196183
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 21.0,
+    "vehicles_cleared": 21,
+    "max_wait_time": 59.9,
+    "residual_pcu": 10.4,
+    "rules": {},
+    "logged_at": 1791960622.213167
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 25.0,
+    "vehicles_cleared": 25,
+    "max_wait_time": 75.0,
+    "residual_pcu": 21.4,
+    "rules": {},
+    "logged_at": 1791960636.2767
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 22.0,
+    "vehicles_cleared": 22,
+    "max_wait_time": 47.9,
+    "residual_pcu": 14.2,
+    "rules": {},
+    "logged_at": 1791960650.3410437
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 29.0,
+    "vehicles_cleared": 29,
+    "max_wait_time": 51.8,
+    "residual_pcu": 17.5,
+    "rules": {},
+    "logged_at": 1791960664.375869
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 21.0,
+    "vehicles_cleared": 21,
+    "max_wait_time": 38.3,
+    "residual_pcu": 14.8,
+    "rules": {},
+    "logged_at": 1791960678.5381799
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 28.0,
+    "vehicles_cleared": 28,
+    "max_wait_time": 36.9,
+    "residual_pcu": 12.7,
+    "rules": {},
+    "logged_at": 1791960692.5700397
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 25.0,
+    "vehicles_cleared": 25,
+    "max_wait_time": 35.1,
+    "residual_pcu": 17.7,
+    "rules": {},
+    "logged_at": 1791960706.600879
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 23.0,
+    "vehicles_cleared": 23,
+    "max_wait_time": 34.8,
+    "residual_pcu": 21.9,
+    "rules": {},
+    "logged_at": 1791960720.6921356
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 22.0,
+    "vehicles_cleared": 22,
+    "max_wait_time": 46.2,
+    "residual_pcu": 11.9,
+    "rules": {},
+    "logged_at": 1791960734.7342234
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 25.0,
+    "vehicles_cleared": 25,
+    "max_wait_time": 39.6,
+    "residual_pcu": 27.1,
+    "rules": {},
+    "logged_at": 1791960748.763146
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 26.0,
+    "vehicles_cleared": 26,
+    "max_wait_time": 36.3,
+    "residual_pcu": 8.0,
+    "rules": {},
+    "logged_at": 1791960762.7251468
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 29.0,
+    "vehicles_cleared": 29,
+    "max_wait_time": 50.3,
+    "residual_pcu": 18.9,
+    "rules": {},
+    "logged_at": 1791960776.8356178
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 22.0,
+    "vehicles_cleared": 22,
+    "max_wait_time": 25.1,
+    "residual_pcu": 16.0,
+    "rules": {},
+    "logged_at": 1791960790.8508189
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 29.0,
+    "vehicles_cleared": 29,
+    "max_wait_time": 47.0,
+    "residual_pcu": 18.2,
+    "rules": {},
+    "logged_at": 1791960804.9606082
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 21.0,
+    "vehicles_cleared": 21,
+    "max_wait_time": 39.7,
+    "residual_pcu": 16.7,
+    "rules": {},
+    "logged_at": 1791960818.9803295
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 31.0,
+    "vehicles_cleared": 31,
+    "max_wait_time": 37.1,
+    "residual_pcu": 15.4,
+    "rules": {},
+    "logged_at": 1791960832.9917052
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 25.0,
+    "vehicles_cleared": 25,
+    "max_wait_time": 44.5,
+    "residual_pcu": 9.1,
+    "rules": {},
+    "logged_at": 1791960847.0999103
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 31.0,
+    "vehicles_cleared": 31,
+    "max_wait_time": 28.4,
+    "residual_pcu": 11.4,
+    "rules": {},
+    "logged_at": 1791960861.2509072
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 27.0,
+    "vehicles_cleared": 27,
+    "max_wait_time": 25.4,
+    "residual_pcu": 10.5,
+    "rules": {},
+    "logged_at": 1791960875.2854202
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 31.0,
+    "vehicles_cleared": 31,
+    "max_wait_time": 23.4,
+    "residual_pcu": 5.5,
+    "rules": {},
+    "logged_at": 1791960889.330976
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 26.0,
+    "vehicles_cleared": 26,
+    "max_wait_time": 23.7,
+    "residual_pcu": 9.8,
+    "rules": {},
+    "logged_at": 1791960903.428945
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 26.0,
+    "vehicles_cleared": 26,
+    "max_wait_time": 23.3,
+    "residual_pcu": 9.5,
+    "rules": {},
+    "logged_at": 1791960917.4759297
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 25.0,
+    "vehicles_cleared": 25,
+    "max_wait_time": 24.1,
+    "residual_pcu": 9.2,
+    "rules": {},
+    "logged_at": 1791960931.4238987
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 26.0,
+    "vehicles_cleared": 26,
+    "max_wait_time": 20.2,
+    "residual_pcu": 14.2,
+    "rules": {},
+    "logged_at": 1791960945.5044427
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 24.0,
+    "vehicles_cleared": 24,
+    "max_wait_time": 23.8,
+    "residual_pcu": 15.0,
+    "rules": {},
+    "logged_at": 1791960959.512419
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 25.0,
+    "vehicles_cleared": 25,
+    "max_wait_time": 32.3,
+    "residual_pcu": 18.0,
+    "rules": {},
+    "logged_at": 1791960973.5797834
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 17.0,
+    "vehicles_cleared": 17,
+    "max_wait_time": 26.6,
+    "residual_pcu": 13.7,
+    "rules": {},
+    "logged_at": 1791960987.6324022
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 24.0,
+    "vehicles_cleared": 24,
+    "max_wait_time": 37.3,
+    "residual_pcu": 13.7,
+    "rules": {},
+    "logged_at": 1791961001.7026935
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 25.0,
+    "vehicles_cleared": 25,
+    "max_wait_time": 44.7,
+    "residual_pcu": 12.7,
+    "rules": {},
+    "logged_at": 1791961015.7338083
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 33.0,
+    "vehicles_cleared": 33,
+    "max_wait_time": 44.7,
+    "residual_pcu": 14.0,
+    "rules": {},
+    "logged_at": 1791961029.8118618
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 21.0,
+    "vehicles_cleared": 21,
+    "max_wait_time": 50.5,
+    "residual_pcu": 20.6,
+    "rules": {},
+    "logged_at": 1791961043.9018202
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 25.0,
+    "vehicles_cleared": 25,
+    "max_wait_time": 36.5,
+    "residual_pcu": 15.0,
+    "rules": {},
+    "logged_at": 1791961057.9280624
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 24.0,
+    "vehicles_cleared": 24,
+    "max_wait_time": 40.3,
+    "residual_pcu": 10.4,
+    "rules": {},
+    "logged_at": 1791961071.9443128
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 32.0,
+    "vehicles_cleared": 32,
+    "max_wait_time": 38.2,
+    "residual_pcu": 9.0,
+    "rules": {},
+    "logged_at": 1791961085.9752572
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 20.0,
+    "vehicles_cleared": 20,
+    "max_wait_time": 25.6,
+    "residual_pcu": 19.9,
+    "rules": {},
+    "logged_at": 1791961100.0673099
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 23.0,
+    "vehicles_cleared": 23,
+    "max_wait_time": 28.5,
+    "residual_pcu": 15.3,
+    "rules": {},
+    "logged_at": 1791961114.0751073
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 23.0,
+    "vehicles_cleared": 23,
+    "max_wait_time": 42.6,
+    "residual_pcu": 13.9,
+    "rules": {},
+    "logged_at": 1791961128.13503
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 21.0,
+    "vehicles_cleared": 21,
+    "max_wait_time": 42.8,
+    "residual_pcu": 26.1,
+    "rules": {},
+    "logged_at": 1791961142.202313
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 21.0,
+    "vehicles_cleared": 21,
+    "max_wait_time": 25.0,
+    "residual_pcu": 15.9,
+    "rules": {},
+    "logged_at": 1791961156.2920866
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 22.0,
+    "vehicles_cleared": 22,
+    "max_wait_time": 57.7,
+    "residual_pcu": 24.0,
+    "rules": {},
+    "logged_at": 1791961167.2330666
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 25.0,
+    "vehicles_cleared": 25,
+    "max_wait_time": 38.2,
+    "residual_pcu": 4.7,
+    "rules": {},
+    "logged_at": 1791961181.3889396
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 27.0,
+    "vehicles_cleared": 27,
+    "max_wait_time": 54.7,
+    "residual_pcu": 13.2,
+    "rules": {},
+    "logged_at": 1791961195.3710098
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 15.0,
+    "vehicles_cleared": 15,
+    "max_wait_time": 24.0,
+    "residual_pcu": 17.0,
+    "rules": {},
+    "logged_at": 1791961209.4102063
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 28.0,
+    "vehicles_cleared": 28,
+    "max_wait_time": 54.2,
+    "residual_pcu": 18.7,
+    "rules": {},
+    "logged_at": 1791961223.57817
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 29.0,
+    "vehicles_cleared": 29,
+    "max_wait_time": 40.8,
+    "residual_pcu": 7.0,
+    "rules": {},
+    "logged_at": 1791961237.6235702
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 27.0,
+    "vehicles_cleared": 27,
+    "max_wait_time": 49.0,
+    "residual_pcu": 12.7,
+    "rules": {},
+    "logged_at": 1791961251.6308415
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 23.0,
+    "vehicles_cleared": 23,
+    "max_wait_time": 21.0,
+    "residual_pcu": 8.9,
+    "rules": {},
+    "logged_at": 1791961265.6786044
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 24.0,
+    "vehicles_cleared": 24,
+    "max_wait_time": 42.8,
+    "residual_pcu": 18.6,
+    "rules": {},
+    "logged_at": 1791961279.7250316
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 20.0,
+    "vehicles_cleared": 20,
+    "max_wait_time": 25.1,
+    "residual_pcu": 17.0,
+    "rules": {},
+    "logged_at": 1791961293.7525911
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 24.0,
+    "vehicles_cleared": 24,
+    "max_wait_time": 34.6,
+    "residual_pcu": 25.9,
+    "rules": {},
+    "logged_at": 1791961307.7877798
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 26.0,
+    "vehicles_cleared": 26,
+    "max_wait_time": 40.7,
+    "residual_pcu": 9.9,
+    "rules": {},
+    "logged_at": 1791961321.8901155
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 30.0,
+    "vehicles_cleared": 30,
+    "max_wait_time": 48.4,
+    "residual_pcu": 12.2,
+    "rules": {},
+    "logged_at": 1791961335.956838
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 23.0,
+    "vehicles_cleared": 23,
+    "max_wait_time": 37.4,
+    "residual_pcu": 21.9,
+    "rules": {},
+    "logged_at": 1791961349.9566865
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 33.0,
+    "vehicles_cleared": 33,
+    "max_wait_time": 49.7,
+    "residual_pcu": 9.7,
+    "rules": {},
+    "logged_at": 1791961364.0325994
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 23.0,
+    "vehicles_cleared": 23,
+    "max_wait_time": 44.9,
+    "residual_pcu": 13.6,
+    "rules": {},
+    "logged_at": 1791961378.0683978
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 28.0,
+    "vehicles_cleared": 28,
+    "max_wait_time": 23.2,
+    "residual_pcu": 12.4,
+    "rules": {},
+    "logged_at": 1791961392.1262548
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 29.0,
+    "vehicles_cleared": 29,
+    "max_wait_time": 43.0,
+    "residual_pcu": 11.5,
+    "rules": {},
+    "logged_at": 1791961406.1582892
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 20.0,
+    "vehicles_cleared": 20,
+    "max_wait_time": 23.9,
+    "residual_pcu": 15.9,
+    "rules": {},
+    "logged_at": 1791961420.2541165
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 24.0,
+    "vehicles_cleared": 24,
+    "max_wait_time": 21.8,
+    "residual_pcu": 11.2,
+    "rules": {},
+    "logged_at": 1791961434.22117
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 22.0,
+    "vehicles_cleared": 22,
+    "max_wait_time": 32.4,
+    "residual_pcu": 21.2,
+    "rules": {},
+    "logged_at": 1791961448.3327637
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 25.0,
+    "vehicles_cleared": 25,
+    "max_wait_time": 23.1,
+    "residual_pcu": 10.4,
+    "rules": {},
+    "logged_at": 1791961462.334592
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 25.0,
+    "vehicles_cleared": 25,
+    "max_wait_time": 44.4,
+    "residual_pcu": 23.2,
+    "rules": {},
+    "logged_at": 1791961476.540356
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 22.0,
+    "vehicles_cleared": 22,
+    "max_wait_time": 25.1,
+    "residual_pcu": 14.4,
+    "rules": {},
+    "logged_at": 1791961490.5870821
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 30.0,
+    "vehicles_cleared": 30,
+    "max_wait_time": 53.0,
+    "residual_pcu": 22.2,
+    "rules": {},
+    "logged_at": 1791961504.719939
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 28.0,
+    "vehicles_cleared": 28,
+    "max_wait_time": 30.6,
+    "residual_pcu": 8.2,
+    "rules": {},
+    "logged_at": 1791961518.8946748
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 26.0,
+    "vehicles_cleared": 26,
+    "max_wait_time": 35.2,
+    "residual_pcu": 18.0,
+    "rules": {},
+    "logged_at": 1791961532.8762898
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 22.0,
+    "vehicles_cleared": 22,
+    "max_wait_time": 24.4,
+    "residual_pcu": 21.9,
+    "rules": {},
+    "logged_at": 1791961546.9681444
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 22.0,
+    "vehicles_cleared": 22,
+    "max_wait_time": 42.4,
+    "residual_pcu": 20.2,
+    "rules": {},
+    "logged_at": 1791961561.085499
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 19.0,
+    "vehicles_cleared": 19,
+    "max_wait_time": 45.3,
+    "residual_pcu": 19.4,
+    "rules": {},
+    "logged_at": 1791961575.087649
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 21.0,
+    "vehicles_cleared": 21,
+    "max_wait_time": 57.5,
+    "residual_pcu": 21.9,
+    "rules": {},
+    "logged_at": 1791961589.2098436
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 20.0,
+    "vehicles_cleared": 20,
+    "max_wait_time": 45.9,
+    "residual_pcu": 11.3,
+    "rules": {},
+    "logged_at": 1791961603.2759843
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 33.0,
+    "vehicles_cleared": 33,
+    "max_wait_time": 52.6,
+    "residual_pcu": 14.2,
+    "rules": {},
+    "logged_at": 1791961617.244998
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 18.0,
+    "vehicles_cleared": 18,
+    "max_wait_time": 66.2,
+    "residual_pcu": 21.6,
+    "rules": {},
+    "logged_at": 1791961631.3233316
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 22.0,
+    "vehicles_cleared": 22,
+    "max_wait_time": 51.0,
+    "residual_pcu": 16.5,
+    "rules": {},
+    "logged_at": 1791961645.414867
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 22.0,
+    "vehicles_cleared": 22,
+    "max_wait_time": 79.6,
+    "residual_pcu": 15.6,
+    "rules": {},
+    "logged_at": 1791961659.413685
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 28.0,
+    "vehicles_cleared": 28,
+    "max_wait_time": 46.5,
+    "residual_pcu": 13.5,
+    "rules": {},
+    "logged_at": 1791961673.5179749
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 13.0,
+    "vehicles_cleared": 13,
+    "max_wait_time": 69.8,
+    "residual_pcu": 12.7,
+    "rules": {},
+    "logged_at": 1791961684.565465
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 22.0,
+    "vehicles_cleared": 22,
+    "max_wait_time": 41.3,
+    "residual_pcu": 16.9,
+    "rules": {},
+    "logged_at": 1791961698.6081326
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 25.0,
+    "vehicles_cleared": 25,
+    "max_wait_time": 48.2,
+    "residual_pcu": 8.4,
+    "rules": {},
+    "logged_at": 1791961712.604236
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 25.0,
+    "vehicles_cleared": 25,
+    "max_wait_time": 39.8,
+    "residual_pcu": 18.1,
+    "rules": {},
+    "logged_at": 1791961726.6663723
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 20.0,
+    "vehicles_cleared": 20,
+    "max_wait_time": 24.2,
+    "residual_pcu": 14.4,
+    "rules": {},
+    "logged_at": 1791961740.7822533
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 31.0,
+    "vehicles_cleared": 31,
+    "max_wait_time": 47.9,
+    "residual_pcu": 9.1,
+    "rules": {},
+    "logged_at": 1791961754.7536192
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 23.0,
+    "vehicles_cleared": 23,
+    "max_wait_time": 45.0,
+    "residual_pcu": 12.1,
+    "rules": {},
+    "logged_at": 1791961768.9128962
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 28.0,
+    "vehicles_cleared": 28,
+    "max_wait_time": 37.7,
+    "residual_pcu": 9.9,
+    "rules": {},
+    "logged_at": 1791961782.8872557
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 30.0,
+    "vehicles_cleared": 30,
+    "max_wait_time": 42.2,
+    "residual_pcu": 8.4,
+    "rules": {},
+    "logged_at": 1791961797.0116534
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 24.0,
+    "vehicles_cleared": 24,
+    "max_wait_time": 38.0,
+    "residual_pcu": 19.7,
+    "rules": {},
+    "logged_at": 1791961810.9793367
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 21.0,
+    "vehicles_cleared": 21,
+    "max_wait_time": 22.1,
+    "residual_pcu": 15.7,
+    "rules": {},
+    "logged_at": 1791961825.0685036
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 26.0,
+    "vehicles_cleared": 26,
+    "max_wait_time": 46.7,
+    "residual_pcu": 10.5,
+    "rules": {},
+    "logged_at": 1791961839.0740964
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 27.0,
+    "vehicles_cleared": 27,
+    "max_wait_time": 31.5,
+    "residual_pcu": 10.3,
+    "rules": {},
+    "logged_at": 1791961853.1757376
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 21.0,
+    "vehicles_cleared": 21,
+    "max_wait_time": 43.6,
+    "residual_pcu": 21.6,
+    "rules": {},
+    "logged_at": 1791961867.2275195
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 24.0,
+    "vehicles_cleared": 24,
+    "max_wait_time": 24.0,
+    "residual_pcu": 8.4,
+    "rules": {},
+    "logged_at": 1791961881.3084478
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 32.0,
+    "vehicles_cleared": 32,
+    "max_wait_time": 49.4,
+    "residual_pcu": 10.0,
+    "rules": {},
+    "logged_at": 1791961895.3177524
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 27.0,
+    "vehicles_cleared": 27,
+    "max_wait_time": 21.9,
+    "residual_pcu": 14.5,
+    "rules": {},
+    "logged_at": 1791961909.3972077
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 31.0,
+    "vehicles_cleared": 31,
+    "max_wait_time": 41.0,
+    "residual_pcu": 11.7,
+    "rules": {},
+    "logged_at": 1791961923.4101484
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 25.0,
+    "vehicles_cleared": 25,
+    "max_wait_time": 23.6,
+    "residual_pcu": 8.2,
+    "rules": {},
+    "logged_at": 1791961937.4898732
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 19.0,
+    "vehicles_cleared": 19,
+    "max_wait_time": 28.1,
+    "residual_pcu": 20.5,
+    "rules": {},
+    "logged_at": 1791961951.5513613
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 21.0,
+    "vehicles_cleared": 21,
+    "max_wait_time": 23.5,
+    "residual_pcu": 13.4,
+    "rules": {},
+    "logged_at": 1791961965.5992649
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 28.0,
+    "vehicles_cleared": 28,
+    "max_wait_time": 47.4,
+    "residual_pcu": 11.9,
+    "rules": {},
+    "logged_at": 1791961979.5972397
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 28.0,
+    "vehicles_cleared": 28,
+    "max_wait_time": 35.3,
+    "residual_pcu": 6.0,
+    "rules": {},
+    "logged_at": 1791961993.750283
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 29.0,
+    "vehicles_cleared": 29,
+    "max_wait_time": 50.8,
+    "residual_pcu": 8.7,
+    "rules": {},
+    "logged_at": 1791962007.7774572
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 24.0,
+    "vehicles_cleared": 24,
+    "max_wait_time": 23.9,
+    "residual_pcu": 12.0,
+    "rules": {},
+    "logged_at": 1791962021.8770843
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 24.0,
+    "vehicles_cleared": 24,
+    "max_wait_time": 27.8,
+    "residual_pcu": 14.4,
+    "rules": {},
+    "logged_at": 1791962035.8712287
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 23.0,
+    "vehicles_cleared": 23,
+    "max_wait_time": 29.5,
+    "residual_pcu": 13.7,
+    "rules": {},
+    "logged_at": 1791962049.9666367
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 30.0,
+    "vehicles_cleared": 30,
+    "max_wait_time": 32.5,
+    "residual_pcu": 11.0,
+    "rules": {},
+    "logged_at": 1791962064.0136962
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 26.0,
+    "vehicles_cleared": 26,
+    "max_wait_time": 41.7,
+    "residual_pcu": 12.0,
+    "rules": {},
+    "logged_at": 1791962078.0146294
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 26.0,
+    "vehicles_cleared": 26,
+    "max_wait_time": 33.9,
+    "residual_pcu": 13.9,
+    "rules": {},
+    "logged_at": 1791962092.0811594
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 19.0,
+    "vehicles_cleared": 19,
+    "max_wait_time": 24.0,
+    "residual_pcu": 14.8,
+    "rules": {},
+    "logged_at": 1791962106.078156
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 28.0,
+    "vehicles_cleared": 28,
+    "max_wait_time": 55.9,
+    "residual_pcu": 14.4,
+    "rules": {},
+    "logged_at": 1791962120.2386456
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 23.0,
+    "vehicles_cleared": 23,
+    "max_wait_time": 44.9,
+    "residual_pcu": 17.3,
+    "rules": {},
+    "logged_at": 1791962134.220879
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 28.0,
+    "vehicles_cleared": 28,
+    "max_wait_time": 33.1,
+    "residual_pcu": 15.7,
+    "rules": {},
+    "logged_at": 1791962148.2966917
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 27.0,
+    "vehicles_cleared": 27,
+    "max_wait_time": 57.8,
+    "residual_pcu": 11.7,
+    "rules": {},
+    "logged_at": 1791962162.2941651
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 34.0,
+    "vehicles_cleared": 34,
+    "max_wait_time": 44.7,
+    "residual_pcu": 27.8,
+    "rules": {},
+    "logged_at": 1791962176.362427
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 20.0,
+    "vehicles_cleared": 20,
+    "max_wait_time": 22.9,
+    "residual_pcu": 13.8,
+    "rules": {},
+    "logged_at": 1791962190.4080348
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 32.0,
+    "vehicles_cleared": 32,
+    "max_wait_time": 30.9,
+    "residual_pcu": 33.6,
+    "rules": {},
+    "logged_at": 1791962204.5176344
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 27.0,
+    "vehicles_cleared": 27,
+    "max_wait_time": 44.2,
+    "residual_pcu": 10.7,
+    "rules": {},
+    "logged_at": 1791962218.560396
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 23.0,
+    "vehicles_cleared": 23,
+    "max_wait_time": 39.7,
+    "residual_pcu": 32.1,
+    "rules": {},
+    "logged_at": 1791962232.6175926
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 18.0,
+    "vehicles_cleared": 18,
+    "max_wait_time": 23.4,
+    "residual_pcu": 14.0,
+    "rules": {},
+    "logged_at": 1791962246.7149994
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 26.0,
+    "vehicles_cleared": 26,
+    "max_wait_time": 51.7,
+    "residual_pcu": 32.6,
+    "rules": {},
+    "logged_at": 1791962260.742797
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 29.0,
+    "vehicles_cleared": 29,
+    "max_wait_time": 40.8,
+    "residual_pcu": 10.7,
+    "rules": {},
+    "logged_at": 1791962274.8032475
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 33.0,
+    "vehicles_cleared": 33,
+    "max_wait_time": 72.3,
+    "residual_pcu": 34.4,
+    "rules": {},
+    "logged_at": 1791962288.831849
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 26.0,
+    "vehicles_cleared": 26,
+    "max_wait_time": 24.7,
+    "residual_pcu": 8.2,
+    "rules": {},
+    "logged_at": 1791962302.8679159
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 32.0,
+    "vehicles_cleared": 32,
+    "max_wait_time": 76.2,
+    "residual_pcu": 37.6,
+    "rules": {},
+    "logged_at": 1791962316.9087021
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 18.0,
+    "vehicles_cleared": 18,
+    "max_wait_time": 23.9,
+    "residual_pcu": 19.5,
+    "rules": {},
+    "logged_at": 1791962331.0000496
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 29.0,
+    "vehicles_cleared": 29,
+    "max_wait_time": 68.9,
+    "residual_pcu": 35.1,
+    "rules": {},
+    "logged_at": 1791962344.9623694
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 26.0,
+    "vehicles_cleared": 26,
+    "max_wait_time": 43.7,
+    "residual_pcu": 17.4,
+    "rules": {},
+    "logged_at": 1791962359.0941617
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 29.0,
+    "vehicles_cleared": 29,
+    "max_wait_time": 74.9,
+    "residual_pcu": 39.1,
+    "rules": {},
+    "logged_at": 1791962373.091042
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 22.0,
+    "vehicles_cleared": 22,
+    "max_wait_time": 28.5,
+    "residual_pcu": 9.5,
+    "rules": {},
+    "logged_at": 1791962387.137866
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 29.0,
+    "vehicles_cleared": 29,
+    "max_wait_time": 90.0,
+    "residual_pcu": 30.5,
+    "rules": {},
+    "logged_at": 1791962398.1545556
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 27.0,
+    "vehicles_cleared": 27,
+    "max_wait_time": 21.5,
+    "residual_pcu": 11.7,
+    "rules": {},
+    "logged_at": 1791962412.187932
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 35.0,
+    "vehicles_cleared": 35,
+    "max_wait_time": 62.7,
+    "residual_pcu": 37.3,
+    "rules": {},
+    "logged_at": 1791962426.30171
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 24.0,
+    "vehicles_cleared": 24,
+    "max_wait_time": 25.0,
+    "residual_pcu": 9.7,
+    "rules": {},
+    "logged_at": 1791962440.2957637
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 35.0,
+    "vehicles_cleared": 35,
+    "max_wait_time": 82.9,
+    "residual_pcu": 27.2,
+    "rules": {},
+    "logged_at": 1791962454.3927321
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 28.0,
+    "vehicles_cleared": 28,
+    "max_wait_time": 22.4,
+    "residual_pcu": 9.4,
+    "rules": {},
+    "logged_at": 1791962468.4580886
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 38.0,
+    "vehicles_cleared": 38,
+    "max_wait_time": 85.3,
+    "residual_pcu": 27.8,
+    "rules": {},
+    "logged_at": 1791962482.419009
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 22.0,
+    "vehicles_cleared": 22,
+    "max_wait_time": 24.3,
+    "residual_pcu": 13.4,
+    "rules": {},
+    "logged_at": 1791962496.4493594
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 36.0,
+    "vehicles_cleared": 36,
+    "max_wait_time": 46.9,
+    "residual_pcu": 27.7,
+    "rules": {},
+    "logged_at": 1791962510.571489
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 25.0,
+    "vehicles_cleared": 25,
+    "max_wait_time": 39.8,
+    "residual_pcu": 13.7,
+    "rules": {},
+    "logged_at": 1791962524.5002415
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 32.0,
+    "vehicles_cleared": 32,
+    "max_wait_time": 46.1,
+    "residual_pcu": 29.9,
+    "rules": {},
+    "logged_at": 1791962546.1257815
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 22.0,
+    "vehicles_cleared": 22,
+    "max_wait_time": 24.0,
+    "residual_pcu": 21.0,
+    "rules": {},
+    "logged_at": 1791962552.5805957
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 34.0,
+    "vehicles_cleared": 34,
+    "max_wait_time": 47.1,
+    "residual_pcu": 33.3,
+    "rules": {},
+    "logged_at": 1791962566.6681333
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 23.0,
+    "vehicles_cleared": 23,
+    "max_wait_time": 41.5,
+    "residual_pcu": 9.9,
+    "rules": {},
+    "logged_at": 1791962580.798911
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 33.0,
+    "vehicles_cleared": 33,
+    "max_wait_time": 48.6,
+    "residual_pcu": 28.9,
+    "rules": {},
+    "logged_at": 1791962594.812951
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 22.0,
+    "vehicles_cleared": 22,
+    "max_wait_time": 23.8,
+    "residual_pcu": 8.7,
+    "rules": {},
+    "logged_at": 1791962608.8406935
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 37.0,
+    "vehicles_cleared": 37,
+    "max_wait_time": 46.8,
+    "residual_pcu": 35.4,
+    "rules": {},
+    "logged_at": 1791962622.9224782
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 28.0,
+    "vehicles_cleared": 28,
+    "max_wait_time": 25.0,
+    "residual_pcu": 9.2,
+    "rules": {},
+    "logged_at": 1791962636.9782763
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 22.0,
+    "vehicles_cleared": 22,
+    "max_wait_time": 45.9,
+    "residual_pcu": 34.5,
+    "rules": {},
+    "logged_at": 1791962650.9472938
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 18.0,
+    "vehicles_cleared": 18,
+    "max_wait_time": 26.6,
+    "residual_pcu": 14.7,
+    "rules": {},
+    "logged_at": 1791962665.0165288
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 38.0,
+    "vehicles_cleared": 38,
+    "max_wait_time": 47.6,
+    "residual_pcu": 26.2,
+    "rules": {},
+    "logged_at": 1791962679.1695354
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 24.0,
+    "vehicles_cleared": 24,
+    "max_wait_time": 45.3,
+    "residual_pcu": 10.4,
+    "rules": {},
+    "logged_at": 1791962693.1346896
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 38.0,
+    "vehicles_cleared": 38,
+    "max_wait_time": 47.6,
+    "residual_pcu": 27.6,
+    "rules": {},
+    "logged_at": 1791962707.2209523
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 21.0,
+    "vehicles_cleared": 21,
+    "max_wait_time": 24.2,
+    "residual_pcu": 12.5,
+    "rules": {},
+    "logged_at": 1791962721.2238336
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 31.0,
+    "vehicles_cleared": 31,
+    "max_wait_time": 47.5,
+    "residual_pcu": 39.5,
+    "rules": {},
+    "logged_at": 1791962735.326187
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 25.0,
+    "vehicles_cleared": 25,
+    "max_wait_time": 42.2,
+    "residual_pcu": 11.4,
+    "rules": {},
+    "logged_at": 1791962749.3493106
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 32.0,
+    "vehicles_cleared": 32,
+    "max_wait_time": 48.8,
+    "residual_pcu": 32.1,
+    "rules": {},
+    "logged_at": 1791962763.3449938
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 17.0,
+    "vehicles_cleared": 17,
+    "max_wait_time": 24.1,
+    "residual_pcu": 14.0,
+    "rules": {},
+    "logged_at": 1791962777.3814726
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 26.0,
+    "vehicles_cleared": 26,
+    "max_wait_time": 63.4,
+    "residual_pcu": 36.0,
+    "rules": {},
+    "logged_at": 1791962791.4474545
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 24.0,
+    "vehicles_cleared": 24,
+    "max_wait_time": 44.4,
+    "residual_pcu": 7.5,
+    "rules": {},
+    "logged_at": 1791962805.5603082
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 36.0,
+    "vehicles_cleared": 36,
+    "max_wait_time": 73.1,
+    "residual_pcu": 26.9,
+    "rules": {},
+    "logged_at": 1791962819.5376318
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 21.0,
+    "vehicles_cleared": 21,
+    "max_wait_time": 25.0,
+    "residual_pcu": 15.4,
+    "rules": {},
+    "logged_at": 1791962833.6335058
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 36.0,
+    "vehicles_cleared": 36,
+    "max_wait_time": 72.5,
+    "residual_pcu": 27.6,
+    "rules": {},
+    "logged_at": 1791962847.66519
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 27.0,
+    "vehicles_cleared": 27,
+    "max_wait_time": 44.8,
+    "residual_pcu": 9.5,
+    "rules": {},
+    "logged_at": 1791962861.8060467
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 40.0,
+    "vehicles_cleared": 40,
+    "max_wait_time": 48.9,
+    "residual_pcu": 20.2,
+    "rules": {},
+    "logged_at": 1791962875.8473344
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 23.0,
+    "vehicles_cleared": 23,
+    "max_wait_time": 21.6,
+    "residual_pcu": 11.2,
+    "rules": {},
+    "logged_at": 1791962889.8761253
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 37.0,
+    "vehicles_cleared": 37,
+    "max_wait_time": 46.6,
+    "residual_pcu": 26.1,
+    "rules": {},
+    "logged_at": 1791962903.968953
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 28.0,
+    "vehicles_cleared": 28,
+    "max_wait_time": 31.1,
+    "residual_pcu": 6.0,
+    "rules": {},
+    "logged_at": 1791962918.023806
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 29.0,
+    "vehicles_cleared": 29,
+    "max_wait_time": 50.8,
+    "residual_pcu": 33.2,
+    "rules": {},
+    "logged_at": 1791962932.0531685
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 25.0,
+    "vehicles_cleared": 25,
+    "max_wait_time": 23.6,
+    "residual_pcu": 7.2,
+    "rules": {},
+    "logged_at": 1791962946.0417347
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 35.0,
+    "vehicles_cleared": 35,
+    "max_wait_time": 72.5,
+    "residual_pcu": 24.9,
+    "rules": {},
+    "logged_at": 1791962960.1583204
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 18.0,
+    "vehicles_cleared": 18,
+    "max_wait_time": 25.1,
+    "residual_pcu": 19.3,
+    "rules": {},
+    "logged_at": 1791962974.2239585
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 25.0,
+    "vehicles_cleared": 25,
+    "max_wait_time": 74.4,
+    "residual_pcu": 34.6,
+    "rules": {},
+    "logged_at": 1791962988.2838855
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 26.0,
+    "vehicles_cleared": 26,
+    "max_wait_time": 46.2,
+    "residual_pcu": 12.0,
+    "rules": {},
+    "logged_at": 1791963002.279535
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 32.0,
+    "vehicles_cleared": 32,
+    "max_wait_time": 89.5,
+    "residual_pcu": 31.4,
+    "rules": {},
+    "logged_at": 1791963016.3338096
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 24.0,
+    "vehicles_cleared": 24,
+    "max_wait_time": 33.6,
+    "residual_pcu": 12.4,
+    "rules": {},
+    "logged_at": 1791963030.4177613
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 27.0,
+    "vehicles_cleared": 27,
+    "max_wait_time": 75.2,
+    "residual_pcu": 38.0,
+    "rules": {},
+    "logged_at": 1791963044.4417408
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 23.0,
+    "vehicles_cleared": 23,
+    "max_wait_time": 38.2,
+    "residual_pcu": 14.7,
+    "rules": {},
+    "logged_at": 1791963058.528762
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 39.0,
+    "vehicles_cleared": 39,
+    "max_wait_time": 90.2,
+    "residual_pcu": 26.0,
+    "rules": {},
+    "logged_at": 1791963072.6231859
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 25.0,
+    "vehicles_cleared": 25,
+    "max_wait_time": 37.8,
+    "residual_pcu": 14.2,
+    "rules": {},
+    "logged_at": 1791963086.637397
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 35.0,
+    "vehicles_cleared": 35,
+    "max_wait_time": 71.6,
+    "residual_pcu": 28.4,
+    "rules": {},
+    "logged_at": 1791963100.7219186
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 26.0,
+    "vehicles_cleared": 26,
+    "max_wait_time": 35.7,
+    "residual_pcu": 8.5,
+    "rules": {},
+    "logged_at": 1791963114.6796107
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 31.0,
+    "vehicles_cleared": 31,
+    "max_wait_time": 46.6,
+    "residual_pcu": 34.4,
+    "rules": {},
+    "logged_at": 1791963128.7688963
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 27.0,
+    "vehicles_cleared": 27,
+    "max_wait_time": 23.8,
+    "residual_pcu": 11.5,
+    "rules": {},
+    "logged_at": 1791963142.910625
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 29.0,
+    "vehicles_cleared": 29,
+    "max_wait_time": 44.8,
+    "residual_pcu": 35.0,
+    "rules": {},
+    "logged_at": 1791963156.9106832
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 21.0,
+    "vehicles_cleared": 21,
+    "max_wait_time": 21.6,
+    "residual_pcu": 10.4,
+    "rules": {},
+    "logged_at": 1791963171.0048046
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 29.0,
+    "vehicles_cleared": 29,
+    "max_wait_time": 54.0,
+    "residual_pcu": 38.1,
+    "rules": {},
+    "logged_at": 1791963184.9889805
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 26.0,
+    "vehicles_cleared": 26,
+    "max_wait_time": 24.3,
+    "residual_pcu": 6.2,
+    "rules": {},
+    "logged_at": 1791963199.1096098
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 31.0,
+    "vehicles_cleared": 31,
+    "max_wait_time": 50.4,
+    "residual_pcu": 38.8,
+    "rules": {},
+    "logged_at": 1791963213.1531913
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 21.0,
+    "vehicles_cleared": 21,
+    "max_wait_time": 23.3,
+    "residual_pcu": 10.5,
+    "rules": {},
+    "logged_at": 1791963227.1966152
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 35.0,
+    "vehicles_cleared": 35,
+    "max_wait_time": 49.5,
+    "residual_pcu": 34.2,
+    "rules": {},
+    "logged_at": 1791963241.1756027
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 28.0,
+    "vehicles_cleared": 28,
+    "max_wait_time": 30.1,
+    "residual_pcu": 11.7,
+    "rules": {},
+    "logged_at": 1791963255.2841222
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 36.0,
+    "vehicles_cleared": 36,
+    "max_wait_time": 48.2,
+    "residual_pcu": 27.2,
+    "rules": {},
+    "logged_at": 1791963269.3408256
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 20.0,
+    "vehicles_cleared": 20,
+    "max_wait_time": 24.2,
+    "residual_pcu": 16.4,
+    "rules": {},
+    "logged_at": 1791963283.2991247
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 30.0,
+    "vehicles_cleared": 30,
+    "max_wait_time": 47.6,
+    "residual_pcu": 29.0,
+    "rules": {},
+    "logged_at": 1791963297.3818007
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 27.0,
+    "vehicles_cleared": 27,
+    "max_wait_time": 43.6,
+    "residual_pcu": 7.5,
+    "rules": {},
+    "logged_at": 1791963311.4403744
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 39.0,
+    "vehicles_cleared": 39,
+    "max_wait_time": 62.7,
+    "residual_pcu": 26.4,
+    "rules": {},
+    "logged_at": 1791963325.4020014
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 16.0,
+    "vehicles_cleared": 16,
+    "max_wait_time": 23.3,
+    "residual_pcu": 19.5,
+    "rules": {},
+    "logged_at": 1791963339.4785814
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 23.0,
+    "vehicles_cleared": 23,
+    "max_wait_time": 45.2,
+    "residual_pcu": 40.9,
+    "rules": {},
+    "logged_at": 1791963353.578488
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 24.0,
+    "vehicles_cleared": 24,
+    "max_wait_time": 40.9,
+    "residual_pcu": 14.7,
+    "rules": {},
+    "logged_at": 1791963367.5582345
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 35.0,
+    "vehicles_cleared": 35,
+    "max_wait_time": 47.9,
+    "residual_pcu": 29.5,
+    "rules": {},
+    "logged_at": 1791963381.6007366
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 23.0,
+    "vehicles_cleared": 23,
+    "max_wait_time": 37.6,
+    "residual_pcu": 12.7,
+    "rules": {},
+    "logged_at": 1791963395.626367
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 36.0,
+    "vehicles_cleared": 36,
+    "max_wait_time": 47.5,
+    "residual_pcu": 27.5,
+    "rules": {},
+    "logged_at": 1791963409.6339755
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 23.0,
+    "vehicles_cleared": 23,
+    "max_wait_time": 36.9,
+    "residual_pcu": 11.9,
+    "rules": {},
+    "logged_at": 1791963423.6684067
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 36.0,
+    "vehicles_cleared": 36,
+    "max_wait_time": 47.4,
+    "residual_pcu": 31.0,
+    "rules": {},
+    "logged_at": 1791963437.7121081
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 26.0,
+    "vehicles_cleared": 26,
+    "max_wait_time": 38.6,
+    "residual_pcu": 13.8,
+    "rules": {},
+    "logged_at": 1791963451.779162
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 23.0,
+    "vehicles_cleared": 23,
+    "max_wait_time": 47.4,
+    "residual_pcu": 34.6,
+    "rules": {},
+    "logged_at": 1791963465.8080156
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 14.0,
+    "vehicles_cleared": 14,
+    "max_wait_time": 24.9,
+    "residual_pcu": 22.6,
+    "rules": {},
+    "logged_at": 1791963479.9475062
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 28.0,
+    "vehicles_cleared": 28,
+    "max_wait_time": 68.7,
+    "residual_pcu": 38.0,
+    "rules": {},
+    "logged_at": 1791963493.908783
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 31.0,
+    "vehicles_cleared": 31,
+    "max_wait_time": 45.6,
+    "residual_pcu": 10.0,
+    "rules": {},
+    "logged_at": 1791963507.9420004
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 36.0,
+    "vehicles_cleared": 36,
+    "max_wait_time": 74.1,
+    "residual_pcu": 37.4,
+    "rules": {},
+    "logged_at": 1791963521.9895153
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 24.0,
+    "vehicles_cleared": 24,
+    "max_wait_time": 24.0,
+    "residual_pcu": 9.5,
+    "rules": {},
+    "logged_at": 1791963536.1308012
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 21.0,
+    "vehicles_cleared": 21,
+    "max_wait_time": 60.3,
+    "residual_pcu": 48.2,
+    "rules": {},
+    "logged_at": 1791963550.0982826
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 21.0,
+    "vehicles_cleared": 21,
+    "max_wait_time": 25.1,
+    "residual_pcu": 10.1,
+    "rules": {},
+    "logged_at": 1791963564.1266637
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 37.0,
+    "vehicles_cleared": 37,
+    "max_wait_time": 76.2,
+    "residual_pcu": 30.7,
+    "rules": {},
+    "logged_at": 1791963578.2433035
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 20.0,
+    "vehicles_cleared": 20,
+    "max_wait_time": 40.4,
+    "residual_pcu": 13.9,
+    "rules": {},
+    "logged_at": 1791963592.2082407
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 30.0,
+    "vehicles_cleared": 30,
+    "max_wait_time": 74.8,
+    "residual_pcu": 33.8,
+    "rules": {},
+    "logged_at": 1791963606.3697438
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 28.0,
+    "vehicles_cleared": 28,
+    "max_wait_time": 50.5,
+    "residual_pcu": 13.2,
+    "rules": {},
+    "logged_at": 1791963620.315841
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 41.0,
+    "vehicles_cleared": 41,
+    "max_wait_time": 45.3,
+    "residual_pcu": 23.4,
+    "rules": {},
+    "logged_at": 1791963634.3584626
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 22.0,
+    "vehicles_cleared": 22,
+    "max_wait_time": 23.4,
+    "residual_pcu": 16.5,
+    "rules": {},
+    "logged_at": 1791963648.4455018
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 26.0,
+    "vehicles_cleared": 26,
+    "max_wait_time": 46.8,
+    "residual_pcu": 36.4,
+    "rules": {},
+    "logged_at": 1791963662.4371595
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 27.0,
+    "vehicles_cleared": 27,
+    "max_wait_time": 30.7,
+    "residual_pcu": 6.4,
+    "rules": {},
+    "logged_at": 1791963676.5260603
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 34.0,
+    "vehicles_cleared": 34,
+    "max_wait_time": 48.4,
+    "residual_pcu": 34.6,
+    "rules": {},
+    "logged_at": 1791963690.634086
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 24.0,
+    "vehicles_cleared": 24,
+    "max_wait_time": 22.6,
+    "residual_pcu": 13.2,
+    "rules": {},
+    "logged_at": 1791963704.6992831
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 33.0,
+    "vehicles_cleared": 33,
+    "max_wait_time": 46.2,
+    "residual_pcu": 35.9,
+    "rules": {},
+    "logged_at": 1791963718.70612
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 24.0,
+    "vehicles_cleared": 24,
+    "max_wait_time": 38.7,
+    "residual_pcu": 9.1,
+    "rules": {},
+    "logged_at": 1791963732.733604
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 36.0,
+    "vehicles_cleared": 36,
+    "max_wait_time": 61.2,
+    "residual_pcu": 24.4,
+    "rules": {},
+    "logged_at": 1791963746.8194854
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 23.0,
+    "vehicles_cleared": 23,
+    "max_wait_time": 24.5,
+    "residual_pcu": 8.6,
+    "rules": {},
+    "logged_at": 1791963760.9035008
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 26.0,
+    "vehicles_cleared": 26,
+    "max_wait_time": 48.6,
+    "residual_pcu": 35.0,
+    "rules": {},
+    "logged_at": 1791963774.864209
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 22.0,
+    "vehicles_cleared": 22,
+    "max_wait_time": 24.4,
+    "residual_pcu": 17.7,
+    "rules": {},
+    "logged_at": 1791963788.9584656
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 35.0,
+    "vehicles_cleared": 35,
+    "max_wait_time": 51.3,
+    "residual_pcu": 32.9,
+    "rules": {},
+    "logged_at": 1791963803.0544631
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 19.0,
+    "vehicles_cleared": 19,
+    "max_wait_time": 26.6,
+    "residual_pcu": 18.1,
+    "rules": {},
+    "logged_at": 1791963817.0395555
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 22.0,
+    "vehicles_cleared": 22,
+    "max_wait_time": 75.8,
+    "residual_pcu": 43.2,
+    "rules": {},
+    "logged_at": 1791963831.0840201
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 23.0,
+    "vehicles_cleared": 23,
+    "max_wait_time": 43.9,
+    "residual_pcu": 14.7,
+    "rules": {},
+    "logged_at": 1791963845.1486118
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 27.0,
+    "vehicles_cleared": 27,
+    "max_wait_time": 97.0,
+    "residual_pcu": 38.7,
+    "rules": {},
+    "logged_at": 1791963859.273457
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 25.0,
+    "vehicles_cleared": 25,
+    "max_wait_time": 43.0,
+    "residual_pcu": 15.0,
+    "rules": {},
+    "logged_at": 1791963873.3468885
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 40.0,
+    "vehicles_cleared": 40,
+    "max_wait_time": 93.5,
+    "residual_pcu": 30.2,
+    "rules": {},
+    "logged_at": 1791963887.3977067
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 23.0,
+    "vehicles_cleared": 23,
+    "max_wait_time": 35.5,
+    "residual_pcu": 8.2,
+    "rules": {},
+    "logged_at": 1791963901.3652937
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 31.0,
+    "vehicles_cleared": 31,
+    "max_wait_time": 56.3,
+    "residual_pcu": 35.6,
+    "rules": {},
+    "logged_at": 1791963915.4574258
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 22.0,
+    "vehicles_cleared": 22,
+    "max_wait_time": 24.5,
+    "residual_pcu": 12.0,
+    "rules": {},
+    "logged_at": 1791963929.4957306
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 39.0,
+    "vehicles_cleared": 39,
+    "max_wait_time": 45.3,
+    "residual_pcu": 31.3,
+    "rules": {},
+    "logged_at": 1791963943.4873803
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 19.0,
+    "vehicles_cleared": 19,
+    "max_wait_time": 22.3,
+    "residual_pcu": 14.4,
+    "rules": {},
+    "logged_at": 1791963957.6106741
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 34.0,
+    "vehicles_cleared": 34,
+    "max_wait_time": 42.9,
+    "residual_pcu": 31.8,
+    "rules": {},
+    "logged_at": 1791963971.695105
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 25.0,
+    "vehicles_cleared": 25,
+    "max_wait_time": 33.2,
+    "residual_pcu": 11.4,
+    "rules": {},
+    "logged_at": 1791963985.664544
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 34.0,
+    "vehicles_cleared": 34,
+    "max_wait_time": 46.5,
+    "residual_pcu": 23.7,
+    "rules": {},
+    "logged_at": 1791963999.7237055
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 19.0,
+    "vehicles_cleared": 19,
+    "max_wait_time": 25.5,
+    "residual_pcu": 17.4,
+    "rules": {},
+    "logged_at": 1791964013.8047733
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 26.0,
+    "vehicles_cleared": 26,
+    "max_wait_time": 47.6,
+    "residual_pcu": 33.9,
+    "rules": {},
+    "logged_at": 1791964027.9069376
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 28.0,
+    "vehicles_cleared": 28,
+    "max_wait_time": 40.6,
+    "residual_pcu": 12.7,
+    "rules": {},
+    "logged_at": 1791964041.9694452
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 29.0,
+    "vehicles_cleared": 29,
+    "max_wait_time": 45.2,
+    "residual_pcu": 38.2,
+    "rules": {},
+    "logged_at": 1791964055.958613
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 19.0,
+    "vehicles_cleared": 19,
+    "max_wait_time": 24.4,
+    "residual_pcu": 17.5,
+    "rules": {},
+    "logged_at": 1791964069.9959595
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 27.0,
+    "vehicles_cleared": 27,
+    "max_wait_time": 63.4,
+    "residual_pcu": 40.3,
+    "rules": {},
+    "logged_at": 1791964084.065119
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 28.0,
+    "vehicles_cleared": 28,
+    "max_wait_time": 34.6,
+    "residual_pcu": 13.2,
+    "rules": {},
+    "logged_at": 1791964098.1417432
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 27.0,
+    "vehicles_cleared": 27,
+    "max_wait_time": 79.9,
+    "residual_pcu": 39.7,
+    "rules": {},
+    "logged_at": 1791964112.1572878
+  },
+  {
+    "phase_axis": "NS",
+    "allocated_green": 8.0,
+    "pcu_demand": 23.0,
+    "vehicles_cleared": 23,
+    "max_wait_time": 24.3,
+    "residual_pcu": 11.8,
+    "rules": {},
+    "logged_at": 1791964126.2247782
+  },
+  {
+    "phase_axis": "EW",
+    "allocated_green": 8.0,
+    "pcu_demand": 32.0,
+    "vehicles_cleared": 32,
+    "max_wait_time": 87.6,
+    "residual_pcu": 32.2,
+    "rules": {},
+    "logged_at": 1791964140.2388985
   }
 ]
