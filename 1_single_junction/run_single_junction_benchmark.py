@@ -355,13 +355,13 @@ def run_24hour_benchmark():
     # -------------------------------------------------------------
     # GENERATE HIGH-RES CHARTS
     # -------------------------------------------------------------
-    figures_dir = os.path.join(PROJECT_ROOT, "data", "simulation_reports", "figures")
+    figures_dir = os.path.join(PROJECT_ROOT, "data", "simulation_reports", "1_2026-08-24_Single_Junction", "figures")
     generate_visual_graphs(df_hourly, waits_by_mode, figures_dir)
 
     # -------------------------------------------------------------
     # BUILD MULTI-TAB EXCEL WORKBOOK
     # -------------------------------------------------------------
-    output_dir = os.path.join(PROJECT_ROOT, "data", "simulation_reports")
+    output_dir = os.path.join(PROJECT_ROOT, "data", "simulation_reports", "1_2026-08-24_Single_Junction", "24hour_benchmark")
     excel_path = os.path.join(output_dir, "24hour_benchmark_3modes_comparison.xlsx")
 
     wb = openpyxl.Workbook()

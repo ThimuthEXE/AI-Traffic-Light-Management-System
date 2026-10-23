@@ -310,7 +310,7 @@ def run_5hour_benchmark():
     df_exec = pd.DataFrame(exec_summary)
 
     # ── Save Excel Report ──
-    report_dir = os.path.join(PROJECT_ROOT, "data", "simulation_reports", "two_junction_reports")
+    report_dir = os.path.join(PROJECT_ROOT, "data", "simulation_reports", "2_2026-08-27_Two_Junction_Corridor")
     os.makedirs(report_dir, exist_ok=True)
     figures_dir = os.path.join(report_dir, "figures")
     os.makedirs(figures_dir, exist_ok=True)

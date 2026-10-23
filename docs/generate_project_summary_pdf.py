@@ -312,8 +312,9 @@ def create_document():
     r_foot.font.italic = True
     r_foot.font.color.rgb = c_slate
 
-    docx_path = os.path.join(PROJECT_ROOT, "AI_Traffic_Light_Management_System_Summary.docx")
-    pdf_path = os.path.join(PROJECT_ROOT, "AI_Traffic_Light_Management_System_Summary.pdf")
+    docs_dir = os.path.dirname(os.path.abspath(__file__))
+    docx_path = os.path.join(docs_dir, "AI_Traffic_Light_Management_System_Summary.docx")
+    pdf_path = os.path.join(docs_dir, "AI_Traffic_Light_Management_System_Summary.pdf")
 
     doc.save(docx_path)
     print(f"[1/2] Word document created at: {docx_path}")

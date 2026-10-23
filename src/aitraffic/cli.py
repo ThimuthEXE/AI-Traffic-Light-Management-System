@@ -76,7 +76,7 @@ def interactive_menu():
             elif b_choice == "3":
                 run_script("3_four_junction/run_four_junction_benchmark.py")
         elif choice == "7":
-            run_script("test_dashboard_functionality.py")
+            run_script("tests/test_dashboard.py")
         elif choice == "0":
             print("\nExiting AITraffic. Goodbye!\n")
             sys.exit(0)
@@ -111,7 +111,7 @@ def main():
     elif args.command == "vision":
         run_script("ai_engine/models/run_yolo_traffic_monitor.py")
     elif args.command == "test":
-        run_script("test_dashboard_functionality.py")
+        run_script("tests/test_dashboard.py")
     elif args.command == "benchmark":
         target = args.target or "4"
         if target == "1":

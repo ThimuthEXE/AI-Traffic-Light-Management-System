@@ -387,7 +387,7 @@ def run_5hour_four_junction_benchmark():
         })
     df_exec = pd.DataFrame(exec_summary)
 
-    report_dir = os.path.join(PROJECT_ROOT, "data", "simulation_reports", "four_junction_reports")
+    report_dir = os.path.join(PROJECT_ROOT, "data", "simulation_reports", "3_2026-09-17_Four_Junction_Grid")
     os.makedirs(report_dir, exist_ok=True)
     figures_dir = os.path.join(report_dir, "figures")
     os.makedirs(figures_dir, exist_ok=True)
