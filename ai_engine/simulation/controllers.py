@@ -96,7 +96,14 @@ class AIFuzzyController(BaseController):
                 self.ml_model = joblib.load(model_path)
                 print("[AI Controller] Dynamic Cycle ML Phasing Optimizer loaded successfully!")
             except Exception as exc:
-                print(f"[AI Controller] ML model load failed: {exc}")
+                print(f"[AI Controller] ML model load failed: {exc}. Retraining on-the-fly for current environment...")
+                try:
+                    from ai_engine.traffic_predictor.train_phase_optimizer import train_phase_optimizer
+                    train_phase_optimizer()
+                    self.ml_model = joblib.load(model_path)
+                    print("[AI Controller] ML Phasing Optimizer successfully retrained and loaded!")
+                except Exception as retrain_exc:
+                    print(f"[AI Controller] Automatic model retraining failed: {retrain_exc}")
 
     def analyze_all_lanes(self, vehicles: list) -> dict:
         stats: dict = {}
