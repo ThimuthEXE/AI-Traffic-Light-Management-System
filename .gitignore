@@ -1,4 +1,4 @@
-﻿# Python
+# Python
 __pycache__/
 *.py[cod]
 *.class
@@ -22,3 +22,9 @@ data/sample_videos/*.mp4
 data/sample_videos/*.avi
 .DS_Store
 Thumbs.db
+
+# Runtime simulation logs & local DB fallback
+*.log
+data/db_fallback/*.json
+!data/db_fallback/.gitkeep
+data/traffic_cycle_logs.json
