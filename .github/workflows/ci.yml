@@ -36,4 +36,5 @@ jobs:
         env:
           SDL_VIDEODRIVER: dummy
         run: |
-          python test_dashboard_functionality.py
+          python tests/test_dashboard.py
+          python tests/test_neuro_fuzzy_controller.py
