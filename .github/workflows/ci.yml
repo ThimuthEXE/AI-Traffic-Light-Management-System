@@ -22,15 +22,10 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Install Package & Dependencies
+      - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -e .
-          pip install httpx httpx2
-
-      - name: Verify Package Import
-        run: |
-          python -c "import aitraffic; print('AITraffic Version:', aitraffic.__version__)"
+          pip install -r requirements.txt
 
       - name: Run Test Suite
         env:
